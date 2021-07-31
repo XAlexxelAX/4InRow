@@ -4,3 +4,17 @@ C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour_MarkupCompile.cache
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour_MarkupCompile.lref
+C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\connectFour.exe
+C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\connectFour.deps.json
+C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\connectFour.runtimeconfig.json
+C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\connectFour.runtimeconfig.dev.json
+C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\connectFour.dll
+C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\connectFour.pdb
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.g.resources
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.AssemblyInfoInputs.cache
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.AssemblyInfo.cs
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csproj.CoreCompileInputs.cache
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.dll
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.pdb
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.genruntimeconfig.cache
