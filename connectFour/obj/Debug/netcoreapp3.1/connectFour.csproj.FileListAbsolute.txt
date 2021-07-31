@@ -1,0 +1,6 @@
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csprojAssemblyReference.cache
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour_MarkupCompile.cache
+C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour_MarkupCompile.lref
