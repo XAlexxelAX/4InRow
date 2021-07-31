@@ -17,6 +17,8 @@ namespace grpc4InRowService {
 
     static readonly grpc::Marshaller<global::grpc4InRowService.HelloRequest> __Marshaller_greet_HelloRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.HelloRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::grpc4InRowService.HelloReply> __Marshaller_greet_HelloReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.HelloReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::grpc4InRowService.LoginRequest> __Marshaller_greet_LoginRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.LoginRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::grpc4InRowService.LoginReply> __Marshaller_greet_LoginReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.LoginReply.Parser.ParseFrom);
 
     static readonly grpc::Method<global::grpc4InRowService.HelloRequest, global::grpc4InRowService.HelloReply> __Method_SayHello = new grpc::Method<global::grpc4InRowService.HelloRequest, global::grpc4InRowService.HelloReply>(
         grpc::MethodType.Unary,
@@ -24,6 +26,13 @@ namespace grpc4InRowService {
         "SayHello",
         __Marshaller_greet_HelloRequest,
         __Marshaller_greet_HelloReply);
+
+    static readonly grpc::Method<global::grpc4InRowService.LoginRequest, global::grpc4InRowService.LoginReply> __Method_Login = new grpc::Method<global::grpc4InRowService.LoginRequest, global::grpc4InRowService.LoginReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Login",
+        __Marshaller_greet_LoginRequest,
+        __Marshaller_greet_LoginReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -46,6 +55,11 @@ namespace grpc4InRowService {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.LoginReply> Login(global::grpc4InRowService.LoginRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -53,7 +67,8 @@ namespace grpc4InRowService {
     public static grpc::ServerServiceDefinition BindService(GreeterBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();
+          .AddMethod(__Method_SayHello, serviceImpl.SayHello)
+          .AddMethod(__Method_Login, serviceImpl.Login).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -63,6 +78,7 @@ namespace grpc4InRowService {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, GreeterBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.HelloRequest, global::grpc4InRowService.HelloReply>(serviceImpl.SayHello));
+      serviceBinder.AddMethod(__Method_Login, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.LoginRequest, global::grpc4InRowService.LoginReply>(serviceImpl.Login));
     }
 
   }

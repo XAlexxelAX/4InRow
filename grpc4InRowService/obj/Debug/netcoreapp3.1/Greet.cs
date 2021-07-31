@@ -25,16 +25,19 @@ namespace grpc4InRowService {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChJQcm90b3MvZ3JlZXQucHJvdG8SBWdyZWV0IhwKDEhlbGxvUmVxdWVzdBIM",
-            "CgRuYW1lGAEgASgJIh0KCkhlbGxvUmVwbHkSDwoHbWVzc2FnZRgBIAEoCSIh",
-            "CgVMb2dpbhIMCgR1c2VyGAEgASgJEgoKAnB3GAIgASgJMj0KB0dyZWV0ZXIS",
-            "MgoIU2F5SGVsbG8SEy5ncmVldC5IZWxsb1JlcXVlc3QaES5ncmVldC5IZWxs",
-            "b1JlcGx5QhSqAhFncnBjNEluUm93U2VydmljZWIGcHJvdG8z"));
+            "CgRuYW1lGAEgASgJIh0KCkhlbGxvUmVwbHkSDwoHbWVzc2FnZRgBIAEoCSIo",
+            "CgxMb2dpblJlcXVlc3QSDAoEdXNlchgBIAEoCRIKCgJwdxgCIAEoCSIMCgpM",
+            "b2dpblJlcGx5Mm4KB0dyZWV0ZXISMgoIU2F5SGVsbG8SEy5ncmVldC5IZWxs",
+            "b1JlcXVlc3QaES5ncmVldC5IZWxsb1JlcGx5Ei8KBUxvZ2luEhMuZ3JlZXQu",
+            "TG9naW5SZXF1ZXN0GhEuZ3JlZXQuTG9naW5SZXBseUIUqgIRZ3JwYzRJblJv",
+            "d1NlcnZpY2ViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.HelloRequest), global::grpc4InRowService.HelloRequest.Parser, new[]{ "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.HelloReply), global::grpc4InRowService.HelloReply.Parser, new[]{ "Message" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Login), global::grpc4InRowService.Login.Parser, new[]{ "User", "Pw" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.LoginRequest), global::grpc4InRowService.LoginRequest.Parser, new[]{ "User", "Pw" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.LoginReply), global::grpc4InRowService.LoginReply.Parser, null, null, null, null, null)
           }));
     }
     #endregion
@@ -305,11 +308,11 @@ namespace grpc4InRowService {
 
   }
 
-  public sealed partial class Login : pb::IMessage<Login> {
-    private static readonly pb::MessageParser<Login> _parser = new pb::MessageParser<Login>(() => new Login());
+  public sealed partial class LoginRequest : pb::IMessage<LoginRequest> {
+    private static readonly pb::MessageParser<LoginRequest> _parser = new pb::MessageParser<LoginRequest>(() => new LoginRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Login> Parser { get { return _parser; } }
+    public static pb::MessageParser<LoginRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -322,22 +325,22 @@ namespace grpc4InRowService {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Login() {
+    public LoginRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Login(Login other) : this() {
+    public LoginRequest(LoginRequest other) : this() {
       user_ = other.user_;
       pw_ = other.pw_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Login Clone() {
-      return new Login(this);
+    public LoginRequest Clone() {
+      return new LoginRequest(this);
     }
 
     /// <summary>Field number for the "user" field.</summary>
@@ -364,11 +367,11 @@ namespace grpc4InRowService {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Login);
+      return Equals(other as LoginRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Login other) {
+    public bool Equals(LoginRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -427,7 +430,7 @@ namespace grpc4InRowService {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Login other) {
+    public void MergeFrom(LoginRequest other) {
       if (other == null) {
         return;
       }
@@ -456,6 +459,107 @@ namespace grpc4InRowService {
             Pw = input.ReadString();
             break;
           }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class LoginReply : pb::IMessage<LoginReply> {
+    private static readonly pb::MessageParser<LoginReply> _parser = new pb::MessageParser<LoginReply>(() => new LoginReply());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<LoginReply> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::grpc4InRowService.GreetReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LoginReply() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LoginReply(LoginReply other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public LoginReply Clone() {
+      return new LoginReply(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as LoginReply);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(LoginReply other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(LoginReply other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
         }
       }
     }
