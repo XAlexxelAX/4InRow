@@ -103,5 +103,14 @@ namespace connectFour
                     return i;
             return -1; // return -1 if all col is full
         }
+
+        private void checkForWinner()
+        {
+            for (int i = 0; i < board.GetLength(0); i++)
+                for (int j = 0; j < board.GetLength(1); j++)
+                {
+
+                }
+        }
     }
 }
