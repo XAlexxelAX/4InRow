@@ -5,18 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="680">
+        Title="MainWindow" Height="600" Width="680"
+        Background="DarkGray">
     <Grid x:Name="boardView" PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -73,5 +74,30 @@
         <Image Source="Resources/cell.png" Grid.Column="5" Grid.Row="7"/>
         <Image Source="Resources/cell.png" Grid.Column="6" Grid.Row="7"/>
         <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="7"/>
+
+        <TextBlock Text="4 In A Row" Grid.Column="1" Grid.Row="1"
+                   FontSize="40" FontFamily="Bell MT Italic"
+                   Foreground="ForestGreen" VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        
+        <TextBlock Text="Score Player 1:" Grid.Column="1" Grid.Row="3"
+                   FontSize="30" FontFamily="Bell MT Italic"
+                   Foreground="Red" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" 
+                   TextDecorations="Underline"/>
+        <TextBlock Text="Score Player 2:" Grid.Column="1" Grid.Row="6"
+                   FontSize="30" FontFamily="Bell MT Italic"
+                   Foreground="Yellow" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" 
+                   TextDecorations="Underline"/>
+
+        <TextBlock Text="0" Grid.Column="1" Grid.Row="4"
+                   FontSize="30" FontFamily="Bell MT"
+                   Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" />
+        <TextBlock Text="0" Grid.Column="1" Grid.Row="7"
+                   FontSize="30" FontFamily="Bell MT"
+                   Foreground="Black" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" />
     </Grid>
 </Window>

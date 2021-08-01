@@ -66,6 +66,10 @@ namespace connectFour
 
             updateBoard(row - 1, col - 2);
             turn = 1 - turn;
+
+            if (checkForWinner())
+                Environment.Exit(0);
+
             // row and col now correspond Grid's RowDefinition and ColumnDefinition mouse was 
             // over when double clicked!
             //}
@@ -104,13 +108,117 @@ namespace connectFour
             return -1; // return -1 if all col is full
         }
 
-        private void checkForWinner()
+        private bool checkForWinner()
         {
             for (int i = 0; i < board.GetLength(0); i++)
                 for (int j = 0; j < board.GetLength(1); j++)
-                {
+                    if (checkDown(i, j))
+                    {
+                        updateBoardWinner(i, j, 0); // 0 = down
+                        return true;
+                    }
+                    else if (checkRight(i, j))
+                    {
+                        updateBoardWinner(i, j, 1); // 1 = right
+                        return true;
+                    }
+                    else if (checkMainDiagonal(i, j))
+                    {
+                        updateBoardWinner(i, j, 2); // 2 = main diagonal
+                        return true;
+                    }
+                    else if (checkSecondaryDiagonal(i, j))
+                    {
+                        updateBoardWinner(i, j, 3); // 3 = second diagonal
+                        return true;
+                    }
+            return false;
+        }
 
+        private bool checkDown(int i, int j)
+        {
+            try
+            {
+                return board[i, j] != 0 &&
+                    board[i, j] == board[i + 1, j] && board[i, j] == board[i + 2, j] && board[i, j] == board[i + 3, j];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
+        }
+        private bool checkRight(int i, int j)
+        {
+            try
+            {
+                return board[i, j] != 0 &&
+                    board[i, j] == board[i, j + 1] && board[i, j] == board[i, j + 2] && board[i, j] == board[i, j + 3];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
+        }
+        private bool checkMainDiagonal(int i, int j)
+        {
+            try
+            {
+                return board[i, j] != 0 &&
+                    board[i, j] == board[i + 1, j + 1] && board[i, j] == board[i + 2, j + 2] && board[i, j] == board[i + 3, j + 3];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
+        }
+        private bool checkSecondaryDiagonal(int i, int j)
+        {
+            try
+            {
+                return board[i, j] != 0 &&
+                    board[i, j] == board[i + 1, j - 1] && board[i, j] == board[i + 2, j - 2] && board[i, j] == board[i + 3, j - 3];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
+        }
+
+        private void updateBoardWinner(int i, int j, int direction)
+        {
+            BitmapImage bitmapImage;
+            String path = Environment.CurrentDirectory.Split("connectFour")[0] + "connectFour\\Resources\\";
+
+            if (board[i,j]==1)
+                bitmapImage = new BitmapImage(new Uri(path + "predMarked.png"));
+            else // board[i,j]==2
+                bitmapImage = new BitmapImage(new Uri(path + "pyellowMarked.png"));
+
+
+            for (int k = 0; k < 4; k++) // update winner , 4 cells on board
+            {
+                var img = new Image { Width = 70, Height = 70 };
+                img.Source = bitmapImage;
+
+                img.SetValue(Grid.RowProperty, i + 1);
+                img.SetValue(Grid.ColumnProperty, j + 2);
+                boardView.Children.Add(img);
+
+                if (direction == 0) //down
+                    i++;
+                else if (direction == 1) //right
+                    j++;
+                else if (direction == 2) //main diagonal
+                {
+                    i++;
+                    j++;
                 }
+                else // 3 = second diagonal
+                {
+                    i++;
+                    j--;
+                }
+            }
         }
     }
 }
