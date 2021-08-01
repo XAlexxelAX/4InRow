@@ -21,7 +21,9 @@ namespace connectFour
     public partial class MainWindow : Window
     {
         private int[,] board;
-        private int turn;
+        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score;
+        private List<Image> imgs;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +36,12 @@ namespace connectFour
             for (int i = 0; i < board.GetLength(0); i++)
                 for (int j = 0; j < board.GetLength(1); board[i, j++] = 0) ; // init empty board
 
+            p1_cellCount = 0;
+            p2_cellCount = 0;
+            p1_score = 0;
+            p2_score = 0;
             turn = 0;
+            imgs = new List<Image>();
         }
 
         private void OnPreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -64,23 +71,50 @@ namespace connectFour
                 col++;
             }
 
-            updateBoard(row - 1, col - 2);
+            int emptyCell_row = findEmptyRowCell(col - 2);
+            if (emptyCell_row == -1)
+                return;
+
+            updateBoard(emptyCell_row, col - 2);
+
+            p1_cellCount = turn == 0 ? p1_cellCount + 1 : p1_cellCount;
+            p2_cellCount = turn == 1 ? p2_cellCount + 1 : p2_cellCount;
             turn = 1 - turn;
 
-            if (checkForWinner())
-                Environment.Exit(0);
+            int winnerOrTie = checkForWinnerOrTie();
+            if (winnerOrTie != 0) // val!=0 => winner or tie
+            {
+                if (winnerOrTie == 1) // first player won
+                {
+                    MessageBox.Show("Red Player Has Won! ☺");
+                    p1_score += 1000;
+                    p2_score += p2_cellCount * 10;
+                }
+                else if (winnerOrTie == 2) // second player won
+                {
+                    MessageBox.Show("Yellow Player Has Won! ☺");
+                    p2_score += 1000;
+                    p1_score += p1_cellCount * 10;
+                }
+                else if (winnerOrTie == 3) // tie
+                {
+                    MessageBox.Show("It's a Tie! ☻");
+                    p1_score += p1_cellCount * 10;
+                    p2_score += p2_cellCount * 10;
+                }
+                updateBonus();
+                p1Score.Text = "" + p1_score;
+                p2Score.Text = "" + p2_score;
 
+                resetBoard();
+            }
             // row and col now correspond Grid's RowDefinition and ColumnDefinition mouse was 
             // over when double clicked!
             //}
         }
 
-        private void updateBoard(int row, int col)
+        private void updateBoard(int emptyCell_row, int col)
         {
-            int emptyCell_row = findEmptyColCell(col);
-            if (emptyCell_row == -1)
-                return;
-
             var img = new Image { Width = 70, Height = 70 };
             BitmapImage bitmapImage;
             String path = Environment.CurrentDirectory.Split("connectFour")[0] + "connectFour\\Resources\\";
@@ -94,13 +128,13 @@ namespace connectFour
 
             img.SetValue(Grid.RowProperty, emptyCell_row + 1);
             img.SetValue(Grid.ColumnProperty, col + 2);
-
             boardView.Children.Add(img);
+            imgs.Add(img);
 
             board[emptyCell_row, col] = turn + 1;
         }
 
-        private int findEmptyColCell(int j)
+        private int findEmptyRowCell(int j)
         {
             for (int i = board.GetLength(0) - 1; i >= 0; i--)
                 if (board[i, j] == 0)
@@ -108,31 +142,40 @@ namespace connectFour
             return -1; // return -1 if all col is full
         }
 
-        private bool checkForWinner()
+        private int checkForWinnerOrTie()
         {
+            bool isTie = true;
             for (int i = 0; i < board.GetLength(0); i++)
                 for (int j = 0; j < board.GetLength(1); j++)
+                {
                     if (checkDown(i, j))
                     {
                         updateBoardWinner(i, j, 0); // 0 = down
-                        return true;
+                        return board[i, j];
                     }
                     else if (checkRight(i, j))
                     {
                         updateBoardWinner(i, j, 1); // 1 = right
-                        return true;
+                        return board[i, j];
+
                     }
                     else if (checkMainDiagonal(i, j))
                     {
                         updateBoardWinner(i, j, 2); // 2 = main diagonal
-                        return true;
+                        return board[i, j];
                     }
                     else if (checkSecondaryDiagonal(i, j))
                     {
                         updateBoardWinner(i, j, 3); // 3 = second diagonal
-                        return true;
+                        return board[i, j];
                     }
-            return false;
+
+                    if (board[i, j] == 0) // check for empty cell on board, if there isn't => tie
+                        isTie = false;
+                }
+            if (isTie)
+                return 3;
+            return 0;
         }
 
         private bool checkDown(int i, int j)
@@ -189,7 +232,7 @@ namespace connectFour
             BitmapImage bitmapImage;
             String path = Environment.CurrentDirectory.Split("connectFour")[0] + "connectFour\\Resources\\";
 
-            if (board[i,j]==1)
+            if (board[i, j] == 1)
                 bitmapImage = new BitmapImage(new Uri(path + "predMarked.png"));
             else // board[i,j]==2
                 bitmapImage = new BitmapImage(new Uri(path + "pyellowMarked.png"));
@@ -197,12 +240,13 @@ namespace connectFour
 
             for (int k = 0; k < 4; k++) // update winner , 4 cells on board
             {
-                var img = new Image { Width = 70, Height = 70 };
+                Image img = new Image { Width = 70, Height = 70 };
                 img.Source = bitmapImage;
 
                 img.SetValue(Grid.RowProperty, i + 1);
                 img.SetValue(Grid.ColumnProperty, j + 2);
                 boardView.Children.Add(img);
+                imgs.Add(img);
 
                 if (direction == 0) //down
                     i++;
@@ -219,6 +263,35 @@ namespace connectFour
                     j--;
                 }
             }
+        }
+
+        private void updateBonus()
+        {
+            bool isBonus_p1 = true, isBonus_p2 = true;
+            for (int j = 0; j < board.GetLength(1); j++)
+            {
+                isBonus_p1 = checkCol(j, 1) && isBonus_p1;
+                isBonus_p2 = checkCol(j, 2) && isBonus_p2;
+            }
+            p1_score = isBonus_p1 ? p1_score + 100 : p1_score;
+            p2_score = isBonus_p2 ? p2_score + 100 : p2_score;
+        }
+        private bool checkCol(int j, int p)
+        {
+            for (int i = 0; i < board.GetLength(0); i++)
+                if (board[i, j] == p)
+                    return true;
+            return false;
+        }
+
+        private void resetBoard()
+        {
+            for (int i = 0; i < board.GetLength(0); i++)
+                for (int j = 0; j < board.GetLength(1); board[i, j++] = 0) ;
+
+            foreach (Image img in imgs)
+                boardView.Children.Remove(img);
+            imgs.Clear();
         }
     }
 }

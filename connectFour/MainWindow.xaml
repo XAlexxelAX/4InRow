@@ -76,28 +76,30 @@
         <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="7"/>
 
         <TextBlock Text="4 In A Row" Grid.Column="1" Grid.Row="1"
-                   FontSize="40" FontFamily="Bell MT Italic"
+                   FontSize="40" FontFamily="Bell MT Italic Bold"
                    Foreground="ForestGreen" VerticalAlignment="Center"
                    HorizontalAlignment="Center"/>
-        
+
         <TextBlock Text="Score Player 1:" Grid.Column="1" Grid.Row="3"
-                   FontSize="30" FontFamily="Bell MT Italic"
+                   FontSize="30" FontFamily="Bell MT Italic Bold"
                    Foreground="Red" VerticalAlignment="Center"
                    HorizontalAlignment="Center" 
                    TextDecorations="Underline"/>
         <TextBlock Text="Score Player 2:" Grid.Column="1" Grid.Row="6"
-                   FontSize="30" FontFamily="Bell MT Italic"
+                   FontSize="30" FontFamily="Bell MT Italic Bold"
                    Foreground="Yellow" VerticalAlignment="Center"
                    HorizontalAlignment="Center" 
                    TextDecorations="Underline"/>
 
         <TextBlock Text="0" Grid.Column="1" Grid.Row="4"
-                   FontSize="30" FontFamily="Bell MT"
+                   FontSize="30" FontFamily="Bell MT Bold"
                    Foreground="Black" VerticalAlignment="Center"
-                   HorizontalAlignment="Center" />
+                   HorizontalAlignment="Center" 
+                   x:Name="p1Score"/>
         <TextBlock Text="0" Grid.Column="1" Grid.Row="7"
-                   FontSize="30" FontFamily="Bell MT"
+                   FontSize="30" FontFamily="Bell MT Bold"
                    Foreground="Black" VerticalAlignment="Center"
-                   HorizontalAlignment="Center" />
+                   HorizontalAlignment="Center" 
+                   x:Name="p2Score"/>
     </Grid>
 </Window>
