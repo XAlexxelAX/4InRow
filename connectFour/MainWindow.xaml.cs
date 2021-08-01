@@ -36,6 +36,7 @@ namespace connectFour
             for (int i = 0; i < board.GetLength(0); i++)
                 for (int j = 0; j < board.GetLength(1); board[i, j++] = 0) ; // init empty board
 
+            //initiate default values
             p1_cellCount = 0;
             p2_cellCount = 0;
             p1_score = 0;
@@ -48,7 +49,7 @@ namespace connectFour
         {
             /*if (e.ClickCount == 2) // for double-click, remove this condition if only want single click
             {*/
-            var point = Mouse.GetPosition(boardView);
+            var point = Mouse.GetPosition(boardView); // mouse ptr cordiante at click event time
 
             int row = 0, col = 0;
             double accumulatedHeight = 0, accumulatedWidth = 0;
@@ -84,21 +85,25 @@ namespace connectFour
             int winnerOrTie = checkForWinnerOrTie();
             if (winnerOrTie != 0) // val!=0 => winner or tie
             {
+                MessageBoxResult result=MessageBoxResult.No;
                 if (winnerOrTie == 1) // first player won
                 {
-                    MessageBox.Show("Red Player Has Won! ☺");
+                    result = MessageBox.Show("Red Player Has Won! ☺\nWould you like to have another round?", "Game Over",
+                        MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                     p1_score += 1000;
                     p2_score += p2_cellCount * 10;
                 }
                 else if (winnerOrTie == 2) // second player won
                 {
-                    MessageBox.Show("Yellow Player Has Won! ☺");
+                    result = MessageBox.Show("Yellow Player Has Won! ☺\nWould you like to have another round?", "Game Over",
+                        MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                     p2_score += 1000;
                     p1_score += p1_cellCount * 10;
                 }
                 else if (winnerOrTie == 3) // tie
                 {
-                    MessageBox.Show("It's a Tie! ☻");
+                    result = MessageBox.Show("It's a Tie! ☻\nWould you like to have another round?", "Game Over",
+                        MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                     p1_score += p1_cellCount * 10;
                     p2_score += p2_cellCount * 10;
                 }
@@ -106,7 +111,10 @@ namespace connectFour
                 p1Score.Text = "" + p1_score;
                 p2Score.Text = "" + p2_score;
 
-                resetBoard();
+                if (result == MessageBoxResult.Yes) // player want another round
+                    resetBoard();
+                else // player wished to exit
+                    Environment.Exit(0);
             }
             // row and col now correspond Grid's RowDefinition and ColumnDefinition mouse was 
             // over when double clicked!
@@ -117,8 +125,9 @@ namespace connectFour
         {
             var img = new Image { Width = 70, Height = 70 };
             BitmapImage bitmapImage;
-            String path = Environment.CurrentDirectory.Split("connectFour")[0] + "connectFour\\Resources\\";
+            String path = Environment.CurrentDirectory.Split("connectFour")[0] + "connectFour\\Resources\\"; // current project dir.
 
+            // update board with relevant cell (red/yellow ball)
             if (turn == 0)
                 bitmapImage = new BitmapImage(new Uri(path + "pred.png"));
             else
@@ -126,17 +135,19 @@ namespace connectFour
 
             img.Source = bitmapImage;
 
+            //update the image/ball uppon the board
             img.SetValue(Grid.RowProperty, emptyCell_row + 1);
             img.SetValue(Grid.ColumnProperty, col + 2);
             boardView.Children.Add(img);
             imgs.Add(img);
 
+            // update the 2D board programically
             board[emptyCell_row, col] = turn + 1;
         }
 
         private int findEmptyRowCell(int j)
         {
-            for (int i = board.GetLength(0) - 1; i >= 0; i--)
+            for (int i = board.GetLength(0) - 1; i >= 0; i--) // find the position of the ball by the user col. input
                 if (board[i, j] == 0)
                     return i;
             return -1; // return -1 if all col is full
@@ -148,38 +159,36 @@ namespace connectFour
             for (int i = 0; i < board.GetLength(0); i++)
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
-                    if (checkDown(i, j))
+                    if (checkDown(i, j)) // check 4 balls down from start position (i,j)
                     {
                         updateBoardWinner(i, j, 0); // 0 = down
-                        return board[i, j];
+                        return board[i, j]; // return winner
                     }
-                    else if (checkRight(i, j))
+                    else if (checkRight(i, j)) // check 4 balls right from start position (i,j)
                     {
                         updateBoardWinner(i, j, 1); // 1 = right
-                        return board[i, j];
+                        return board[i, j]; // return winner
 
                     }
-                    else if (checkMainDiagonal(i, j))
+                    else if (checkMainDiagonal(i, j)) // check 4 balls diagnoally from start position (i,j)
                     {
                         updateBoardWinner(i, j, 2); // 2 = main diagonal
-                        return board[i, j];
+                        return board[i, j]; //  return winner
                     }
-                    else if (checkSecondaryDiagonal(i, j))
+                    else if (checkSecondaryDiagonal(i, j)) // check 4 balls 2nd diagonally from start position (i,j)
                     {
                         updateBoardWinner(i, j, 3); // 3 = second diagonal
-                        return board[i, j];
+                        return board[i, j]; // return winner
                     }
 
                     if (board[i, j] == 0) // check for empty cell on board, if there isn't => tie
-                        isTie = false;
+                        isTie = false; // if there is even 1 empty cell -> not a tie (in current time/move)
                 }
-            if (isTie)
-                return 3;
-            return 0;
+            return isTie ? 3 : 0; // 3=tie, no winner=0
         }
 
         private bool checkDown(int i, int j)
-        {
+        { // check 4 balls down from start position (i,j)
             try
             {
                 return board[i, j] != 0 &&
@@ -191,7 +200,7 @@ namespace connectFour
             }
         }
         private bool checkRight(int i, int j)
-        {
+        {// check 4 balls right from start position (i,j)
             try
             {
                 return board[i, j] != 0 &&
@@ -203,7 +212,7 @@ namespace connectFour
             }
         }
         private bool checkMainDiagonal(int i, int j)
-        {
+        {// check 4 balls diagonally from start position (i,j)
             try
             {
                 return board[i, j] != 0 &&
@@ -215,7 +224,7 @@ namespace connectFour
             }
         }
         private bool checkSecondaryDiagonal(int i, int j)
-        {
+        {// check 4 balls 2nd diagonally from start position (i,j)
             try
             {
                 return board[i, j] != 0 &&
@@ -238,11 +247,12 @@ namespace connectFour
                 bitmapImage = new BitmapImage(new Uri(path + "pyellowMarked.png"));
 
 
-            for (int k = 0; k < 4; k++) // update winner , 4 cells on board
+            for (int k = 0; k < 4; k++) // update winner , 4 cells on board with crowned/marked balls
             {
                 Image img = new Image { Width = 70, Height = 70 };
                 img.Source = bitmapImage;
 
+                // add crowned ball image
                 img.SetValue(Grid.RowProperty, i + 1);
                 img.SetValue(Grid.ColumnProperty, j + 2);
                 boardView.Children.Add(img);
@@ -267,17 +277,20 @@ namespace connectFour
 
         private void updateBonus()
         {
+            //check for bonus of a player with ball in each col.
             bool isBonus_p1 = true, isBonus_p2 = true;
             for (int j = 0; j < board.GetLength(1); j++)
             {
                 isBonus_p1 = checkCol(j, 1) && isBonus_p1;
                 isBonus_p2 = checkCol(j, 2) && isBonus_p2;
             }
+            // bonus +100 to score
             p1_score = isBonus_p1 ? p1_score + 100 : p1_score;
             p2_score = isBonus_p2 ? p2_score + 100 : p2_score;
         }
         private bool checkCol(int j, int p)
         {
+            // check current col. if it has a cell/ball of player p
             for (int i = 0; i < board.GetLength(0); i++)
                 if (board[i, j] == p)
                     return true;
@@ -285,7 +298,7 @@ namespace connectFour
         }
 
         private void resetBoard()
-        {
+        { // reset board view to default/empty/start
             for (int i = 0; i < board.GetLength(0); i++)
                 for (int j = 0; j < board.GetLength(1); board[i, j++] = 0) ;
 
