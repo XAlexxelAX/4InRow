@@ -5,8 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
-    <Grid>
+        Title="MainWindow" Height="600" Width="680">
+    <Grid x:Name="boardView" PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="Resources/cell.png" Grid.Column="2" Grid.Row="1"/>
+        <Image Source="Resources/cell.png" Grid.Column="3" Grid.Row="1"/>
+        <Image Source="Resources/cell.png" Grid.Column="4" Grid.Row="1"/>
+        <Image Source="Resources/cell.png" Grid.Column="5" Grid.Row="1"/>
+        <Image Source="Resources/cell.png" Grid.Column="6" Grid.Row="1"/>
+        <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="1"/>
+        <Image Source="Resources/cell.png" Grid.Column="2" Grid.Row="2"/>
+        <Image Source="Resources/cell.png" Grid.Column="3" Grid.Row="2"/>
+        <Image Source="Resources/cell.png" Grid.Column="4" Grid.Row="2"/>
+        <Image Source="Resources/cell.png" Grid.Column="5" Grid.Row="2"/>
+        <Image Source="Resources/cell.png" Grid.Column="6" Grid.Row="2"/>
+        <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="2"/>
+        <Image Source="Resources/cell.png" Grid.Column="2" Grid.Row="3"/>
+        <Image Source="Resources/cell.png" Grid.Column="3" Grid.Row="3"/>
+        <Image Source="Resources/cell.png" Grid.Column="4" Grid.Row="3"/>
+        <Image Source="Resources/cell.png" Grid.Column="5" Grid.Row="3"/>
+        <Image Source="Resources/cell.png" Grid.Column="6" Grid.Row="3"/>
+        <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="3"/>
+        <Image Source="Resources/cell.png" Grid.Column="2" Grid.Row="4"/>
+        <Image Source="Resources/cell.png" Grid.Column="3" Grid.Row="4"/>
+        <Image Source="Resources/cell.png" Grid.Column="4" Grid.Row="4"/>
+        <Image Source="Resources/cell.png" Grid.Column="5" Grid.Row="4"/>
+        <Image Source="Resources/cell.png" Grid.Column="6" Grid.Row="4"/>
+        <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="4"/>
+        <Image Source="Resources/cell.png" Grid.Column="2" Grid.Row="5"/>
+        <Image Source="Resources/cell.png" Grid.Column="3" Grid.Row="5"/>
+        <Image Source="Resources/cell.png" Grid.Column="4" Grid.Row="5"/>
+        <Image Source="Resources/cell.png" Grid.Column="5" Grid.Row="5"/>
+        <Image Source="Resources/cell.png" Grid.Column="6" Grid.Row="5"/>
+        <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="5"/>
+        <Image Source="Resources/cell.png" Grid.Column="2" Grid.Row="6"/>
+        <Image Source="Resources/cell.png" Grid.Column="3" Grid.Row="6"/>
+        <Image Source="Resources/cell.png" Grid.Column="4" Grid.Row="6"/>
+        <Image Source="Resources/cell.png" Grid.Column="5" Grid.Row="6"/>
+        <Image Source="Resources/cell.png" Grid.Column="6" Grid.Row="6"/>
+        <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="6"/>
+        <Image Source="Resources/cell.png" Grid.Column="2" Grid.Row="7"/>
+        <Image Source="Resources/cell.png" Grid.Column="3" Grid.Row="7"/>
+        <Image Source="Resources/cell.png" Grid.Column="4" Grid.Row="7"/>
+        <Image Source="Resources/cell.png" Grid.Column="5" Grid.Row="7"/>
+        <Image Source="Resources/cell.png" Grid.Column="6" Grid.Row="7"/>
+        <Image Source="Resources/cell.png" Grid.Column="7" Grid.Row="7"/>
     </Grid>
 </Window>
