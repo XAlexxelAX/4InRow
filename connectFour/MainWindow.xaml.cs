@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -85,7 +86,7 @@ namespace connectFour
             int winnerOrTie = checkForWinnerOrTie();
             if (winnerOrTie != 0) // val!=0 => winner or tie
             {
-                MessageBoxResult result=MessageBoxResult.No;
+                MessageBoxResult result = MessageBoxResult.No;
                 if (winnerOrTie == 1) // first player won
                 {
                     result = MessageBox.Show("Red Player Has Won! ☺\nWould you like to have another round?", "Game Over",
@@ -121,7 +122,7 @@ namespace connectFour
             //}
         }
 
-        private void updateBoard(int emptyCell_row, int col)
+        private void makeAnimation(int emptyCell_row, int col)
         {
             var img = new Image { Width = 70, Height = 70 };
             BitmapImage bitmapImage;
@@ -136,10 +137,26 @@ namespace connectFour
             img.Source = bitmapImage;
 
             //update the image/ball uppon the board
-            img.SetValue(Grid.RowProperty, emptyCell_row + 1);
+            img.SetValue(Grid.RowProperty, 1);
             img.SetValue(Grid.ColumnProperty, col + 2);
             boardView.Children.Add(img);
             imgs.Add(img);
+
+            // make animation of the ball sliding down
+            Vector offset = VisualTreeHelper.GetOffset(img);
+            var top = offset.Y;
+            var left = offset.X;
+            TranslateTransform trans = new TranslateTransform();
+            img.RenderTransform = trans;
+            int posY = emptyCell_row == 6 ? 60 : emptyCell_row == 5 ? 58 : emptyCell_row == 4 ? 56 : emptyCell_row == 3 ? 52 : emptyCell_row == 2 ? 46
+                : emptyCell_row == 1 ? 35 : 0;
+            DoubleAnimation animY = new DoubleAnimation(0, posY * (emptyCell_row + 1) - top, TimeSpan.FromMilliseconds(1500-(6-emptyCell_row)*200));
+            trans.BeginAnimation(TranslateTransform.YProperty, animY);           
+        }
+
+        private void updateBoard(int emptyCell_row, int col)
+        {
+            makeAnimation(emptyCell_row, col);
 
             // update the 2D board programically
             board[emptyCell_row, col] = turn + 1;
