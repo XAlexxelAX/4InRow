@@ -151,7 +151,9 @@ namespace connectFour
             int posY = emptyCell_row == 6 ? 60 : emptyCell_row == 5 ? 58 : emptyCell_row == 4 ? 56 : emptyCell_row == 3 ? 52 : emptyCell_row == 2 ? 46
                 : emptyCell_row == 1 ? 35 : 0;
             DoubleAnimation animY = new DoubleAnimation(0, posY * (emptyCell_row + 1) - top, TimeSpan.FromMilliseconds(1500-(6-emptyCell_row)*200));
-            trans.BeginAnimation(TranslateTransform.YProperty, animY);
+            trans.BeginAnimation(TranslateTransform.YProperty, animY); 
+
+            // TODO: Add OnCompleteListener or some sort of checking whether the animation completed
         }
 
         private void updateBoard(int emptyCell_row, int col)
