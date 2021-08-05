@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="680"
-        Background="DarkGray">
+        Background="DarkGray" Icon="Resources\icon.ico">
     <Grid x:Name="boardView" PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

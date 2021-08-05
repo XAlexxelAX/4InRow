@@ -10,10 +10,18 @@
     <None Remove="Protos\greet.proto" />
     <None Remove="Resources\cell.png" />
     <None Remove="Resources\cell_hole.png" />
+    <None Remove="Resources\game_icon.ico" />
+    <None Remove="Resources\icon.ico" />
     <None Remove="Resources\pred.png" />
     <None Remove="Resources\predMarked.png" />
     <None Remove="Resources\pyellow.png" />
     <None Remove="Resources\pyellowMarked.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\game_icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -26,10 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\cell.png">
+    <Resource Include="Resources\cell_hole.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\cell_hole.png">
+    <Resource Include="Resources\icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\pred.png">
