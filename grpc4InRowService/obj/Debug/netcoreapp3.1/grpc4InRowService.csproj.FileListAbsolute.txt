@@ -13,7 +13,6 @@ C:\Users\shaha\Desktop\4inRow\grpc4InRowService\bin\Debug\netcoreapp3.1\Grpc.Cor
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\bin\Debug\netcoreapp3.1\Grpc.Net.Client.dll
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\bin\Debug\netcoreapp3.1\Grpc.Net.ClientFactory.dll
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\bin\Debug\netcoreapp3.1\Grpc.Net.Common.dll
-C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.csprojAssemblyReference.cache
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.AssemblyInfoInputs.cache
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.AssemblyInfo.cs
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.csproj.CoreCompileInputs.cache
@@ -54,3 +53,4 @@ C:\Users\Alex\source\repos\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc
 C:\Users\Alex\source\repos\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.dll
 C:\Users\Alex\source\repos\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.pdb
 C:\Users\Alex\source\repos\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.genruntimeconfig.cache
+C:\Users\shaha\Desktop\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.csproj.AssemblyReference.cache

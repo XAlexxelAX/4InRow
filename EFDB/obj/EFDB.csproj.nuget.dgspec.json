@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj": {}
+    "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\EFDB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj": {
+    "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\EFDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj",
+        "projectUniqueName": "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\EFDB.csproj",
         "projectName": "EFDB",
-        "projectPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj",
-        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\obj\\",
+        "projectPath": "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\EFDB.csproj",
+        "packagesPath": "C:\\Users\\shaha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\shaha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -42,12 +43,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[5.0.8, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

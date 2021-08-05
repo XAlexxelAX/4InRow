@@ -1,0 +1,9 @@
+C:\Users\shaha\Desktop\4InRow\EFDB\bin\Debug\netcoreapp3.1\EFDB.deps.json
+C:\Users\shaha\Desktop\4InRow\EFDB\bin\Debug\netcoreapp3.1\EFDB.dll
+C:\Users\shaha\Desktop\4InRow\EFDB\bin\Debug\netcoreapp3.1\EFDB.pdb
+C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.AssemblyReference.cache
+C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.AssemblyInfoInputs.cache
+C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.AssemblyInfo.cs
+C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.CoreCompileInputs.cache
+C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.dll
+C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.pdb

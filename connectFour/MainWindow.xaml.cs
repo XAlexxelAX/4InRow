@@ -48,10 +48,8 @@ namespace connectFour
 
         private void OnPreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            //  boardView.IsHitTestVisibleProperty = false;
-            /*if (e.ClickCount == 2) // for double-click, remove this condition if only want single click
-            {*/
-
+            if (checkForWinnerOrTie() != 0)
+                return;
             var point = Mouse.GetPosition(boardView); // mouse ptr cordiante at click event time
 
             int row = 0, col = 0;
@@ -80,10 +78,6 @@ namespace connectFour
                 return;
 
             updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
-
-            // row and col now correspond Grid's RowDefinition and ColumnDefinition mouse was 
-            // over when double clicked!
-            //}
         }
 
         private void codeAfterAnimation()
@@ -114,17 +108,14 @@ namespace connectFour
                 p1Score.Text = "" + p1_score;
                 p2Score.Text = "" + p2_score;
 
-                if (winner_tie_msgBox(winnerOrTie) == MessageBoxResult.Yes) // player want another round
-                    resetBoard();
-                else // player wished to exit
-                    Environment.Exit(0);
+                winner_tie_msgBox(winnerOrTie);
             }
         }
 
         private void makeAnimation(int emptyCell_row, int col)
         {
             boardView.IsHitTestVisible = false; // disable mouse clicks again until full move and animation is over
-            var img = new Image { Width = 70, Height = 70 };
+            Image img = new Image { Width = 70, Height = 70 }, img2;
             BitmapImage bitmapImage;
             String path = Environment.CurrentDirectory.Split("connectFour")[0] + "connectFour\\Resources\\"; // current project dir.
 
@@ -136,10 +127,21 @@ namespace connectFour
 
             img.Source = bitmapImage;
 
+                      
             //update the image/ball uppon the board
             img.SetValue(Grid.RowProperty, 1);
             img.SetValue(Grid.ColumnProperty, col + 2);
             boardView.Children.Add(img);
+
+            for (int i = 1; i <= board.GetLength(0); i++)
+            {// make new images of the board cells on top of the ball animation
+                img2 = new Image { Width = 70, Height = 70 };
+                img2.Source = new BitmapImage(new Uri(path + "cell_hole.png"));
+                img2.SetValue(Grid.RowProperty, i);
+                img2.SetValue(Grid.ColumnProperty, col + 2);
+                boardView.Children.Add(img2);
+                imgs.Add(img2);
+            }
             imgs.Add(img);
 
             // make animation of the ball sliding down
@@ -151,13 +153,17 @@ namespace connectFour
             int posY = emptyCell_row == 6 ? 60 : emptyCell_row == 5 ? 58 : emptyCell_row == 4 ? 56 : emptyCell_row == 3 ? 52 : emptyCell_row == 2 ? 46
                 : emptyCell_row == 1 ? 35 : 0;
 
-            DoubleAnimation animY = new DoubleAnimation(0, posY * (emptyCell_row + 1) - top, TimeSpan.FromMilliseconds(1500 - (6 - emptyCell_row) * 200));
+            DoubleAnimation animY = new DoubleAnimation(0, posY * (emptyCell_row + 1) - top, TimeSpan.FromMilliseconds(900 - (6 - emptyCell_row) * 100));
 
             EventHandler onComplete = (s, e) =>
             {
                 // animY.Completed -= onComplete;
                 codeAfterAnimation(); // check for winner + update score etc
+
                 boardView.IsHitTestVisible = true; // enable mouse clicks again for next move
+                                                   // update turn title view
+                turnTitle.Text = turn == 1 ? "Yellow Player Turn" : "Red Player Turn";
+                turnTitle.Foreground = turn == 1 ? new SolidColorBrush(Colors.Yellow) : new SolidColorBrush(Colors.Red);
             };
             animY.Completed += onComplete;
             trans.BeginAnimation(TranslateTransform.YProperty, animY);
@@ -300,17 +306,29 @@ namespace connectFour
                 }
             }
         }
-        private MessageBoxResult winner_tie_msgBox(int p)
-        {
-            if (p == 1)
-                return MessageBox.Show("Red Player Has Won! ☺\nWould you like to have another round?", "Game Over",
-                       MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-            else if (p == 2)
-                return MessageBox.Show("Yellow Player Has Won! ☺\nWould you like to have another round?", "Game Over",
-                       MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
 
-            return MessageBox.Show("It's a Tie! ☻\nWould you like to have another round?", "Game Over",
-                   MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+        private void winner_tie_msgBox(int p)
+        {
+            String msg;
+
+            if (p == 1)
+                msg = "Red Player Has Won! ☺\nWould you like to have another round?";
+            else if (p == 2)
+                msg = "Yellow Player Has Won! ☺\nWould you like to have another round?";
+            else msg = "It's a Tie! ☻\nWould you like to have another round?";
+
+            MessageBoxResult result = MessageBoxResult.None;
+            new Thread(() =>
+            {// new thread in order for the game to freeze until the answer is given (another round/exit)
+                result = MessageBox.Show(msg, "Game Over",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (result == MessageBoxResult.Yes)
+                    this.Dispatcher.Invoke(() => // in order to change the UI with another thread
+                    {
+                        resetBoard(); // reset board to start another round
+                    });
+                else Environment.Exit(0); // if the answer was to quit the game - then exit the program
+            }).Start();
         }
         private void updateBonus()
         {
