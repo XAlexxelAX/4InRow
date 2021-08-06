@@ -12,16 +12,12 @@
     <None Remove="Resources\cell_hole.png" />
     <None Remove="Resources\game_icon.ico" />
     <None Remove="Resources\icon.ico" />
+    <None Remove="Resources\loginIcon.ico" />
+    <None Remove="Resources\loginUser.png" />
     <None Remove="Resources\pred.png" />
     <None Remove="Resources\predMarked.png" />
     <None Remove="Resources\pyellow.png" />
     <None Remove="Resources\pyellowMarked.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\game_icon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +34,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\loginIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\loginUser.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\pred.png">

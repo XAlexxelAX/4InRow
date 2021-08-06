@@ -47,7 +47,7 @@ namespace connectFour
         }
 
         private void OnPreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
+        {            
             if (checkForWinnerOrTie() != 0)
                 return;
             var point = Mouse.GetPosition(boardView); // mouse ptr cordiante at click event time
