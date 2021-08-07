@@ -22,9 +22,16 @@ namespace connectFour
             InitializeComponent();
         }
 
-        private void Thumb_OnDragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        private void login_Click(object sender, RoutedEventArgs e)
         {
-
+            if (username.Text.Equals("")) // check the input (username&password)
+                MessageBox.Show("Username is empty!", "Input Error",
+                                    MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
+            else if (password.Password.Equals(""))
+                MessageBox.Show("Password is empty!", "Input Error",
+                                    MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK); 
+            else
+                new MainWindow().Show(); // open the list of current active players
         }
     }
 }

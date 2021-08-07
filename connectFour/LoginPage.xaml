@@ -35,13 +35,15 @@
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Username:" FontFamily="Bell MT Bold"
                    Foreground="Black" VerticalAlignment="Center" FontSize="22" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
-        <TextBox Grid.Row="4" Grid.Column="1" x:Name="Username" Background="Azure"/>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="username" Background="Azure"
+                  FontSize="20" TextAlignment="Center"/>
         <TextBlock Grid.Row="6" Grid.Column="1" Text="Password:" FontFamily="Bell MT Bold"
                    Foreground="Black" VerticalAlignment="Center" FontSize="22" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
-        <TextBox Grid.Row="7" Grid.Column="1" Background="Azure"/>
+        <PasswordBox Grid.Row="7" Grid.Column="1" Background="Azure" x:Name="password"
+                     FontSize="20" HorizontalContentAlignment="Center" />
         <Button Grid.Row="8" Grid.Column="1" x:Name="loginBtn" Content="Login" FontSize="25"
-                 FontFamily="Bell MT Bold" Foreground="RoyalBlue"/>
+                 FontFamily="Bell MT Bold" Foreground="RoyalBlue" Click="login_Click"/>
         <TextBlock Grid.Row="10" Grid.Column="1" Text="Click Here To Register"
                    Foreground="Purple" VerticalAlignment="Center" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
