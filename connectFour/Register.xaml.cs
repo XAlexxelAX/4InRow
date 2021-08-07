@@ -32,8 +32,8 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-
                 // TODO: ADD USER TO DB
+
                 this.Close();
             }
         }
