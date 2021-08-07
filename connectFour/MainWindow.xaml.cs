@@ -20,12 +20,12 @@ namespace connectFour
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Game : Window
     {
         private int[,] board;
         private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score;
         private List<Image> imgs;
-        public MainWindow()
+        public Game()
         {
             InitializeComponent();
             initVars();

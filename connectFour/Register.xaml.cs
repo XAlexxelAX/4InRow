@@ -13,32 +13,29 @@ using System.Windows.Shapes;
 namespace connectFour
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for Register.xaml
     /// </summary>
-    public partial class LoginPage : Window
+    public partial class Register : Window
     {
-        public LoginPage()
+        public Register()
         {
             InitializeComponent();
         }
 
-        private void login_Click(object sender, RoutedEventArgs e)
+        private void register_Click(object sender, RoutedEventArgs e)
         {
             if (username.Text.Equals("")) // check the input (username&password)
                 MessageBox.Show("Username is empty!", "Input Error",
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else if (password.Password.Equals(""))
                 MessageBox.Show("Password is empty!", "Input Error",
-                                    MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK); 
+                                    MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
-                new Game().Show(); // open the list of current active players
+            {
 
-            // TODO: Authenticate USER from DB
-        }
-
-        private void register_Click(object sender, RoutedEventArgs e)
-        {
-            new Register().Show(); // open the list of current active players
+                // TODO: ADD USER TO DB
+                this.Close();
+            }
         }
     }
 }

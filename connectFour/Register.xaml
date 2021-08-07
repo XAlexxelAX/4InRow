@@ -1,11 +1,11 @@
-﻿<Window x:Class="connectFour.LoginPage"
+﻿<Window x:Class="connectFour.Register"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="400"
+        Title="Register" Height="450" Width="400"
         Background="Azure" Icon="Resources\loginIcon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,7 +28,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Login:" FontFamily="Bell MT Bold"
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Register:" FontFamily="Bell MT Bold"
                    Foreground="DeepSkyBlue" VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
         <Image Source="Resources\loginUser.png" Grid.Row="1" Grid.Column="1"/>
@@ -42,12 +42,8 @@
                     TextDecorations="Underline"/>
         <PasswordBox Grid.Row="7" Grid.Column="1" Background="Azure" x:Name="password"
                      FontSize="20" HorizontalContentAlignment="Center" />
-        <Button Grid.Row="8" Grid.Column="1" x:Name="loginBtn" Content="Login" FontSize="25"
-                 FontFamily="Bell MT Bold" Foreground="RoyalBlue" Click="login_Click"/>
-        <Button Grid.Row="10" Grid.Column="1" Content="Click Here To Register"
-                   Foreground="Purple" Background="Azure"
-                VerticalAlignment="Center" HorizontalAlignment="Center" 
-                    Click="register_Click"/>
+        <Button Grid.Row="8" Grid.Column="1" Content="Register" FontSize="25"
+                 FontFamily="Bell MT Bold" Foreground="RoyalBlue" Click="register_Click"/>
     </Grid>
 
 </Window>
