@@ -12,8 +12,7 @@ namespace grpc4InRowService
 {
     public class Program
     {
-        //public static UsersContext realUserDB = new UsersContext(new DbContextOptionsBuilder().Options);
-        public static Dictionary<String, String> userDB = new Dictionary<string, string>();
+        public static Dictionary<Int32, String> onlineUsers = new Dictionary<Int32, String>();
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
