@@ -54,3 +54,5 @@ C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.pd
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.genruntimeconfig.cache
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\Register.g.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\Register.baml
+C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\OnlineUsersList.g.cs
+C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\OnlineUsersList.baml
