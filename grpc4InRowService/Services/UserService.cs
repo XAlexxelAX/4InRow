@@ -1,4 +1,6 @@
-﻿using Grpc.Core;
+﻿using EFDB.DataAccess;
+using EFDB.Models;
+using Grpc.Core;
 using grpc4InRowService.Protos;
 using Microsoft.Extensions.Logging;
 using System;
@@ -33,9 +35,17 @@ namespace grpc4InRowService.Services
             try
             {
                 Program.userDB.Add(request.Username, request.Pw);
+                using (var db = new UsersContext())
+                {
+                    var user = new UserModel { Username = request.Username, PW = request.Pw };
+                    db.users.Add(user);
+                    db.SaveChanges();
+                }
+                //Program.realUserDB.users.Add(new EFDB.Models.UserModel { Username = request.Username, PW = request.Pw });
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 rr.IsSuccessfull = false;
             }
             return Task.FromResult(rr);

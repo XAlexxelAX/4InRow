@@ -1,4 +1,6 @@
+using EFDB.DataAccess;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace grpc4InRowService
 {
     public class Program
     {
-
+        //public static UsersContext realUserDB = new UsersContext(new DbContextOptionsBuilder().Options);
         public static Dictionary<String, String> userDB = new Dictionary<string, string>();
         public static void Main(string[] args)
         {

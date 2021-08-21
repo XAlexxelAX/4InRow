@@ -1,9 +1,11 @@
-﻿using grpc4InRowService.Services;
+﻿using EFDB.DataAccess;
+using grpc4InRowService.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,7 @@ namespace grpc4InRowService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<UsersContext>(options => options.UseSqlServer(@"Server = (localdb)\mssqllocaldb; Database = connectFour; Trusted_Connection = True"));
             services.AddGrpc();
         }
 
