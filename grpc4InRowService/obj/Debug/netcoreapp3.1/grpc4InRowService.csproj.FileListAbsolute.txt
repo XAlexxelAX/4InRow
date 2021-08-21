@@ -53,7 +53,6 @@ C:\Users\Alex\source\repos\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc
 C:\Users\Alex\source\repos\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.dll
 C:\Users\Alex\source\repos\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.pdb
 C:\Users\Alex\source\repos\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.genruntimeconfig.cache
-C:\Users\shaha\Desktop\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.csproj.AssemblyReference.cache
 C:\Users\USER\Desktop\4InRow\grpc4InRowService\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\USER\Desktop\4InRow\grpc4InRowService\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\USER\Desktop\4InRow\grpc4InRowService\bin\Debug\netcoreapp3.1\grpc4InRowService.exe

@@ -9,6 +9,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Grpc.Core;
+using Grpc.Net.Client;
+using grpc4InRowService.Protos;
 
 namespace connectFour.Resources
 {
@@ -17,9 +20,29 @@ namespace connectFour.Resources
     /// </summary>
     public partial class OnlineUsersList : Window
     {
+        private GrpcChannel channel;
+        private User.UserClient userClient;
         public OnlineUsersList()
         {
             InitializeComponent();
+
+            channel = GrpcChannel.ForAddress("https://localhost:5001");
+            userClient = new User.UserClient(channel);
+
+            fillListAsync();
+        }
+
+        private async System.Threading.Tasks.Task fillListAsync()
+        {
+            using (var call=userClient.getOnlineUsers(new Req()))
+            {
+                while(await call.ResponseStream.MoveNext())
+                {
+                    ListBoxItem newUser = new ListBoxItem();
+                    newUser.Content = call.ResponseStream.Current.User;
+                    users.Items.Add(newUser);
+                }
+            }
         }
 
         private void userSelected(object sender, SelectionChangedEventArgs e)

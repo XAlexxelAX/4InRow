@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Grpc.Net.Client;
+using grpc4InRowService.Protos;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,9 +19,15 @@ namespace connectFour
     /// </summary>
     public partial class LoginPage : Window
     {
+        private GrpcChannel channel;
+        private User.UserClient userClient;
+
         public LoginPage()
         {
             InitializeComponent();
+
+            channel = GrpcChannel.ForAddress("https://localhost:5001");
+            userClient = new User.UserClient(channel);
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
@@ -33,6 +41,7 @@ namespace connectFour
             else
             {
                 // TODO: Authenticate USER from DB
+
                 this.Close();
 
                 new Game().Show(); // open the list of current active players

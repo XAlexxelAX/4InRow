@@ -20,15 +20,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        
+
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Online Users:" FontFamily="Bell MT Bold"
                    Foreground="DeepSkyBlue" VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
-        
-        <ListBox Grid.Row="3" Grid.Column="1" SelectionChanged="userSelected">
-            <ListBoxItem>ListBox Item #1</ListBoxItem>
-            <ListBoxItem>ListBox Item #2</ListBoxItem>
-            <ListBoxItem>ListBox Item #3</ListBoxItem>
+
+        <ListBox Grid.Row="3" Grid.Column="1" SelectionChanged="userSelected" x:Name="users">
         </ListBox>
     </Grid>
 </Window>
