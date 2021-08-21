@@ -3,6 +3,7 @@ using grpc4InRowService.Protos;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -30,7 +31,7 @@ namespace connectFour
             userClient = new User.UserClient(channel);
         }
 
-        private void login_Click(object sender, RoutedEventArgs e)
+        private async void login_Click(object sender, RoutedEventArgs e)
         {
             if (username.Text.Equals("")) // check the input (username&password)
                 MessageBox.Show("Username is empty!", "Input Error",
@@ -40,11 +41,15 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-                // TODO: Authenticate USER from DB
+                if(!(await userClient.LoginAsync(new LoginRequest { Username = username.Text, Pw = password.Password })).IsSuccessfull)
+                {
+                    MessageBox.Show("Couldn't login :(");
+                    return;
+                }
+                new OnlineUsersList().Show(); // open the list of current active players
 
                 this.Close();
-
-                new Game().Show(); // open the list of current active players
+                
             }
         }
 

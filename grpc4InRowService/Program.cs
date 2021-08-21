@@ -10,6 +10,8 @@ namespace grpc4InRowService
 {
     public class Program
     {
+
+        public static Dictionary<String, String> userDB = new Dictionary<string, string>();
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

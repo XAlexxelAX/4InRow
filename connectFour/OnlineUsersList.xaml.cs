@@ -13,7 +13,7 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using grpc4InRowService.Protos;
 
-namespace connectFour.Resources
+namespace connectFour
 {
     /// <summary>
     /// Interaction logic for OnlineUsersList.xaml
@@ -39,7 +39,7 @@ namespace connectFour.Resources
                 while(await call.ResponseStream.MoveNext())
                 {
                     ListBoxItem newUser = new ListBoxItem();
-                    newUser.Content = call.ResponseStream.Current.User;
+                    newUser.Content = call.ResponseStream.Current.Username;
                     users.Items.Add(newUser);
                 }
             }

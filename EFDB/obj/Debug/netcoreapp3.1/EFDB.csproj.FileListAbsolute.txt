@@ -15,4 +15,3 @@ C:\Users\USER\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.AssemblyInfo.cs
 C:\Users\USER\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.CoreCompileInputs.cache
 C:\Users\USER\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.dll
 C:\Users\USER\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.pdb
-C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csprojAssemblyReference.cache

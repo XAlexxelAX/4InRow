@@ -24,24 +24,23 @@ namespace grpc4InRowService.Protos {
     static UserReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFQcm90b3MvdXNlci5wcm90byIFCgNSZXEiJAoIVXNlckRhdGESCgoCaWQY",
-            "ASABKAUSDAoEdXNlchgCIAEoCSIoCgxMb2dpblJlcXVlc3QSDAoEdXNlchgB",
-            "IAEoCRIKCgJwdxgCIAEoCSIjCgpMb2dpblJlcGx5EhUKDWlzU3VjY2Vzc2Z1",
-            "bGwYASABKAgiWAoPUmVnaXN0ZXJSZXF1ZXN0EgwKBHVzZXIYASABKAkSCgoC",
-            "cHcYAiABKAkSDQoFZW1haWwYAyABKAkSDQoFZm5hbWUYBCABKAkSDQoFbG5h",
-            "bWUYBSABKAkiJgoNUmVnaXN0ZXJSZXBseRIVCg1pc1N1Y2Nlc3NmdWxsGAEg",
-            "ASgIMn4KBFVzZXISIwoOZ2V0T25saW5lVXNlcnMSBC5SZXEaCS5Vc2VyRGF0",
-            "YTABEiMKBUxvZ2luEg0uTG9naW5SZXF1ZXN0GgsuTG9naW5SZXBseRIsCghS",
-            "ZWdpc3RlchIQLlJlZ2lzdGVyUmVxdWVzdBoOLlJlZ2lzdGVyUmVwbHlCG6oC",
-            "GGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
+            "ChFQcm90b3MvdXNlci5wcm90byIFCgNSZXEiKAoIVXNlckRhdGESCgoCaWQY",
+            "ASABKAUSEAoIdXNlcm5hbWUYAiABKAkiLAoMTG9naW5SZXF1ZXN0EhAKCHVz",
+            "ZXJuYW1lGAEgASgJEgoKAnB3GAIgASgJIiMKCkxvZ2luUmVwbHkSFQoNaXNT",
+            "dWNjZXNzZnVsbBgBIAEoCCIvCg9SZWdpc3RlclJlcXVlc3QSEAoIdXNlcm5h",
+            "bWUYASABKAkSCgoCcHcYAiABKAkiJgoNUmVnaXN0ZXJSZXBseRIVCg1pc1N1",
+            "Y2Nlc3NmdWxsGAEgASgIMn4KBFVzZXISIwoOZ2V0T25saW5lVXNlcnMSBC5S",
+            "ZXEaCS5Vc2VyRGF0YTABEiMKBUxvZ2luEg0uTG9naW5SZXF1ZXN0GgsuTG9n",
+            "aW5SZXBseRIsCghSZWdpc3RlchIQLlJlZ2lzdGVyUmVxdWVzdBoOLlJlZ2lz",
+            "dGVyUmVwbHlCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Req), global::grpc4InRowService.Protos.Req.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserData), global::grpc4InRowService.Protos.UserData.Parser, new[]{ "Id", "User" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.LoginRequest), global::grpc4InRowService.Protos.LoginRequest.Parser, new[]{ "User", "Pw" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserData), global::grpc4InRowService.Protos.UserData.Parser, new[]{ "Id", "Username" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.LoginRequest), global::grpc4InRowService.Protos.LoginRequest.Parser, new[]{ "Username", "Pw" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.LoginReply), global::grpc4InRowService.Protos.LoginReply.Parser, new[]{ "IsSuccessfull" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.RegisterRequest), global::grpc4InRowService.Protos.RegisterRequest.Parser, new[]{ "User", "Pw", "Email", "Fname", "Lname" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.RegisterRequest), global::grpc4InRowService.Protos.RegisterRequest.Parser, new[]{ "Username", "Pw" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.RegisterReply), global::grpc4InRowService.Protos.RegisterReply.Parser, new[]{ "IsSuccessfull" }, null, null, null, null)
           }));
     }
@@ -176,7 +175,7 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public UserData(UserData other) : this() {
       id_ = other.id_;
-      user_ = other.user_;
+      username_ = other.username_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -196,14 +195,14 @@ namespace grpc4InRowService.Protos {
       }
     }
 
-    /// <summary>Field number for the "user" field.</summary>
-    public const int UserFieldNumber = 2;
-    private string user_ = "";
+    /// <summary>Field number for the "username" field.</summary>
+    public const int UsernameFieldNumber = 2;
+    private string username_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string User {
-      get { return user_; }
+    public string Username {
+      get { return username_; }
       set {
-        user_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -221,7 +220,7 @@ namespace grpc4InRowService.Protos {
         return true;
       }
       if (Id != other.Id) return false;
-      if (User != other.User) return false;
+      if (Username != other.Username) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -229,7 +228,7 @@ namespace grpc4InRowService.Protos {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
-      if (User.Length != 0) hash ^= User.GetHashCode();
+      if (Username.Length != 0) hash ^= Username.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -247,9 +246,9 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
       }
-      if (User.Length != 0) {
+      if (Username.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(User);
+        output.WriteString(Username);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -262,8 +261,8 @@ namespace grpc4InRowService.Protos {
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
       }
-      if (User.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(User);
+      if (Username.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -279,8 +278,8 @@ namespace grpc4InRowService.Protos {
       if (other.Id != 0) {
         Id = other.Id;
       }
-      if (other.User.Length != 0) {
-        User = other.User;
+      if (other.Username.Length != 0) {
+        Username = other.Username;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -298,7 +297,7 @@ namespace grpc4InRowService.Protos {
             break;
           }
           case 18: {
-            User = input.ReadString();
+            Username = input.ReadString();
             break;
           }
         }
@@ -332,7 +331,7 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public LoginRequest(LoginRequest other) : this() {
-      user_ = other.user_;
+      username_ = other.username_;
       pw_ = other.pw_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -342,14 +341,14 @@ namespace grpc4InRowService.Protos {
       return new LoginRequest(this);
     }
 
-    /// <summary>Field number for the "user" field.</summary>
-    public const int UserFieldNumber = 1;
-    private string user_ = "";
+    /// <summary>Field number for the "username" field.</summary>
+    public const int UsernameFieldNumber = 1;
+    private string username_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string User {
-      get { return user_; }
+    public string Username {
+      get { return username_; }
       set {
-        user_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -377,7 +376,7 @@ namespace grpc4InRowService.Protos {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (User != other.User) return false;
+      if (Username != other.Username) return false;
       if (Pw != other.Pw) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -385,7 +384,7 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (User.Length != 0) hash ^= User.GetHashCode();
+      if (Username.Length != 0) hash ^= Username.GetHashCode();
       if (Pw.Length != 0) hash ^= Pw.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -400,9 +399,9 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (User.Length != 0) {
+      if (Username.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(User);
+        output.WriteString(Username);
       }
       if (Pw.Length != 0) {
         output.WriteRawTag(18);
@@ -416,8 +415,8 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (User.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(User);
+      if (Username.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
       }
       if (Pw.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Pw);
@@ -433,8 +432,8 @@ namespace grpc4InRowService.Protos {
       if (other == null) {
         return;
       }
-      if (other.User.Length != 0) {
-        User = other.User;
+      if (other.Username.Length != 0) {
+        Username = other.Username;
       }
       if (other.Pw.Length != 0) {
         Pw = other.Pw;
@@ -451,7 +450,7 @@ namespace grpc4InRowService.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            User = input.ReadString();
+            Username = input.ReadString();
             break;
           }
           case 18: {
@@ -618,11 +617,8 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RegisterRequest(RegisterRequest other) : this() {
-      user_ = other.user_;
+      username_ = other.username_;
       pw_ = other.pw_;
-      email_ = other.email_;
-      fname_ = other.fname_;
-      lname_ = other.lname_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -631,14 +627,14 @@ namespace grpc4InRowService.Protos {
       return new RegisterRequest(this);
     }
 
-    /// <summary>Field number for the "user" field.</summary>
-    public const int UserFieldNumber = 1;
-    private string user_ = "";
+    /// <summary>Field number for the "username" field.</summary>
+    public const int UsernameFieldNumber = 1;
+    private string username_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string User {
-      get { return user_; }
+    public string Username {
+      get { return username_; }
       set {
-        user_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -650,39 +646,6 @@ namespace grpc4InRowService.Protos {
       get { return pw_; }
       set {
         pw_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "email" field.</summary>
-    public const int EmailFieldNumber = 3;
-    private string email_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Email {
-      get { return email_; }
-      set {
-        email_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "fname" field.</summary>
-    public const int FnameFieldNumber = 4;
-    private string fname_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Fname {
-      get { return fname_; }
-      set {
-        fname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "lname" field.</summary>
-    public const int LnameFieldNumber = 5;
-    private string lname_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Lname {
-      get { return lname_; }
-      set {
-        lname_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -699,22 +662,16 @@ namespace grpc4InRowService.Protos {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (User != other.User) return false;
+      if (Username != other.Username) return false;
       if (Pw != other.Pw) return false;
-      if (Email != other.Email) return false;
-      if (Fname != other.Fname) return false;
-      if (Lname != other.Lname) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (User.Length != 0) hash ^= User.GetHashCode();
+      if (Username.Length != 0) hash ^= Username.GetHashCode();
       if (Pw.Length != 0) hash ^= Pw.GetHashCode();
-      if (Email.Length != 0) hash ^= Email.GetHashCode();
-      if (Fname.Length != 0) hash ^= Fname.GetHashCode();
-      if (Lname.Length != 0) hash ^= Lname.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -728,25 +685,13 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (User.Length != 0) {
+      if (Username.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(User);
+        output.WriteString(Username);
       }
       if (Pw.Length != 0) {
         output.WriteRawTag(18);
         output.WriteString(Pw);
-      }
-      if (Email.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Email);
-      }
-      if (Fname.Length != 0) {
-        output.WriteRawTag(34);
-        output.WriteString(Fname);
-      }
-      if (Lname.Length != 0) {
-        output.WriteRawTag(42);
-        output.WriteString(Lname);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -756,20 +701,11 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (User.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(User);
+      if (Username.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
       }
       if (Pw.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Pw);
-      }
-      if (Email.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
-      }
-      if (Fname.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Fname);
-      }
-      if (Lname.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Lname);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -782,20 +718,11 @@ namespace grpc4InRowService.Protos {
       if (other == null) {
         return;
       }
-      if (other.User.Length != 0) {
-        User = other.User;
+      if (other.Username.Length != 0) {
+        Username = other.Username;
       }
       if (other.Pw.Length != 0) {
         Pw = other.Pw;
-      }
-      if (other.Email.Length != 0) {
-        Email = other.Email;
-      }
-      if (other.Fname.Length != 0) {
-        Fname = other.Fname;
-      }
-      if (other.Lname.Length != 0) {
-        Lname = other.Lname;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -809,23 +736,11 @@ namespace grpc4InRowService.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            User = input.ReadString();
+            Username = input.ReadString();
             break;
           }
           case 18: {
             Pw = input.ReadString();
-            break;
-          }
-          case 26: {
-            Email = input.ReadString();
-            break;
-          }
-          case 34: {
-            Fname = input.ReadString();
-            break;
-          }
-          case 42: {
-            Lname = input.ReadString();
             break;
           }
         }

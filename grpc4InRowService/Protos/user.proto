@@ -14,11 +14,11 @@ message Req{
 
 message UserData{
 	int32 id = 1;
-	string user = 2;
+	string username = 2;
 }
 
 message LoginRequest {
-	string user = 1;
+	string username = 1;
 	string pw = 2;
 }
 
@@ -27,11 +27,8 @@ message LoginReply{
 }
 
 message RegisterRequest{
-	string user = 1;
+	string username = 1;
 	string pw = 2;
-	string email = 3;
-	string fname = 4;
-	string lname = 5;
 }
 
 message RegisterReply{

@@ -8,9 +8,9 @@
 using grpc = global::Grpc.Core;
 
 namespace grpc4InRowService.Protos {
-  public static partial class UserService
+  public static partial class User
   {
-    static readonly string __ServiceName = "UserService";
+    static readonly string __ServiceName = "User";
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
@@ -46,6 +46,10 @@ namespace grpc4InRowService.Protos {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.Req> __Marshaller_Req = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::grpc4InRowService.Protos.Req.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.UserData> __Marshaller_UserData = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::grpc4InRowService.Protos.UserData.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.LoginRequest> __Marshaller_LoginRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::grpc4InRowService.Protos.LoginRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.LoginReply> __Marshaller_LoginReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::grpc4InRowService.Protos.LoginReply.Parser));
@@ -53,6 +57,14 @@ namespace grpc4InRowService.Protos {
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.RegisterRequest> __Marshaller_RegisterRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::grpc4InRowService.Protos.RegisterRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.RegisterReply> __Marshaller_RegisterReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::grpc4InRowService.Protos.RegisterReply.Parser));
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::grpc4InRowService.Protos.Req, global::grpc4InRowService.Protos.UserData> __Method_getOnlineUsers = new grpc::Method<global::grpc4InRowService.Protos.Req, global::grpc4InRowService.Protos.UserData>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "getOnlineUsers",
+        __Marshaller_Req,
+        __Marshaller_UserData);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::grpc4InRowService.Protos.LoginRequest, global::grpc4InRowService.Protos.LoginReply> __Method_Login = new grpc::Method<global::grpc4InRowService.Protos.LoginRequest, global::grpc4InRowService.Protos.LoginReply>(
@@ -76,10 +88,16 @@ namespace grpc4InRowService.Protos {
       get { return global::grpc4InRowService.Protos.UserReflection.Descriptor.Services[0]; }
     }
 
-    /// <summary>Base class for server-side implementations of UserService</summary>
-    [grpc::BindServiceMethod(typeof(UserService), "BindService")]
-    public abstract partial class UserServiceBase
+    /// <summary>Base class for server-side implementations of User</summary>
+    [grpc::BindServiceMethod(typeof(User), "BindService")]
+    public abstract partial class UserBase
     {
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task getOnlineUsers(global::grpc4InRowService.Protos.Req request, grpc::IServerStreamWriter<global::grpc4InRowService.Protos.UserData> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.LoginReply> Login(global::grpc4InRowService.Protos.LoginRequest request, grpc::ServerCallContext context)
       {
@@ -94,33 +112,43 @@ namespace grpc4InRowService.Protos {
 
     }
 
-    /// <summary>Client for UserService</summary>
-    public partial class UserServiceClient : grpc::ClientBase<UserServiceClient>
+    /// <summary>Client for User</summary>
+    public partial class UserClient : grpc::ClientBase<UserClient>
     {
-      /// <summary>Creates a new client for UserService</summary>
+      /// <summary>Creates a new client for User</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public UserServiceClient(grpc::ChannelBase channel) : base(channel)
+      public UserClient(grpc::ChannelBase channel) : base(channel)
       {
       }
-      /// <summary>Creates a new client for UserService that uses a custom <c>CallInvoker</c>.</summary>
+      /// <summary>Creates a new client for User that uses a custom <c>CallInvoker</c>.</summary>
       /// <param name="callInvoker">The callInvoker to use to make remote calls.</param>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public UserServiceClient(grpc::CallInvoker callInvoker) : base(callInvoker)
+      public UserClient(grpc::CallInvoker callInvoker) : base(callInvoker)
       {
       }
       /// <summary>Protected parameterless constructor to allow creation of test doubles.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      protected UserServiceClient() : base()
+      protected UserClient() : base()
       {
       }
       /// <summary>Protected constructor to allow creation of configured clients.</summary>
       /// <param name="configuration">The client configuration.</param>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      protected UserServiceClient(ClientBaseConfiguration configuration) : base(configuration)
+      protected UserClient(ClientBaseConfiguration configuration) : base(configuration)
       {
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::grpc4InRowService.Protos.UserData> getOnlineUsers(global::grpc4InRowService.Protos.Req request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return getOnlineUsers(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::grpc4InRowService.Protos.UserData> getOnlineUsers(global::grpc4InRowService.Protos.Req request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_getOnlineUsers, null, options, request);
+      }
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::grpc4InRowService.Protos.LoginReply Login(global::grpc4InRowService.Protos.LoginRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
@@ -163,18 +191,19 @@ namespace grpc4InRowService.Protos {
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      protected override UserServiceClient NewInstance(ClientBaseConfiguration configuration)
+      protected override UserClient NewInstance(ClientBaseConfiguration configuration)
       {
-        return new UserServiceClient(configuration);
+        return new UserClient(configuration);
       }
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    public static grpc::ServerServiceDefinition BindService(UserServiceBase serviceImpl)
+    public static grpc::ServerServiceDefinition BindService(UserBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_getOnlineUsers, serviceImpl.getOnlineUsers)
           .AddMethod(__Method_Login, serviceImpl.Login)
           .AddMethod(__Method_Register, serviceImpl.Register).Build();
     }
@@ -184,8 +213,9 @@ namespace grpc4InRowService.Protos {
     /// <param name="serviceBinder">Service methods will be bound by calling <c>AddMethod</c> on this object.</param>
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    public static void BindService(grpc::ServiceBinderBase serviceBinder, UserServiceBase serviceImpl)
+    public static void BindService(grpc::ServiceBinderBase serviceBinder, UserBase serviceImpl)
     {
+      serviceBinder.AddMethod(__Method_getOnlineUsers, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::grpc4InRowService.Protos.Req, global::grpc4InRowService.Protos.UserData>(serviceImpl.getOnlineUsers));
       serviceBinder.AddMethod(__Method_Login, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.LoginRequest, global::grpc4InRowService.Protos.LoginReply>(serviceImpl.Login));
       serviceBinder.AddMethod(__Method_Register, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.RegisterRequest, global::grpc4InRowService.Protos.RegisterReply>(serviceImpl.Register));
     }
