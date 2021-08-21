@@ -46,7 +46,6 @@ C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\Google.Pro
 C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Core.Api.dll
 C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Net.Client.dll
 C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Net.Common.dll
-C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csproj.AssemblyReference.cache
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\App.g.cs
@@ -61,3 +60,14 @@ C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFou
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.dll
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.pdb
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.genruntimeconfig.cache
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\grpc4InRowService.deps.json
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\grpc4InRowService.runtimeconfig.json
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\grpc4InRowService.runtimeconfig.dev.json
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\grpc4InRowService.exe
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.AspNetCore.Server.dll
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.AspNetCore.Server.ClientFactory.dll
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Net.ClientFactory.dll
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\grpc4InRowService.dll
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\grpc4InRowService.pdb

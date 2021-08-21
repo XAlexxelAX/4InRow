@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "grpc4InRowService", "grpc4I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "connectFour", "connectFour\connectFour.csproj", "{2704555F-FC61-44E3-8B62-F5A77FDBE226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFDB", "EFDB\EFDB.csproj", "{556E1260-8FBB-457C-9102-698979C3354F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFDB", "EFDB\EFDB.csproj", "{556E1260-8FBB-457C-9102-698979C3354F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

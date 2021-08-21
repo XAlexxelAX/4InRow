@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "grpc4InRowService.Services";
+
+service Game{
+	rpc StartGame (GameRequest) returns (stream GameReply);
+}
+
+message GameRequest{
+	//stream userStream=1;
+}
+
+message GameReply{
+
+}

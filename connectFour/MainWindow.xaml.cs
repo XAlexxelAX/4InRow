@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Grpc.Net.Client;
+using grpc4InRowService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,6 +50,7 @@ namespace connectFour
 
         private void OnPreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+
             //  boardView.IsHitTestVisibleProperty = false;
             /*if (e.ClickCount == 2) // for double-click, remove this condition if only want single click
             {*/
@@ -163,8 +166,13 @@ namespace connectFour
             trans.BeginAnimation(TranslateTransform.YProperty, animY);
         }
 
-        private void updateBoard(int emptyCell_row, int col)
+        private async Task updateBoard(int emptyCell_row, int col)
         {
+
+            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var client = new User.UserClient(channel);
+            LoginReply reply = await client.LoginAsync(new LoginRequest());
+            if (reply.IsSuccessfull) { MessageBox.Show("I've connected."); }
             // update the 2D board programically
             board[emptyCell_row, col] = turn + 1;
 
