@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\user.proto" />
     <None Remove="Resources\cell.png" />
     <None Remove="Resources\cell_hole.png" />
     <None Remove="Resources\game_icon.ico" />
@@ -61,7 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\user.proto" />
+    <Folder Include="Protos\" />
   </ItemGroup>
 
 </Project>

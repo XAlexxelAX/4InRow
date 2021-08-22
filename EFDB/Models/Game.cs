@@ -8,8 +8,9 @@ namespace EFDB.Models
     {
         
         public int Id { get; set; }
-        public List<UserModel> Players { get; set; } = new List<UserModel>();
-        public int WinnerIndex { get; set; }
+        public int Player1 { get; set; }
+        public int Player2 { get; set; }
+        public int WinnerId { get; set; }
         public DateTime FinishTime { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace connectFour
 
         private async System.Threading.Tasks.Task fillListAsync()
         {
-            using (var call=userClient.getOnlineUsers(new Req()))
+            using (var call=userClient.getOnlineUsers(new GeneralReq()))
             {
                 while(await call.ResponseStream.MoveNext())
                 {

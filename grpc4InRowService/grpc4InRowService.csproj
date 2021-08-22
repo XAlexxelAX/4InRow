@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\game.proto" />
     <None Remove="Protos\user.proto" />
   </ItemGroup>
 
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="Protos\game.proto" />
     <Protobuf Include="Protos\user.proto" />
   </ItemGroup>
 

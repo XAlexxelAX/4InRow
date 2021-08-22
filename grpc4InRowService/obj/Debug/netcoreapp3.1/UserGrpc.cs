@@ -12,33 +12,31 @@ namespace grpc4InRowService.Protos {
   {
     static readonly string __ServiceName = "User";
 
-    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.Req> __Marshaller_Req = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.Req.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.GeneralReq> __Marshaller_GeneralReq = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.GeneralReq.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.UserData> __Marshaller_UserData = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.UserData.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.LoginRequest> __Marshaller_LoginRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.LoginRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.LoginReply> __Marshaller_LoginReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.LoginReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.RegisterRequest> __Marshaller_RegisterRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.RegisterRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.RegisterReply> __Marshaller_RegisterReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.RegisterReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.UserRequest> __Marshaller_UserRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.UserRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.GeneralReply> __Marshaller_GeneralReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.GeneralReply.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::grpc4InRowService.Protos.Req, global::grpc4InRowService.Protos.UserData> __Method_getOnlineUsers = new grpc::Method<global::grpc4InRowService.Protos.Req, global::grpc4InRowService.Protos.UserData>(
+    static readonly grpc::Method<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.UserData> __Method_getOnlineUsers = new grpc::Method<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.UserData>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "getOnlineUsers",
-        __Marshaller_Req,
+        __Marshaller_GeneralReq,
         __Marshaller_UserData);
 
-    static readonly grpc::Method<global::grpc4InRowService.Protos.LoginRequest, global::grpc4InRowService.Protos.LoginReply> __Method_Login = new grpc::Method<global::grpc4InRowService.Protos.LoginRequest, global::grpc4InRowService.Protos.LoginReply>(
+    static readonly grpc::Method<global::grpc4InRowService.Protos.UserRequest, global::grpc4InRowService.Protos.GeneralReply> __Method_Login = new grpc::Method<global::grpc4InRowService.Protos.UserRequest, global::grpc4InRowService.Protos.GeneralReply>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Login",
-        __Marshaller_LoginRequest,
-        __Marshaller_LoginReply);
+        __Marshaller_UserRequest,
+        __Marshaller_GeneralReply);
 
-    static readonly grpc::Method<global::grpc4InRowService.Protos.RegisterRequest, global::grpc4InRowService.Protos.RegisterReply> __Method_Register = new grpc::Method<global::grpc4InRowService.Protos.RegisterRequest, global::grpc4InRowService.Protos.RegisterReply>(
+    static readonly grpc::Method<global::grpc4InRowService.Protos.UserRequest, global::grpc4InRowService.Protos.GeneralReply> __Method_Register = new grpc::Method<global::grpc4InRowService.Protos.UserRequest, global::grpc4InRowService.Protos.GeneralReply>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Register",
-        __Marshaller_RegisterRequest,
-        __Marshaller_RegisterReply);
+        __Marshaller_UserRequest,
+        __Marshaller_GeneralReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -50,17 +48,36 @@ namespace grpc4InRowService.Protos {
     [grpc::BindServiceMethod(typeof(User), "BindService")]
     public abstract partial class UserBase
     {
-      public virtual global::System.Threading.Tasks.Task getOnlineUsers(global::grpc4InRowService.Protos.Req request, grpc::IServerStreamWriter<global::grpc4InRowService.Protos.UserData> responseStream, grpc::ServerCallContext context)
+      /// <summary>
+      /// sends GeneralReq with user id, returns a stream of online users from Program.onlineUsers
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>A task indicating completion of the handler.</returns>
+      public virtual global::System.Threading.Tasks.Task getOnlineUsers(global::grpc4InRowService.Protos.GeneralReq request, grpc::IServerStreamWriter<global::grpc4InRowService.Protos.UserData> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.LoginReply> Login(global::grpc4InRowService.Protos.LoginRequest request, grpc::ServerCallContext context)
+      /// <summary>
+      /// sends LoginRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.GeneralReply> Login(global::grpc4InRowService.Protos.UserRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.RegisterReply> Register(global::grpc4InRowService.Protos.RegisterRequest request, grpc::ServerCallContext context)
+      /// <summary>
+      /// sends RegisterRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.GeneralReply> Register(global::grpc4InRowService.Protos.UserRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -90,43 +107,113 @@ namespace grpc4InRowService.Protos {
       {
       }
 
-      public virtual grpc::AsyncServerStreamingCall<global::grpc4InRowService.Protos.UserData> getOnlineUsers(global::grpc4InRowService.Protos.Req request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      /// <summary>
+      /// sends GeneralReq with user id, returns a stream of online users from Program.onlineUsers
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::grpc4InRowService.Protos.UserData> getOnlineUsers(global::grpc4InRowService.Protos.GeneralReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return getOnlineUsers(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::grpc4InRowService.Protos.UserData> getOnlineUsers(global::grpc4InRowService.Protos.Req request, grpc::CallOptions options)
+      /// <summary>
+      /// sends GeneralReq with user id, returns a stream of online users from Program.onlineUsers
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::grpc4InRowService.Protos.UserData> getOnlineUsers(global::grpc4InRowService.Protos.GeneralReq request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_getOnlineUsers, null, options, request);
       }
-      public virtual global::grpc4InRowService.Protos.LoginReply Login(global::grpc4InRowService.Protos.LoginRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      /// <summary>
+      /// sends LoginRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::grpc4InRowService.Protos.GeneralReply Login(global::grpc4InRowService.Protos.UserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Login(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::grpc4InRowService.Protos.LoginReply Login(global::grpc4InRowService.Protos.LoginRequest request, grpc::CallOptions options)
+      /// <summary>
+      /// sends LoginRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::grpc4InRowService.Protos.GeneralReply Login(global::grpc4InRowService.Protos.UserRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Login, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.LoginReply> LoginAsync(global::grpc4InRowService.Protos.LoginRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      /// <summary>
+      /// sends LoginRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GeneralReply> LoginAsync(global::grpc4InRowService.Protos.UserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return LoginAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.LoginReply> LoginAsync(global::grpc4InRowService.Protos.LoginRequest request, grpc::CallOptions options)
+      /// <summary>
+      /// sends LoginRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GeneralReply> LoginAsync(global::grpc4InRowService.Protos.UserRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Login, null, options, request);
       }
-      public virtual global::grpc4InRowService.Protos.RegisterReply Register(global::grpc4InRowService.Protos.RegisterRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      /// <summary>
+      /// sends RegisterRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::grpc4InRowService.Protos.GeneralReply Register(global::grpc4InRowService.Protos.UserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Register(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::grpc4InRowService.Protos.RegisterReply Register(global::grpc4InRowService.Protos.RegisterRequest request, grpc::CallOptions options)
+      /// <summary>
+      /// sends RegisterRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::grpc4InRowService.Protos.GeneralReply Register(global::grpc4InRowService.Protos.UserRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Register, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.RegisterReply> RegisterAsync(global::grpc4InRowService.Protos.RegisterRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      /// <summary>
+      /// sends RegisterRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GeneralReply> RegisterAsync(global::grpc4InRowService.Protos.UserRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return RegisterAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.RegisterReply> RegisterAsync(global::grpc4InRowService.Protos.RegisterRequest request, grpc::CallOptions options)
+      /// <summary>
+      /// sends RegisterRequest with username and pw, returns a GeneralReply with user id from db if successfull
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GeneralReply> RegisterAsync(global::grpc4InRowService.Protos.UserRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Register, null, options, request);
       }
@@ -153,9 +240,9 @@ namespace grpc4InRowService.Protos {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, UserBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_getOnlineUsers, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::grpc4InRowService.Protos.Req, global::grpc4InRowService.Protos.UserData>(serviceImpl.getOnlineUsers));
-      serviceBinder.AddMethod(__Method_Login, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.LoginRequest, global::grpc4InRowService.Protos.LoginReply>(serviceImpl.Login));
-      serviceBinder.AddMethod(__Method_Register, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.RegisterRequest, global::grpc4InRowService.Protos.RegisterReply>(serviceImpl.Register));
+      serviceBinder.AddMethod(__Method_getOnlineUsers, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.UserData>(serviceImpl.getOnlineUsers));
+      serviceBinder.AddMethod(__Method_Login, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.UserRequest, global::grpc4InRowService.Protos.GeneralReply>(serviceImpl.Login));
+      serviceBinder.AddMethod(__Method_Register, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.UserRequest, global::grpc4InRowService.Protos.GeneralReply>(serviceImpl.Register));
     }
 
   }

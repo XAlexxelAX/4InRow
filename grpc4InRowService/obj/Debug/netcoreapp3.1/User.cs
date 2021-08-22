@@ -24,35 +24,32 @@ namespace grpc4InRowService.Protos {
     static UserReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFQcm90b3MvdXNlci5wcm90byIFCgNSZXEiKAoIVXNlckRhdGESCgoCaWQY",
-            "ASABKAUSEAoIdXNlcm5hbWUYAiABKAkiLAoMTG9naW5SZXF1ZXN0EhAKCHVz",
-            "ZXJuYW1lGAEgASgJEgoKAnB3GAIgASgJIiMKCkxvZ2luUmVwbHkSFQoNaXNT",
-            "dWNjZXNzZnVsbBgBIAEoCCIvCg9SZWdpc3RlclJlcXVlc3QSEAoIdXNlcm5h",
-            "bWUYASABKAkSCgoCcHcYAiABKAkiJgoNUmVnaXN0ZXJSZXBseRIVCg1pc1N1",
-            "Y2Nlc3NmdWxsGAEgASgIMn4KBFVzZXISIwoOZ2V0T25saW5lVXNlcnMSBC5S",
-            "ZXEaCS5Vc2VyRGF0YTABEiMKBUxvZ2luEg0uTG9naW5SZXF1ZXN0GgsuTG9n",
-            "aW5SZXBseRIsCghSZWdpc3RlchIQLlJlZ2lzdGVyUmVxdWVzdBoOLlJlZ2lz",
-            "dGVyUmVwbHlCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
+            "ChFQcm90b3MvdXNlci5wcm90byIYCgpHZW5lcmFsUmVxEgoKAmlkGAEgASgF",
+            "IigKCFVzZXJEYXRhEgoKAmlkGAEgASgFEhAKCHVzZXJuYW1lGAIgASgJIisK",
+            "C1VzZXJSZXF1ZXN0EhAKCHVzZXJuYW1lGAEgASgJEgoKAnB3GAIgASgJIjEK",
+            "DEdlbmVyYWxSZXBseRIVCg1pc1N1Y2Nlc3NmdWxsGAEgASgIEgoKAmlkGAIg",
+            "ASgFMoEBCgRVc2VyEioKDmdldE9ubGluZVVzZXJzEgsuR2VuZXJhbFJlcRoJ",
+            "LlVzZXJEYXRhMAESJAoFTG9naW4SDC5Vc2VyUmVxdWVzdBoNLkdlbmVyYWxS",
+            "ZXBseRInCghSZWdpc3RlchIMLlVzZXJSZXF1ZXN0Gg0uR2VuZXJhbFJlcGx5",
+            "QhuqAhhncnBjNEluUm93U2VydmljZS5Qcm90b3NiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Req), global::grpc4InRowService.Protos.Req.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GeneralReq), global::grpc4InRowService.Protos.GeneralReq.Parser, new[]{ "Id" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserData), global::grpc4InRowService.Protos.UserData.Parser, new[]{ "Id", "Username" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.LoginRequest), global::grpc4InRowService.Protos.LoginRequest.Parser, new[]{ "Username", "Pw" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.LoginReply), global::grpc4InRowService.Protos.LoginReply.Parser, new[]{ "IsSuccessfull" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.RegisterRequest), global::grpc4InRowService.Protos.RegisterRequest.Parser, new[]{ "Username", "Pw" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.RegisterReply), global::grpc4InRowService.Protos.RegisterReply.Parser, new[]{ "IsSuccessfull" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserRequest), global::grpc4InRowService.Protos.UserRequest.Parser, new[]{ "Username", "Pw" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GeneralReply), global::grpc4InRowService.Protos.GeneralReply.Parser, new[]{ "IsSuccessfull", "Id" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class Req : pb::IMessage<Req> {
-    private static readonly pb::MessageParser<Req> _parser = new pb::MessageParser<Req>(() => new Req());
+  public sealed partial class GeneralReq : pb::IMessage<GeneralReq> {
+    private static readonly pb::MessageParser<GeneralReq> _parser = new pb::MessageParser<GeneralReq>(() => new GeneralReq());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Req> Parser { get { return _parser; } }
+    public static pb::MessageParser<GeneralReq> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -65,41 +62,55 @@ namespace grpc4InRowService.Protos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Req() {
+    public GeneralReq() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Req(Req other) : this() {
+    public GeneralReq(GeneralReq other) : this() {
+      id_ = other.id_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Req Clone() {
-      return new Req(this);
+    public GeneralReq Clone() {
+      return new GeneralReq(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Req);
+      return Equals(other as GeneralReq);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Req other) {
+    public bool Equals(GeneralReq other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Id != other.Id) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -113,6 +124,10 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -121,6 +136,9 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -128,9 +146,12 @@ namespace grpc4InRowService.Protos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Req other) {
+    public void MergeFrom(GeneralReq other) {
       if (other == null) {
         return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -143,6 +164,10 @@ namespace grpc4InRowService.Protos {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
         }
       }
     }
@@ -306,11 +331,11 @@ namespace grpc4InRowService.Protos {
 
   }
 
-  public sealed partial class LoginRequest : pb::IMessage<LoginRequest> {
-    private static readonly pb::MessageParser<LoginRequest> _parser = new pb::MessageParser<LoginRequest>(() => new LoginRequest());
+  public sealed partial class UserRequest : pb::IMessage<UserRequest> {
+    private static readonly pb::MessageParser<UserRequest> _parser = new pb::MessageParser<UserRequest>(() => new UserRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<LoginRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<UserRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -323,22 +348,22 @@ namespace grpc4InRowService.Protos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LoginRequest() {
+    public UserRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LoginRequest(LoginRequest other) : this() {
+    public UserRequest(UserRequest other) : this() {
       username_ = other.username_;
       pw_ = other.pw_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LoginRequest Clone() {
-      return new LoginRequest(this);
+    public UserRequest Clone() {
+      return new UserRequest(this);
     }
 
     /// <summary>Field number for the "username" field.</summary>
@@ -365,11 +390,11 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as LoginRequest);
+      return Equals(other as UserRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(LoginRequest other) {
+    public bool Equals(UserRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -428,7 +453,7 @@ namespace grpc4InRowService.Protos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(LoginRequest other) {
+    public void MergeFrom(UserRequest other) {
       if (other == null) {
         return;
       }
@@ -463,11 +488,11 @@ namespace grpc4InRowService.Protos {
 
   }
 
-  public sealed partial class LoginReply : pb::IMessage<LoginReply> {
-    private static readonly pb::MessageParser<LoginReply> _parser = new pb::MessageParser<LoginReply>(() => new LoginReply());
+  public sealed partial class GeneralReply : pb::IMessage<GeneralReply> {
+    private static readonly pb::MessageParser<GeneralReply> _parser = new pb::MessageParser<GeneralReply>(() => new GeneralReply());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<LoginReply> Parser { get { return _parser; } }
+    public static pb::MessageParser<GeneralReply> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -480,21 +505,22 @@ namespace grpc4InRowService.Protos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LoginReply() {
+    public GeneralReply() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LoginReply(LoginReply other) : this() {
+    public GeneralReply(GeneralReply other) : this() {
       isSuccessfull_ = other.isSuccessfull_;
+      id_ = other.id_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LoginReply Clone() {
-      return new LoginReply(this);
+    public GeneralReply Clone() {
+      return new GeneralReply(this);
     }
 
     /// <summary>Field number for the "isSuccessfull" field.</summary>
@@ -508,13 +534,24 @@ namespace grpc4InRowService.Protos {
       }
     }
 
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 2;
+    private int id_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as LoginReply);
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(LoginReply other) {
+    public override bool Equals(object other) {
+      return Equals(other as GeneralReply);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GeneralReply other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -522,6 +559,7 @@ namespace grpc4InRowService.Protos {
         return true;
       }
       if (IsSuccessfull != other.IsSuccessfull) return false;
+      if (Id != other.Id) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -529,6 +567,7 @@ namespace grpc4InRowService.Protos {
     public override int GetHashCode() {
       int hash = 1;
       if (IsSuccessfull != false) hash ^= IsSuccessfull.GetHashCode();
+      if (Id != 0) hash ^= Id.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -546,6 +585,10 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(8);
         output.WriteBool(IsSuccessfull);
       }
+      if (Id != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Id);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -557,6 +600,9 @@ namespace grpc4InRowService.Protos {
       if (IsSuccessfull != false) {
         size += 1 + 1;
       }
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -564,12 +610,15 @@ namespace grpc4InRowService.Protos {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(LoginReply other) {
+    public void MergeFrom(GeneralReply other) {
       if (other == null) {
         return;
       }
       if (other.IsSuccessfull != false) {
         IsSuccessfull = other.IsSuccessfull;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -586,290 +635,8 @@ namespace grpc4InRowService.Protos {
             IsSuccessfull = input.ReadBool();
             break;
           }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class RegisterRequest : pb::IMessage<RegisterRequest> {
-    private static readonly pb::MessageParser<RegisterRequest> _parser = new pb::MessageParser<RegisterRequest>(() => new RegisterRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<RegisterRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.UserReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RegisterRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RegisterRequest(RegisterRequest other) : this() {
-      username_ = other.username_;
-      pw_ = other.pw_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RegisterRequest Clone() {
-      return new RegisterRequest(this);
-    }
-
-    /// <summary>Field number for the "username" field.</summary>
-    public const int UsernameFieldNumber = 1;
-    private string username_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Username {
-      get { return username_; }
-      set {
-        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "pw" field.</summary>
-    public const int PwFieldNumber = 2;
-    private string pw_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Pw {
-      get { return pw_; }
-      set {
-        pw_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as RegisterRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(RegisterRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Username != other.Username) return false;
-      if (Pw != other.Pw) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Username.Length != 0) hash ^= Username.GetHashCode();
-      if (Pw.Length != 0) hash ^= Pw.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Username.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Username);
-      }
-      if (Pw.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Pw);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Username.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
-      }
-      if (Pw.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Pw);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RegisterRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Username.Length != 0) {
-        Username = other.Username;
-      }
-      if (other.Pw.Length != 0) {
-        Pw = other.Pw;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            Username = input.ReadString();
-            break;
-          }
-          case 18: {
-            Pw = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class RegisterReply : pb::IMessage<RegisterReply> {
-    private static readonly pb::MessageParser<RegisterReply> _parser = new pb::MessageParser<RegisterReply>(() => new RegisterReply());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<RegisterReply> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.UserReflection.Descriptor.MessageTypes[5]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RegisterReply() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RegisterReply(RegisterReply other) : this() {
-      isSuccessfull_ = other.isSuccessfull_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RegisterReply Clone() {
-      return new RegisterReply(this);
-    }
-
-    /// <summary>Field number for the "isSuccessfull" field.</summary>
-    public const int IsSuccessfullFieldNumber = 1;
-    private bool isSuccessfull_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool IsSuccessfull {
-      get { return isSuccessfull_; }
-      set {
-        isSuccessfull_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as RegisterReply);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(RegisterReply other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (IsSuccessfull != other.IsSuccessfull) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (IsSuccessfull != false) hash ^= IsSuccessfull.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (IsSuccessfull != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(IsSuccessfull);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (IsSuccessfull != false) {
-        size += 1 + 1;
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RegisterReply other) {
-      if (other == null) {
-        return;
-      }
-      if (other.IsSuccessfull != false) {
-        IsSuccessfull = other.IsSuccessfull;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            IsSuccessfull = input.ReadBool();
+          case 16: {
+            Id = input.ReadInt32();
             break;
           }
         }

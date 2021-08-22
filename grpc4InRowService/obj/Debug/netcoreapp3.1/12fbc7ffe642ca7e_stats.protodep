@@ -1,0 +1,2 @@
+obj\Debug\netcoreapp3.1/Stats.cs \
+obj\Debug\netcoreapp3.1/StatsGrpc.cs: Protos/stats.proto

@@ -1,4 +1,5 @@
-﻿using Grpc.Net.Client;
+﻿using Grpc.Core;
+using Grpc.Net.Client;
 using grpc4InRowService.Protos;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-                if(!(await userClient.LoginAsync(new LoginRequest { Username = username.Text, Pw = password.Password })).IsSuccessfull)
+                if (!(await userClient.LoginAsync(new LoginRequest { Username = username.Text, Pw = password.Password })).IsSuccessfull)
                 {
                     MessageBox.Show("Couldn't login :(");
                     return;

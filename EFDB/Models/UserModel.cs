@@ -10,5 +10,7 @@ namespace EFDB.Models
         public string Username { get; set; }
         public string PW { get; set; }
         public int Score { get; set; }
+        public int GamesPlayed { get; set; }
+        public int GamesWon { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using Grpc.Core;
 using grpc4InRowService.Protos;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,30 +11,38 @@ namespace grpc4InRowService.Services
 {
     public class UserService: User.UserBase
     {
-        private Dictionary<Int32,String> userStreams = new Dictionary<int, String>();
+        //private Dictionary<Int32,String> userStreams = new Dictionary<int, String>();
         private readonly ILogger<UserService> _logger;
         public UserService(ILogger<UserService> logger)
         {
             _logger = logger;
         }
 
-        public override Task<LoginReply> Login(LoginRequest request, ServerCallContext context)
+        
+        public override Task<GeneralReply> Login(UserRequest request, ServerCallContext context)
         {
-            using (var db = new UsersContext())
+            try
             {
-                UserModel userEntity = db.users.Single(user=>user.Username == request.Username);
-                if (userEntity != null && userEntity.PW == request.Pw)
+                using (var db = new UsersContext())
                 {
-                    Program.onlineUsers.Add(userEntity.Id, userEntity.Username);
-                    return Task.FromResult(new LoginReply { IsSuccessfull = true });
+                    UserModel userEntity = db.users.Single(user => user.Username == request.Username);
+                    if (userEntity != null && userEntity.PW == request.Pw)
+                    {
+                        Program.onlineUsers.Add(userEntity.Id, userEntity.Username);
+                        return Task.FromResult(new GeneralReply { IsSuccessfull = true,Id = userEntity.Id });
+                    }
+                    return Task.FromResult(new GeneralReply { IsSuccessfull = false });
                 }
             }
-            return Task.FromResult(new LoginReply { IsSuccessfull = false });
+            catch
+            {
+                return Task.FromResult(new GeneralReply { IsSuccessfull = false });
+            }
         }
 
-        public override Task<RegisterReply> Register(RegisterRequest request, ServerCallContext context)
+        public override Task<GeneralReply> Register(UserRequest request, ServerCallContext context)
         {
-            RegisterReply rr = new RegisterReply { IsSuccessfull = true };
+            GeneralReply rr = new GeneralReply { IsSuccessfull = true };
             try
             {
                 using (var db = new UsersContext())
@@ -53,7 +60,7 @@ namespace grpc4InRowService.Services
             return Task.FromResult(rr);
         }
 
-        public override async Task getOnlineUsers(Req request, IServerStreamWriter<UserData> responseStream, ServerCallContext context)
+        public override async Task getOnlineUsers(GeneralReq request, IServerStreamWriter<UserData> responseStream, ServerCallContext context)
         {
             foreach (var u in Program.onlineUsers)
             {
