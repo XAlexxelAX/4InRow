@@ -15,21 +15,23 @@ namespace connectFour
     {
         private GrpcChannel channel;
         private User.UserClient userClient;
+        private Games.GamesClient gameClient;
         private Timer timer;
-
+        private bool isFree;
         public OnlineUsersList()
         {
             InitializeComponent();
 
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             userClient = new User.UserClient(channel);
+            isFree = true;
 
             fillListAsync();
             InitTimer();
         }
 
         public void InitTimer()
-        {
+        { // timer invokes each second
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = 1000; // listen and update each second
@@ -40,6 +42,9 @@ namespace connectFour
         {
             //users.Items.Clear();
             fillListAsync();
+
+            //if(isFree)
+            // TODO: check for incoming request to play a game
         }
         private async System.Threading.Tasks.Task fillListAsync()
         {
@@ -67,8 +72,18 @@ namespace connectFour
 
         private void userSelected(object sender, SelectionChangedEventArgs e)
         {
+            isFree = false;
             ListBoxItem lbi = ((sender as System.Windows.Controls.ListBox).SelectedItem as ListBoxItem);
             System.Windows.MessageBox.Show("You selected " + lbi.Content.ToString() + ".");
+
+         /*   using (var call = gameClient.OfferGame(new GameRequest()))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                }
+            }*/
+
+            isFree = true;
         }
     }
 }
