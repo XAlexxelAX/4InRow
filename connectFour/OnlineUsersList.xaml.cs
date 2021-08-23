@@ -76,14 +76,19 @@ namespace connectFour
             ListBoxItem lbi = ((sender as System.Windows.Controls.ListBox).SelectedItem as ListBoxItem);
             System.Windows.MessageBox.Show("You selected " + lbi.Content.ToString() + ".");
 
-         /*   using (var call = gameClient.OfferGame(new GameRequest()))
-            {
-                while (await call.ResponseStream.MoveNext())
-                {
-                }
-            }*/
+            /*   using (var call = gameClient.OfferGame(new GameRequest()))
+               {
+                   while (await call.ResponseStream.MoveNext())
+                   {
+                   }
+               }*/
 
             isFree = true;
+        }
+
+        private void dataSearch(object sender, RoutedEventArgs e)
+        {
+            new DataSearch().Show();
         }
     }
 }

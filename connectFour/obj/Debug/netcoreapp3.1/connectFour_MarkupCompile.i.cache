@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\USER\Desktop\4InRow\connectFour\App.xaml
-4-2047953820
+5160078280
 
-8-711069308
+9-1458344189
 343-1113821431
-LoginPage.xaml;MainWindow.xaml;OnlineUsersList.xaml;Register.xaml;
+DataSearch.xaml;LoginPage.xaml;MainWindow.xaml;OnlineUsersList.xaml;Register.xaml;
 
-False
+True
 

@@ -18,6 +18,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
@@ -27,5 +28,8 @@
 
         <ListBox Grid.Row="3" Grid.Column="1" SelectionChanged="userSelected" x:Name="users">
         </ListBox>
+
+        <Button Content="Data Search" Grid.Column="1" Grid.Row="4"
+                FontSize="22" FontFamily="Bell MT Bold" Foreground="RoyalBlue" Click="dataSearch"/>
     </Grid>
 </Window>
