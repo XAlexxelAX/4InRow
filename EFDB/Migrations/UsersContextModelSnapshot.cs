@@ -29,7 +29,13 @@ namespace EFDB.Migrations
                     b.Property<DateTime>("FinishTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WinnerIndex")
+                    b.Property<int>("Player1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Player2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WinnerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -44,7 +50,10 @@ namespace EFDB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GameId")
+                    b.Property<int>("GamesPlayed")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GamesWon")
                         .HasColumnType("int");
 
                     b.Property<string>("PW")
@@ -58,21 +67,7 @@ namespace EFDB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
-
                     b.ToTable("users");
-                });
-
-            modelBuilder.Entity("EFDB.Models.UserModel", b =>
-                {
-                    b.HasOne("EFDB.Models.Game", null)
-                        .WithMany("Players")
-                        .HasForeignKey("GameId");
-                });
-
-            modelBuilder.Entity("EFDB.Models.Game", b =>
-                {
-                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }

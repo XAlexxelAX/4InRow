@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDB.Migrations
 {
     [DbContext(typeof(UsersContext))]
-    [Migration("20210821195754_InitialCreate")]
+    [Migration("20210823071423_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,13 @@ namespace EFDB.Migrations
                     b.Property<DateTime>("FinishTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WinnerIndex")
+                    b.Property<int>("Player1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Player2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WinnerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -46,17 +52,11 @@ namespace EFDB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GameId")
+                    b.Property<int>("GamesPlayed")
                         .HasColumnType("int");
 
-                    b.Property<string>("Lname")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GamesWon")
+                        .HasColumnType("int");
 
                     b.Property<string>("PW")
                         .HasColumnType("nvarchar(max)");
@@ -69,21 +69,7 @@ namespace EFDB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId");
-
                     b.ToTable("users");
-                });
-
-            modelBuilder.Entity("EFDB.Models.UserModel", b =>
-                {
-                    b.HasOne("EFDB.Models.Game", null)
-                        .WithMany("Players")
-                        .HasForeignKey("GameId");
-                });
-
-            modelBuilder.Entity("EFDB.Models.Game", b =>
-                {
-                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }

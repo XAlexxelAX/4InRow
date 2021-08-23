@@ -38,9 +38,9 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-
-                var response = await userClient.RegisterAsync(new RegisterRequest { Username = username.Text, Pw = password.Password });
-                if (!response.IsSuccessfull) {
+                var response = await userClient.RegisterAsync(new UserRequest { Username = username.Text, Pw = password.Password });
+                if (!response.IsSuccessfull)
+                {
                     MessageBox.Show("Couldn't Register :(");
                     return;
                 }

@@ -42,7 +42,7 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-                if (!(await userClient.LoginAsync(new LoginRequest { Username = username.Text, Pw = password.Password })).IsSuccessfull)
+                if (!(await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = password.Password })).IsSuccessfull)
                 {
                     MessageBox.Show("Couldn't login :(");
                     return;

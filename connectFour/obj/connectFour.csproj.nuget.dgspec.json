@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alex\\source\\repos\\4InRow\\connectFour\\connectFour.csproj": {}
+    "C:\\Users\\USER\\Desktop\\4InRow\\connectFour\\connectFour.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alex\\source\\repos\\4InRow\\connectFour\\connectFour.csproj": {
+    "C:\\Users\\USER\\Desktop\\4InRow\\connectFour\\connectFour.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\source\\repos\\4InRow\\connectFour\\connectFour.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Desktop\\4InRow\\connectFour\\connectFour.csproj",
         "projectName": "connectFour",
-        "projectPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\connectFour\\connectFour.csproj",
-        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\connectFour\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Desktop\\4InRow\\connectFour\\connectFour.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Desktop\\4InRow\\connectFour\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -31,8 +32,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Alex\\source\\repos\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj": {
-                "projectPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj"
+              "C:\\Users\\USER\\Desktop\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj": {
+                "projectPath": "C:\\Users\\USER\\Desktop\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj"
               }
             }
           }
@@ -76,7 +77,7 @@
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             },
-            "Microsoft.WindowsDesktop.App.WPF": {
+            "Microsoft.WindowsDesktop.App": {
               "privateAssets": "none"
             }
           },
@@ -84,20 +85,21 @@
         }
       }
     },
-    "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj": {
+    "C:\\Users\\USER\\Desktop\\4InRow\\EFDB\\EFDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Desktop\\4InRow\\EFDB\\EFDB.csproj",
         "projectName": "EFDB",
-        "projectPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj",
-        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Desktop\\4InRow\\EFDB\\EFDB.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Desktop\\4InRow\\EFDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -157,20 +159,21 @@
         }
       }
     },
-    "C:\\Users\\Alex\\source\\repos\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj": {
+    "C:\\Users\\USER\\Desktop\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\source\\repos\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Desktop\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj",
         "projectName": "grpc4InRowService",
-        "projectPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj",
-        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\grpc4InRowService\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Desktop\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Desktop\\4InRow\\grpc4InRowService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -184,8 +187,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj": {
-                "projectPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\EFDB\\EFDB.csproj"
+              "C:\\Users\\USER\\Desktop\\4InRow\\EFDB\\EFDB.csproj": {
+                "projectPath": "C:\\Users\\USER\\Desktop\\4InRow\\EFDB\\EFDB.csproj"
               }
             }
           }

@@ -1,66 +1,67 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\cell.png" />
-    <None Remove="Resources\cell_hole.png" />
-    <None Remove="Resources\game_icon.ico" />
-    <None Remove="Resources\icon.ico" />
-    <None Remove="Resources\loginIcon.ico" />
-    <None Remove="Resources\loginUser.png" />
-    <None Remove="Resources\pred.png" />
-    <None Remove="Resources\predMarked.png" />
-    <None Remove="Resources\pyellow.png" />
-    <None Remove="Resources\pyellowMarked.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Resources\cell.png" />
+		<None Remove="Resources\cell_hole.png" />
+		<None Remove="Resources\game_icon.ico" />
+		<None Remove="Resources\icon.ico" />
+		<None Remove="Resources\loginIcon.ico" />
+		<None Remove="Resources\loginUser.png" />
+		<None Remove="Resources\pred.png" />
+		<None Remove="Resources\predMarked.png" />
+		<None Remove="Resources\pyellow.png" />
+		<None Remove="Resources\pyellowMarked.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.17.3" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.39.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.39.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.17.3" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.39.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.39.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\grpc4InRowService\grpc4InRowService.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\grpc4InRowService\grpc4InRowService.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Resources\cell_hole.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\icon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\loginIcon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\loginUser.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\pred.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\predMarked.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\pyellow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\pyellowMarked.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="Resources\cell_hole.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\icon.ico">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\loginIcon.ico">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\loginUser.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\pred.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\predMarked.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\pyellow.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\pyellowMarked.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Protos\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Protos\" />
+	</ItemGroup>
 
 </Project>
