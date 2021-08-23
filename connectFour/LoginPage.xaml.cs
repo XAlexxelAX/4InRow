@@ -23,7 +23,7 @@ namespace connectFour
     {
         private GrpcChannel channel;
         private User.UserClient userClient;
-
+        public static int myID;
         public LoginPage()
         {
             InitializeComponent();
@@ -42,11 +42,13 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-                if (!(await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = password.Password })).IsSuccessfull)
+                GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = password.Password });
+                if (!gr.IsSuccessfull)
                 {
                     MessageBox.Show("Couldn't login :(");
                     return;
                 }
+                myID = gr.Id;
                 new OnlineUsersList().Show(); // open the list of current active players
 
                 this.Close();

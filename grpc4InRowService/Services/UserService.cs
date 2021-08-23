@@ -66,6 +66,7 @@ namespace grpc4InRowService.Services
             {
                 await responseStream.WriteAsync(new UserData
                 {
+                    Id = u.Key,
                     Username = u.Value
                 });
             }
