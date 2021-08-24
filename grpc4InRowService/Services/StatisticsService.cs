@@ -43,6 +43,8 @@ namespace grpc4InRowService.Services
                         Id2 = game.Player2,
                         User1 = db.users.Single(user => user.Id == game.Player1).Username,
                         User2 = db.users.Single(user => user.Id == game.Player2).Username,
+                        Score1 = game.Player1Score,
+                        Score2 = game.Player2Score,
                         Winner = game.WinnerId,
                         Date = new Protos.DateTime
                         {

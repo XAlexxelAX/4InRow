@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
-        Title="DataSearch" Height="450" Width="400"
+        Title="DataSearch" Height="500" Width="400"
         Background="Azure">
-    
+
     <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -21,11 +21,12 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*" x:Name="dataRow"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <ComboBox Name="searchOption" Grid.Column="1" Grid.Row="3"
-                  SelectionChanged="searchOption_SelectionChanged" SelectedValuePath="Content">
+                  SelectionChanged="searchOption_SelectionChangedAsync" SelectedValuePath="Content">
             <ComboBoxItem Content="Users: Sorted by username"></ComboBoxItem>
             <ComboBoxItem Content="Users: Sorted by games amount"></ComboBoxItem>
             <ComboBoxItem Content="Users: Sorted by wins amount"></ComboBoxItem>
@@ -39,14 +40,13 @@
         </ComboBox>
 
         <ListBox Grid.Row="4" Grid.Column="1" x:Name="users">
-            <ListBoxItem>
-                <!-- <CheckBox Content="Check"/> -->
-            </ListBoxItem>
         </ListBox>
 
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Data Search:" FontFamily="Bell MT Bold"
                    Foreground="DeepSkyBlue" VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
 
+        <TextBlock Grid.Row="5" Grid.Column="1" x:Name="playersData"
+                    VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Center" />
     </Grid>
 </Window>

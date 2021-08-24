@@ -27,24 +27,24 @@ namespace grpc4InRowService.Protos {
             "ChJQcm90b3Mvc3RhdHMucHJvdG8iKAoMU3RhdHNSZXF1ZXN0EgsKA2lkMRgB",
             "IAEoBRILCgNpZDIYAiABKAUiVQoJVXNlclN0YXRzEgoKAmlkGAEgASgFEhAK",
             "CHVzZXJuYW1lGAIgASgJEg0KBWdhbWVzGAMgASgFEgwKBHdpbnMYBCABKAUS",
-            "DQoFc2NvcmUYBSABKAUibAoJR2FtZVN0YXRzEgsKA2lkMRgBIAEoBRINCgV1",
-            "c2VyMRgCIAEoCRILCgNpZDIYAyABKAUSDQoFdXNlcjIYBCABKAkSDgoGd2lu",
-            "bmVyGAUgASgFEhcKBGRhdGUYBiABKAsyCS5EYXRlVGltZSJSCghEYXRlVGlt",
-            "ZRIMCgRob3VyGAEgASgFEg4KBm1pbnV0ZRgCIAEoBRILCgNkYXkYAyABKAUS",
-            "DQoFbW9udGgYBCABKAUSDAoEeWVhchgFIAEoBTL9AQoKU3RhdGlzdGljcxIv",
-            "ChBnZXRBbGxVc2Vyc1N0YXRzEg0uU3RhdHNSZXF1ZXN0GgouVXNlclN0YXRz",
-            "MAESLgoPZ2V0RmluaXNlZEdhbWVzEg0uU3RhdHNSZXF1ZXN0GgouR2FtZVN0",
-            "YXRzMAESLgoPZ2V0T25nb2luZ0dhbWVzEg0uU3RhdHNSZXF1ZXN0GgouR2Ft",
-            "ZVN0YXRzMAESKQoMZ2V0VXNlclN0YXRzEg0uU3RhdHNSZXF1ZXN0GgouVXNl",
-            "clN0YXRzEjMKFGdldFVzZXJzSW50ZXJzZWN0aW9uEg0uU3RhdHNSZXF1ZXN0",
-            "GgouR2FtZVN0YXRzMAFCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IG",
-            "cHJvdG8z"));
+            "DQoFc2NvcmUYBSABKAUijAEKCUdhbWVTdGF0cxILCgNpZDEYASABKAUSDQoF",
+            "dXNlcjEYAiABKAkSDgoGc2NvcmUxGAMgASgFEgsKA2lkMhgEIAEoBRINCgV1",
+            "c2VyMhgFIAEoCRIOCgZzY29yZTIYBiABKAUSDgoGd2lubmVyGAcgASgFEhcK",
+            "BGRhdGUYCCABKAsyCS5EYXRlVGltZSJSCghEYXRlVGltZRIMCgRob3VyGAEg",
+            "ASgFEg4KBm1pbnV0ZRgCIAEoBRILCgNkYXkYAyABKAUSDQoFbW9udGgYBCAB",
+            "KAUSDAoEeWVhchgFIAEoBTL9AQoKU3RhdGlzdGljcxIvChBnZXRBbGxVc2Vy",
+            "c1N0YXRzEg0uU3RhdHNSZXF1ZXN0GgouVXNlclN0YXRzMAESLgoPZ2V0Rmlu",
+            "aXNlZEdhbWVzEg0uU3RhdHNSZXF1ZXN0GgouR2FtZVN0YXRzMAESLgoPZ2V0",
+            "T25nb2luZ0dhbWVzEg0uU3RhdHNSZXF1ZXN0GgouR2FtZVN0YXRzMAESKQoM",
+            "Z2V0VXNlclN0YXRzEg0uU3RhdHNSZXF1ZXN0GgouVXNlclN0YXRzEjMKFGdl",
+            "dFVzZXJzSW50ZXJzZWN0aW9uEg0uU3RhdHNSZXF1ZXN0GgouR2FtZVN0YXRz",
+            "MAFCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.StatsRequest), global::grpc4InRowService.Protos.StatsRequest.Parser, new[]{ "Id1", "Id2" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserStats), global::grpc4InRowService.Protos.UserStats.Parser, new[]{ "Id", "Username", "Games", "Wins", "Score" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameStats), global::grpc4InRowService.Protos.GameStats.Parser, new[]{ "Id1", "User1", "Id2", "User2", "Winner", "Date" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameStats), global::grpc4InRowService.Protos.GameStats.Parser, new[]{ "Id1", "User1", "Score1", "Id2", "User2", "Score2", "Winner", "Date" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.DateTime), global::grpc4InRowService.Protos.DateTime.Parser, new[]{ "Hour", "Minute", "Day", "Month", "Year" }, null, null, null, null)
           }));
     }
@@ -477,8 +477,10 @@ namespace grpc4InRowService.Protos {
     public GameStats(GameStats other) : this() {
       id1_ = other.id1_;
       user1_ = other.user1_;
+      score1_ = other.score1_;
       id2_ = other.id2_;
       user2_ = other.user2_;
+      score2_ = other.score2_;
       winner_ = other.winner_;
       date_ = other.date_ != null ? other.date_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -511,8 +513,19 @@ namespace grpc4InRowService.Protos {
       }
     }
 
+    /// <summary>Field number for the "score1" field.</summary>
+    public const int Score1FieldNumber = 3;
+    private int score1_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Score1 {
+      get { return score1_; }
+      set {
+        score1_ = value;
+      }
+    }
+
     /// <summary>Field number for the "id2" field.</summary>
-    public const int Id2FieldNumber = 3;
+    public const int Id2FieldNumber = 4;
     private int id2_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Id2 {
@@ -523,7 +536,7 @@ namespace grpc4InRowService.Protos {
     }
 
     /// <summary>Field number for the "user2" field.</summary>
-    public const int User2FieldNumber = 4;
+    public const int User2FieldNumber = 5;
     private string user2_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string User2 {
@@ -533,8 +546,19 @@ namespace grpc4InRowService.Protos {
       }
     }
 
+    /// <summary>Field number for the "score2" field.</summary>
+    public const int Score2FieldNumber = 6;
+    private int score2_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Score2 {
+      get { return score2_; }
+      set {
+        score2_ = value;
+      }
+    }
+
     /// <summary>Field number for the "winner" field.</summary>
-    public const int WinnerFieldNumber = 5;
+    public const int WinnerFieldNumber = 7;
     private int winner_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Winner {
@@ -545,7 +569,7 @@ namespace grpc4InRowService.Protos {
     }
 
     /// <summary>Field number for the "date" field.</summary>
-    public const int DateFieldNumber = 6;
+    public const int DateFieldNumber = 8;
     private global::grpc4InRowService.Protos.DateTime date_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::grpc4InRowService.Protos.DateTime Date {
@@ -570,8 +594,10 @@ namespace grpc4InRowService.Protos {
       }
       if (Id1 != other.Id1) return false;
       if (User1 != other.User1) return false;
+      if (Score1 != other.Score1) return false;
       if (Id2 != other.Id2) return false;
       if (User2 != other.User2) return false;
+      if (Score2 != other.Score2) return false;
       if (Winner != other.Winner) return false;
       if (!object.Equals(Date, other.Date)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -582,8 +608,10 @@ namespace grpc4InRowService.Protos {
       int hash = 1;
       if (Id1 != 0) hash ^= Id1.GetHashCode();
       if (User1.Length != 0) hash ^= User1.GetHashCode();
+      if (Score1 != 0) hash ^= Score1.GetHashCode();
       if (Id2 != 0) hash ^= Id2.GetHashCode();
       if (User2.Length != 0) hash ^= User2.GetHashCode();
+      if (Score2 != 0) hash ^= Score2.GetHashCode();
       if (Winner != 0) hash ^= Winner.GetHashCode();
       if (date_ != null) hash ^= Date.GetHashCode();
       if (_unknownFields != null) {
@@ -607,20 +635,28 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(18);
         output.WriteString(User1);
       }
-      if (Id2 != 0) {
+      if (Score1 != 0) {
         output.WriteRawTag(24);
+        output.WriteInt32(Score1);
+      }
+      if (Id2 != 0) {
+        output.WriteRawTag(32);
         output.WriteInt32(Id2);
       }
       if (User2.Length != 0) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(42);
         output.WriteString(User2);
       }
+      if (Score2 != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Score2);
+      }
       if (Winner != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(56);
         output.WriteInt32(Winner);
       }
       if (date_ != null) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(66);
         output.WriteMessage(Date);
       }
       if (_unknownFields != null) {
@@ -637,11 +673,17 @@ namespace grpc4InRowService.Protos {
       if (User1.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(User1);
       }
+      if (Score1 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score1);
+      }
       if (Id2 != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id2);
       }
       if (User2.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(User2);
+      }
+      if (Score2 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score2);
       }
       if (Winner != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Winner);
@@ -666,11 +708,17 @@ namespace grpc4InRowService.Protos {
       if (other.User1.Length != 0) {
         User1 = other.User1;
       }
+      if (other.Score1 != 0) {
+        Score1 = other.Score1;
+      }
       if (other.Id2 != 0) {
         Id2 = other.Id2;
       }
       if (other.User2.Length != 0) {
         User2 = other.User2;
+      }
+      if (other.Score2 != 0) {
+        Score2 = other.Score2;
       }
       if (other.Winner != 0) {
         Winner = other.Winner;
@@ -701,18 +749,26 @@ namespace grpc4InRowService.Protos {
             break;
           }
           case 24: {
+            Score1 = input.ReadInt32();
+            break;
+          }
+          case 32: {
             Id2 = input.ReadInt32();
             break;
           }
-          case 34: {
+          case 42: {
             User2 = input.ReadString();
             break;
           }
-          case 40: {
+          case 48: {
+            Score2 = input.ReadInt32();
+            break;
+          }
+          case 56: {
             Winner = input.ReadInt32();
             break;
           }
-          case 50: {
+          case 66: {
             if (date_ == null) {
               Date = new global::grpc4InRowService.Protos.DateTime();
             }
