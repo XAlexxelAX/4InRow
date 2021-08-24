@@ -11,7 +11,7 @@
     <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" x:Name="dataCol"/>
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
@@ -20,7 +20,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" x:Name="dataRow"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 

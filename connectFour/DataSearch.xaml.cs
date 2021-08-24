@@ -18,16 +18,24 @@ namespace connectFour
     public partial class DataSearch : Window
     {
         private List<string> usernames;
+        private Grid DynamicGrid;
         public DataSearch()
         {
             InitializeComponent();
             usernames = new List<string>();
-            //usernames.Add("Shahar Blank");
+
+            DynamicGrid = new Grid();
+            DynamicGrid.ShowGridLines = true;
+            Grid.SetColumn(DynamicGrid, 1);
+            Grid.SetRow(DynamicGrid, 4);
+            mainGrid.Children.Add(DynamicGrid);
         }
 
         private void searchOption_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             users.Items.Clear();
+            DynamicGrid.Children.Clear();
+            DynamicGrid.Visibility = Visibility.Hidden;
             switch (searchOption.SelectedItem.ToString().Substring(38))
             {
                 case "Users: Sorted by username":
@@ -48,49 +56,16 @@ namespace connectFour
                     break;
 
                 case "Games: Until now":
-                    Grid DynamicGrid = new Grid();                 
-                    DynamicGrid.ShowGridLines = true;
-                    Grid.SetColumn(DynamicGrid, 1);
-                    Grid.SetRow(DynamicGrid, 4);
-                    mainGrid.Children.Add(DynamicGrid);
+                    int rows = 2, cols = 3;
+                    DynamicGrid.Visibility = Visibility.Visible;
+                    createRows(rows);
+                    createCols(cols);
+                    List<List<String>> rowsData = new List<List<String>>();
+                    //TODO: Insert rows of data to list from DB
+                    rowsData.Add(new List<string> { "Title1", "Title2", "Title3" });
+                    rowsData.Add(new List<string> { "Data1", "Data2", "Data3" });
 
-                    RowDefinition gridRow1 = new RowDefinition();
-                    gridRow1.Height = new GridLength(50);
-                    RowDefinition gridRow2 = new RowDefinition();
-                    gridRow2.Height = new GridLength(50);
-                    DynamicGrid.RowDefinitions.Add(gridRow1);
-                    DynamicGrid.RowDefinitions.Add(gridRow2);
-
-                    ColumnDefinition gridCol1 = new ColumnDefinition();
-                    gridRow1.Height = new GridLength(50);
-                    ColumnDefinition gridCol2 = new ColumnDefinition();
-                    gridRow2.Height = new GridLength(50);
-                    DynamicGrid.ColumnDefinitions.Add(gridCol1);
-                    DynamicGrid.ColumnDefinitions.Add(gridCol2);
-
-                    TextBlock txtBlock1 = new TextBlock();
-                    txtBlock1.Text = "Test Title 1";
-                    txtBlock1.FontSize = 14;
-                    txtBlock1.FontWeight = FontWeights.Bold;
-                    txtBlock1.Foreground = new SolidColorBrush(Colors.Green);
-                    txtBlock1.VerticalAlignment = VerticalAlignment.Center;
-                    txtBlock1.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(txtBlock1, 0);
-                    Grid.SetColumn(txtBlock1, 0);
-                    DynamicGrid.Children.Add(txtBlock1);
-
-                    TextBlock txtBlock2 = new TextBlock();
-                    txtBlock2.Text = "Test Title 2";
-                    txtBlock2.FontSize = 14;
-                    txtBlock2.FontWeight = FontWeights.Bold;
-                    txtBlock2.Foreground = new SolidColorBrush(Colors.Green);
-                    txtBlock2.VerticalAlignment = VerticalAlignment.Top;
-                    txtBlock2.VerticalAlignment = VerticalAlignment.Center;
-                    txtBlock2.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(txtBlock2, 0);
-                    Grid.SetColumn(txtBlock2, 1);
-                    DynamicGrid.Children.Add(txtBlock2);
-
+                    for (int i = 0; i < rows; insertDataToRow(i, rowsData[i], cols), i++) ;
                     break;
 
                 case "Games: Live":
@@ -98,6 +73,47 @@ namespace connectFour
 
                 case "Players: Data":
                     break;
+            }
+        }
+
+        private void insertDataToRow(int row, List<String> data, int cols)
+        {
+            for (int i = 0; i < cols; i++)
+            {
+                TextBlock txtBlock = new TextBlock();
+                txtBlock.Text = data[i];
+                txtBlock.FontSize = 14;
+                txtBlock.FontWeight = FontWeights.Bold;
+                txtBlock.Foreground = new SolidColorBrush(Colors.Green);
+                txtBlock.VerticalAlignment = VerticalAlignment.Center;
+                txtBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                Grid.SetRow(txtBlock, row);
+                Grid.SetColumn(txtBlock, i);
+                DynamicGrid.Children.Add(txtBlock);
+            }
+        }
+
+        private void createCols(int cols)
+        {
+            for (int i = 0; i < cols; i++)
+            {
+                ColumnDefinition gridCol = new ColumnDefinition();
+                gridCol.Width = new GridLength(dataCol.ActualWidth / cols);
+                DynamicGrid.ColumnDefinitions.Add(gridCol);
+            }
+        }
+
+        private void createRows(int rows)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                RowDefinition gridRow = new RowDefinition();
+                if (i == 0)
+                    gridRow.Height = new GridLength(20);
+                else
+                    gridRow.Height = new GridLength((dataRow.ActualHeight - 30) / rows);
+
+                DynamicGrid.RowDefinitions.Add(gridRow);
             }
         }
     }
