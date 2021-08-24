@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option csharp_namespace = "grpc4InRowService.Protos";
+
+service Games{
+	rpc CheckForGame (Check) returns (CheckReply);// invokes server with check that contains user id, returns reply if there's a waiting game request
+	rpc OfferGame (GameRequest) returns (GameReply);// sends to server game request
+	rpc MakeMove (MoveRequest) returns (Reply);// send a move in an ongoing game
+	rpc CheckMove (Check) returns (Reply);// checks if a move was made by the opponent
+	rpc UpdateScore (Score) returns (Reply);
+}
+
+message EmptyMessage{}
+
+message OfferReply{
+	int32 id = 1;
+	bool answer = 2;
+}
+
+message Check{
+	int32 id1=1;
+	int32 id2=2;
+}
+
+message Reply{
+	bool answer = 1;
+	Move move = 2;
+}
+
+message CheckReply{
+	bool answer=1;
+	int32 offeringid=2;
+}
+
+message GameRequest{
+	int32 myId = 1;
+	int32 opponentID = 2;
+	AnswerCode answer = 3;
+}
+
+message GameReply{
+	bool answer=1;
+}
+
+message MoveRequest{
+	int32 myId = 1;
+	int32 opponentID = 2;
+	int32 move = 3;
+}
+
+message Score{
+	int32 id = 1;
+	int32 score = 2;
+	bool won = 3;
+}
+
+message Move{
+	int32 id = 1;
+	int32 move = 2;
+}
+
+enum AnswerCode{
+	Unanswered = 0;
+	Accepted = 1;
+	Rejected = 2;
+}

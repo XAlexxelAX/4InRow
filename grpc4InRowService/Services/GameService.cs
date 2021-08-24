@@ -26,7 +26,6 @@ namespace grpc4InRowService.Services
                 return Task.FromResult(new CheckReply { Answer = true, Offeringid = Program.gameRequests[request.Id2] });
             return Task.FromResult(new CheckReply { Answer = false });
         }
-
         public override Task<GameReply> OfferGame(GameRequest request, ServerCallContext context)
         {
             try
@@ -106,7 +105,7 @@ namespace grpc4InRowService.Services
                 }
                 db.SaveChanges();
             }
-            return base.UpdateScore(request, context);
+           return base.UpdateScore(request, context);
         }
     }
 }

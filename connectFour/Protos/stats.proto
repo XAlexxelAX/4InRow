@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "grpc4InRowService.Protos";
+
+service Statistics{
+	rpc getAllUsersStats(StatsRequest) returns (stream UserStats);
+	rpc getFinisedGames(StatsRequest) returns (stream GameStats);
+	rpc getOngoingGames(StatsRequest) returns (stream GameStats);
+	rpc getUserStats(StatsRequest) returns (UserStats);
+	rpc getUsersIntersection(StatsRequest) returns (stream GameStats);
+}
+
+message StatsRequest{
+	int32 id1=1;
+	int32 id2=2;
+}
+
+message UserStats{
+	int32 id = 1;
+	string username = 2;
+	int32 games = 3;
+	int32 wins = 4;
+	int32 score = 5;
+}
+
+message GameStats{
+	int32 id1 = 1;
+	string user1 = 2;
+	int32 score1 = 3;
+	int32 id2 = 4;
+	string user2 = 5;
+	int32 score2 = 6;
+	int32 winner = 7;
+	DateTime date = 8;
+}
+
+message DateTime{
+	int32 hour = 1;
+	int32 minute = 2;
+	int32 day = 3;
+	int32 month = 4;
+	int32 year = 5;
+}

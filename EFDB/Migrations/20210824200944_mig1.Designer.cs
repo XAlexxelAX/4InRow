@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDB.Migrations
 {
     [DbContext(typeof(UsersContext))]
-    [Migration("20210823071423_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210824200944_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,13 @@ namespace EFDB.Migrations
                     b.Property<int>("Player1")
                         .HasColumnType("int");
 
+                    b.Property<int>("Player1Score")
+                        .HasColumnType("int");
+
                     b.Property<int>("Player2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Player2Score")
                         .HasColumnType("int");
 
                     b.Property<int>("WinnerId")
@@ -52,6 +58,9 @@ namespace EFDB.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("GamesPlayed")
                         .HasColumnType("int");
 
@@ -64,10 +73,7 @@ namespace EFDB.Migrations
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
+                    b.HasKey("Id", "Username");
 
                     b.ToTable("users");
                 });

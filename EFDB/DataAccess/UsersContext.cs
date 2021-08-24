@@ -8,13 +8,20 @@ namespace EFDB.DataAccess
 {
     public class UsersContext:DbContext
     {
-        /*public UsersContext(DbContextOptions<UsersContext> options): base(options)
-        {
-        }*/
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                @"Server=(localdb)\mssqllocaldb;Database=connectFour;Trusted_Connection=True");
+                @"Data Source=c:\fourinarow;Server=(localdb)\mssqllocaldb;Database=fourinarow;Trusted_Connection=True");//Data Source=c:\fourinrow;
+        }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserModel>()
+                .HasKey(u => new { u.Id, u.Username });
+            modelBuilder.Entity<UserModel>()
+                .Property(u => u.Id)
+                .ValueGeneratedOnAdd();
         }
 
         public DbSet<Game> games { get; set; }
