@@ -27,6 +27,8 @@ namespace connectFour
 
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             userClient = new User.UserClient(channel);
+            gameClient = new Games.GamesClient(channel);
+
             isFree = true;
             timerCount = 0;
 

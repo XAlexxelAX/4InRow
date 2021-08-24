@@ -34,8 +34,11 @@ namespace grpc4InRowService.Services
                     return Task.FromResult(new GeneralReply { IsSuccessfull = false });
                 }
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
+                if(e.InnerException!=null)
+                    Console.WriteLine(e.InnerException.Message);
                 return Task.FromResult(new GeneralReply { IsSuccessfull = false });
             }
         }
@@ -55,6 +58,8 @@ namespace grpc4InRowService.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                if (e.InnerException != null)
+                    Console.WriteLine(e.InnerException.Message);
                 rr.IsSuccessfull = false;
             }
             return Task.FromResult(rr);
