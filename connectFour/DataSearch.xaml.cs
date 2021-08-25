@@ -29,7 +29,7 @@ namespace connectFour
             InitializeComponent();
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             statsClient = new Statistics.StatisticsClient(channel);
-
+            usersList = new List<(string, int, int, int, int, float)>();
             DynamicGrid = new Grid();
             DynamicGrid.ShowGridLines = true;
             Grid.SetColumn(DynamicGrid, 1);
@@ -42,6 +42,8 @@ namespace connectFour
             users.Items.Clear();
             usersList.Clear();
             DynamicGrid.Children.Clear();
+            DynamicGrid.RowDefinitions.Clear();
+            DynamicGrid.ColumnDefinitions.Clear();
             DynamicGrid.Visibility = Visibility.Hidden;
 
             int rows, cols;
@@ -62,6 +64,7 @@ namespace connectFour
             {
                 case "Users: Sorted by username":
                     usersList.Sort((x, y) => y.Item1.CompareTo(x.Item1));
+                    usersList.Reverse(); // A->Z
                     foreach ((String, int, int, int, int, float) username in usersList)
                         users.Items.Add(username.Item1);
                     break;

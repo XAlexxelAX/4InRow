@@ -30,7 +30,7 @@ namespace grpc4InRowService.Services
             {
                 int gameReq = Program.gameRequests[request.Id2];
                 Program.gameRequests.Remove(request.Id2); 
-                return Task.FromResult(new CheckReply { Answer = true, Offeringid = Program.gameRequests[request.Id2] });
+                return Task.FromResult(new CheckReply { Answer = true, Offeringid = gameReq });
             }
             return Task.FromResult(new CheckReply { Answer = false });
         }
