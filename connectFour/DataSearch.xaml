@@ -48,5 +48,10 @@
 
         <TextBlock Grid.Row="5" Grid.Column="1" x:Name="playersData"
                     VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Center" />
+
+        <Button x:Name="searchBtn" Content="Search Data of Selected Players" 
+                HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="5"
+                FontFamily="Bell MT Bold" FontSize="23" Visibility="Hidden"
+                Click="DataSearch_ClickedAsync"/>
     </Grid>
 </Window>

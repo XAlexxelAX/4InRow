@@ -81,7 +81,8 @@
                    HorizontalAlignment="Center" x:Name="turnTitle"/>
         
         <TextBlock Text="4 In A Row" Grid.Column="1" Grid.Row="1"
-                   FontSize="40" FontFamily="Bell MT Italic Bold"
+                   FontSize="40" FontFamily="Bell MT Bold"
+                   TextDecorations="Underline"
                    Foreground="ForestGreen" VerticalAlignment="Center"
                    HorizontalAlignment="Center"/>
 

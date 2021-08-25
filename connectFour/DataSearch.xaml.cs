@@ -4,6 +4,7 @@ using grpc4InRowService.Protos;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,17 +21,18 @@ namespace connectFour
     /// </summary>
     public partial class DataSearch : Window
     {
-        private List<(String, int, int, int, int, float)> usersList;
+        private List<(String, int, int, int, int, float, int)> usersList;
         private Grid DynamicGrid;
         private GrpcChannel channel;
         private Statistics.StatisticsClient statsClient;
+        public static List<List<Object>> rowsData;
         public DataSearch()
         {
             InitializeComponent();
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             statsClient = new Statistics.StatisticsClient(channel);
 
-            usersList = new List<(string, int, int, int, int, float)>();
+            usersList = new List<(string, int, int, int, int, float,int)>();
             DynamicGrid = new Grid();
 
             DynamicGrid.ShowGridLines = true;
@@ -47,18 +49,18 @@ namespace connectFour
             DynamicGrid.RowDefinitions.Clear();
             DynamicGrid.ColumnDefinitions.Clear();
             DynamicGrid.Visibility = Visibility.Hidden;
+            searchBtn.Visibility = Visibility.Hidden;
 
             int rows, cols;
-            List<List<Object>> rowsData;
 
             using (var call = statsClient.getAllUsersStats(new StatsRequest()))
             {
                 while (await call.ResponseStream.MoveNext())
                 {
-                    // (Username,Games,Wins,Loses,Score,Ratio)
+                    // (Username,Games,Wins,Loses,Score,Ratio,id)
                     usersList.Add((call.ResponseStream.Current.Username, call.ResponseStream.Current.Games, call.ResponseStream.Current.Wins,
                         call.ResponseStream.Current.Games - call.ResponseStream.Current.Wins, call.ResponseStream.Current.Score
-                        , (float)call.ResponseStream.Current.Wins / call.ResponseStream.Current.Games));
+                        , (float)call.ResponseStream.Current.Wins / call.ResponseStream.Current.Games, call.ResponseStream.Current.Id));
                 }
             }
 
@@ -67,31 +69,31 @@ namespace connectFour
                 case "Users: Sorted by username":
                     usersList.Sort((x, y) => y.Item1.CompareTo(x.Item1));
                     usersList.Reverse(); // A->Z
-                    foreach ((String, int, int, int, int, float) username in usersList)
+                    foreach ((String, int, int, int, int, float, int) username in usersList)
                         users.Items.Add(username.Item1);
                     break;
 
                 case "Users: Sorted by games amount":
                     usersList.Sort((x, y) => y.Item2.CompareTo(x.Item2));
-                    foreach ((String, int, int, int, int, float) username in usersList)
+                    foreach ((String, int, int, int, int, float, int) username in usersList)
                         users.Items.Add(username.Item1);
                     break;
 
                 case "Users: Sorted by wins amount":
                     usersList.Sort((x, y) => y.Item3.CompareTo(x.Item3));
-                    foreach ((String, int, int, int, int, float) username in usersList)
+                    foreach ((String, int, int, int, int, float, int) username in usersList)
                         users.Items.Add(username.Item1);
                     break;
 
                 case "Users: Sorted by loses amount":
                     usersList.Sort((x, y) => y.Item4.CompareTo(x.Item4));
-                    foreach ((String, int, int, int, int, float) username in usersList)
+                    foreach ((String, int, int, int, int, float, int) username in usersList)
                         users.Items.Add(username.Item1);
                     break;
 
                 case "Users: Sorted by points amount":
                     usersList.Sort((x, y) => y.Item5.CompareTo(x.Item5));
-                    foreach ((String, int, int, int, int, float) username in usersList)
+                    foreach ((String, int, int, int, int, float, int) username in usersList)
                         users.Items.Add(username.Item1);
                     break;
 
@@ -136,59 +138,55 @@ namespace connectFour
                     break;
 
                 case "Players: Data":
+                    searchBtn.Visibility = Visibility.Visible;
                     users.HorizontalContentAlignment = HorizontalAlignment.Left;
-                    foreach ((String, int, int, int, int, float) username in usersList)
+                    foreach ((String, int, int, int, int, float, int) username in usersList)
                     {
                         ListBoxItem newUser = new ListBoxItem();
                         newUser.Content = new CheckBox();
                         TextBlock txt = new TextBlock();
                         txt.Text = username.Item1;
                         ((CheckBox)newUser.Content).Content = txt;
-                        ((TextBlock)((CheckBox)newUser.Content).Content).Margin = new Thickness(160,0,0,0);
+                        ((CheckBox)newUser.Content).DataContext = username.Item7;
+                        ((TextBlock)((CheckBox)newUser.Content).Content).Margin = new Thickness(160, 0, 0, 0);
 
                         users.Items.Add(newUser);
                     }
-
-                    int amount = playersPicked_amount();
-                    if (amount == 0 || amount > 2)
-                    {
-                        MessageBox.Show("You can only pick 1 or 2 players!","Error!");
-                        return;
-                    }
-                    else if (amount == 1)
-                    {
-                        cols = 4;
-                        DynamicGrid.Visibility = Visibility.Visible;
-                        createCols(cols);
-
-                        rowsData = new List<List<Object>>();
-                        rowsData.Add(new List<Object> { "Games", "Wins", "Wins Precentage", "Points" });
-                        var call = statsClient.getUserStats(new StatsRequest());
-
-                        rowsData.Add(new List<Object> { call.Games, call.Wins, ""+((float)call.Wins / call.Games)+"%", call.Score });
-
-                        rows = rowsData.Count;
-                        createRows(rows);
-                        for (int i = 0; i < rows; insertDataToRow(i, rowsData[i], cols), i++) ;
-                    }
-                    else // amount==2
-                    {
-                        cols = 4;
-                        DynamicGrid.Visibility = Visibility.Visible;
-                        createCols(cols);
-
-                        rowsData = new List<List<Object>>();
-                        rowsData.Add(new List<Object> { "Games", "Wins", "Wins Precentage", "Points" });
-                        //TODO: Insert rows of data to list from DB
-
-                        rows = rowsData.Count;
-                        createRows(rows);
-                        for (int i = 0; i < rows; insertDataToRow(i, rowsData[i], cols), i++) ;
-                    }
-                    Grid.SetRow(DynamicGrid, 5);
-
-
                     break;
+            }
+        }
+
+        private async void DataSearch_ClickedAsync(object sender, RoutedEventArgs e)
+        {
+            int amount = playersPicked_amount(), cols, rows;
+            if (amount == 0 || amount > 2)
+                MessageBox.Show("You can only pick 1 or 2 players!", "Error!");
+            else if (amount == 1)
+            {
+                rowsData = new List<List<Object>>();
+                rowsData.Add(new List<Object> { "Games", "Wins", "Wins Precentage", "Points" });
+
+                var call = statsClient.getUserStats(new StatsRequest { Id1 = getCheckedIDs()[0] });
+
+                rowsData.Add(new List<Object> { call.Games, call.Wins, "" + ((float)call.Wins / call.Games) + "%", call.Score });
+
+                new PlayersData().Show();
+            }
+            else // amount==2
+            {
+                rowsData = new List<List<Object>>();
+                rowsData.Add(new List<Object> { "Game Date", "Winner", "P1 Points", "P2 Points" });
+                //TODO: Insert rows of data to list from DB
+                using (var call = statsClient.getUsersIntersection(new StatsRequest { Id1 = getCheckedIDs()[0], Id2 = getCheckedIDs()[1] }))
+                {
+                    while(await call.ResponseStream.MoveNext())
+                    {
+                        rowsData.Add(new List<Object> { call.ResponseStream.Current.Date, call.ResponseStream.Current.Winner
+                            ,call.ResponseStream.Current.Score1, call.ResponseStream.Current.Score2 });
+                    }
+                }
+
+                    new PlayersData().Show();
             }
         }
 
@@ -196,7 +194,7 @@ namespace connectFour
         {
             int count = 0;
             foreach (ListBoxItem checkBox in users.Items)
-                if (((CheckBox)checkBox.Content).IsChecked==true)
+                if (((CheckBox)checkBox.Content).IsChecked == true)
                     count++;
             return count;
         }
@@ -240,6 +238,15 @@ namespace connectFour
 
                 DynamicGrid.RowDefinitions.Add(gridRow);
             }
+        }
+
+        private List<int> getCheckedIDs()
+        {
+            List<int> IDs = new List<int>();
+            foreach (ListBoxItem checkBox in users.Items)
+                if (((CheckBox)checkBox.Content).IsChecked == true)
+                    IDs.Add((int)((CheckBox)checkBox.Content).DataContext);
+            return IDs;
         }
     }
 }
