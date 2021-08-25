@@ -24,7 +24,7 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Chosen Players Data:" FontFamily="Bell MT Bold"
                    Foreground="DeepSkyBlue" VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
-        <TextBlock Grid.Row="3" Grid.Column="1"
+        <TextBlock Grid.Row="3" Grid.Column="1" x:Name="winRatioTxt"
                     VerticalAlignment="Center" FontSize="15" HorizontalAlignment="Center" Visibility="Hidden"/>
         <ListBox Grid.Row="2" Grid.Column="1"/>
     </Grid>

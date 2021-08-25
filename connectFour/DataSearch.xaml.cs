@@ -26,6 +26,7 @@ namespace connectFour
         private GrpcChannel channel;
         private Statistics.StatisticsClient statsClient;
         public static List<List<Object>> rowsData;
+        public static List<(String, int)> pickedUsers;
         public DataSearch()
         {
             InitializeComponent();
@@ -166,7 +167,7 @@ namespace connectFour
                 rowsData = new List<List<Object>>();
                 rowsData.Add(new List<Object> { "Games", "Wins", "Wins Ratio", "Points" });
 
-                var call = statsClient.getUserStats(new StatsRequest { Id1 = getCheckedIDs()[0] });
+                var call = statsClient.getUserStats(new StatsRequest { Id1 = getCheckedUsers()[0].Item2 });
 
                 rowsData.Add(new List<Object> { call.Games, call.Wins, "" + ((float)call.Wins / call.Games) + "%", call.Score });
 
@@ -177,7 +178,7 @@ namespace connectFour
                 rowsData = new List<List<Object>>();
                 rowsData.Add(new List<Object> { "Game Date", "Winner", "P1 Points", "P2 Points" });
                 //TODO: Insert rows of data to list from DB
-                using (var call = statsClient.getUsersIntersection(new StatsRequest { Id1 = getCheckedIDs()[0], Id2 = getCheckedIDs()[1] }))
+                using (var call = statsClient.getUsersIntersection(new StatsRequest { Id1 = getCheckedUsers()[0].Item2, Id2 = getCheckedUsers()[1].Item2 }))
                 {
                     while (await call.ResponseStream.MoveNext())
                     {
@@ -240,13 +241,17 @@ namespace connectFour
             }
         }
 
-        private List<int> getCheckedIDs()
+        private List<(String,int)> getCheckedUsers()
         {
-            List<int> IDs = new List<int>();
+            if (pickedUsers == null)
+                pickedUsers = new List<(String, int)>();
+            else
+                pickedUsers.Clear();
+
             foreach (ListBoxItem checkBox in users.Items)
                 if (((CheckBox)checkBox.Content).IsChecked == true)
-                    IDs.Add((int)((CheckBox)checkBox.Content).DataContext);
-            return IDs;
+                    pickedUsers.Add(((String)((CheckBox)checkBox.Content).Content,(int)((CheckBox)checkBox.Content).DataContext));
+            return pickedUsers;
         }
     }
 }

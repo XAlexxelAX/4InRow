@@ -41,8 +41,19 @@ namespace connectFour
             createRows();
             for (int i = 0; i < rows; insertDataToRow(i, DataSearch.rowsData[i], cols), i++) ;
 
-            //TODO: Calculate win ratio for each player if 2 were chosen (winRatioTxt object)
-            //winRatioTxt.Text=...
+            int p1Wins = 0;
+
+            if (DataSearch.rowsData.Count > 1 && DataSearch.rowsData[0].Contains("Game Date")) // 2 players were picked
+            {
+                foreach (List<Object> rowData in DataSearch.rowsData)
+                    if (rowData[1].Equals(DataSearch.rowsData[0][1]))
+                        p1Wins++;
+                if (DataSearch.rowsData[0][1].Equals(DataSearch.pickedUsers[0]))
+                    winRatioTxt.Text = "Win Ratio:\n" + DataSearch.pickedUsers[0].Item1 + ":" + (float)p1Wins / (DataSearch.rowsData.Count - 1) * 100 + "%" +
+                            "\n" + DataSearch.pickedUsers[1].Item1 + ":" + (1 - (float)p1Wins / (DataSearch.rowsData.Count - 1)) * 100 + "%";
+            }
+            else
+                winRatioTxt.Text = "These 2 players haven't played yet";
         }
 
         private void createCols()
