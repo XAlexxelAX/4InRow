@@ -159,7 +159,7 @@ namespace connectFour
 
         private async void DataSearch_ClickedAsync(object sender, RoutedEventArgs e)
         {
-            int amount = playersPicked_amount(), cols, rows;
+            int amount = playersPicked_amount();
             if (amount == 0 || amount > 2)
                 MessageBox.Show("You can only pick 1 or 2 players!", "Error!");
             else if (amount == 1)

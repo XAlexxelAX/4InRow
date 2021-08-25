@@ -94,6 +94,19 @@ namespace connectFour
                 timerCount = 0;
             }
 
+            CheckReply cr = await gameClient.CheckForGameAsync(new Check { Id1 = (int)lbi.DataContext });
+            if (cr.Answer)
+            {
+                if (cr.Status == AnswerCode.Unanswered)
+                    return;
+                else if (cr.Status == AnswerCode.Accepted)
+                    new Game().Show();
+                else
+                {
+                    timerResponse.Stop();
+                    timerCount = 0;
+                }
+            }
             //TODO: check for response of the other player
             //if rejqcted: pop msgBox and inform user
             //if accepted: open a game screen

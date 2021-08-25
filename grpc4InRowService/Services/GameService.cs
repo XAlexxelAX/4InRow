@@ -25,7 +25,7 @@ namespace grpc4InRowService.Services
                 if (Program.gameRequests[request.Id1].Item2 == AnswerCode.Unanswered)
                 {
                     int gameReq = Program.gameRequests[request.Id1].Item1;
-                    return Task.FromResult(new CheckReply { Answer = true, Offeringid = gameReq });
+                    return Task.FromResult(new CheckReply { Answer = true, Offeringid = gameReq, Status = AnswerCode.Unanswered });
                 }
                 else
                     return Task.FromResult(new CheckReply { Answer = true, Status = Program.gameRequests[request.Id1].Item2 });

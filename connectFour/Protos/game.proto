@@ -30,6 +30,7 @@ message Reply{
 message CheckReply{
 	bool answer=1;
 	int32 offeringid=2;
+	AnswerCode status = 3;
 }
 
 message GameRequest{
