@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace grpc4InRowService.Services
 {
-    public class GameService:Games.GamesBase
+    public class GameService : Games.GamesBase
     {
         private readonly ILogger<GameService> _logger;
         public GameService(ILogger<GameService> logger)
@@ -21,9 +21,17 @@ namespace grpc4InRowService.Services
         public override Task<CheckReply> CheckForGame(Check request, ServerCallContext context)
         {
             if (request.Id1 != -1 && Program.gameRequests.ContainsKey(request.Id1))
-                return Task.FromResult(new CheckReply { Answer = true, Offeringid = Program.gameRequests[request.Id1] });
+            {
+                int gameReq = Program.gameRequests[request.Id1];
+                Program.gameRequests.Remove(request.Id1);
+                return Task.FromResult(new CheckReply { Answer = true, Offeringid = gameReq });
+            }
             else if (request.Id2 != -1 && Program.gameRequests.ContainsKey(request.Id2))
+            {
+                int gameReq = Program.gameRequests[request.Id2];
+                Program.gameRequests.Remove(request.Id2); 
                 return Task.FromResult(new CheckReply { Answer = true, Offeringid = Program.gameRequests[request.Id2] });
+            }
             return Task.FromResult(new CheckReply { Answer = false });
         }
         public override Task<GameReply> OfferGame(GameRequest request, ServerCallContext context)
@@ -41,12 +49,15 @@ namespace grpc4InRowService.Services
 
         public override Task<Reply> CheckMove(Check request, ServerCallContext context)
         {
-            if (Program.ongoingGames.ContainsKey((request.Id1, request.Id2)) || Program.ongoingGames.ContainsKey((request.Id2, request.Id2))){
+            if (Program.ongoingGames.ContainsKey((request.Id1, request.Id2)) || Program.ongoingGames.ContainsKey((request.Id2, request.Id2)))
+            {
                 try
                 {
-                    return Task.FromResult(new Reply {
+                    return Task.FromResult(new Reply
+                    {
                         Answer = true,
-                        Move = new Move {
+                        Move = new Move
+                        {
                             Id = Program.ongoingGames[(request.Id1, request.Id2)].Item2[-1].Item1,
                             Move_ = Program.ongoingGames[(request.Id1, request.Id2)].Item2[-1].Item2
                         }
@@ -71,7 +82,7 @@ namespace grpc4InRowService.Services
         public override Task<Reply> MakeMove(MoveRequest request, ServerCallContext context)
         {
             if (!(Program.ongoingGames.ContainsKey((request.MyId, request.OpponentID)) || Program.ongoingGames.ContainsKey((request.OpponentID, request.MyId))))
-                Program.ongoingGames.Add((request.MyId, request.OpponentID), (new System.DateTime(),new List<(int, int)>()));
+                Program.ongoingGames.Add((request.MyId, request.OpponentID), (new System.DateTime(), new List<(int, int)>()));
             try
             {
                 try
@@ -93,7 +104,7 @@ namespace grpc4InRowService.Services
 
         public override Task<Reply> UpdateScore(Score request, ServerCallContext context)
         {
-            using(var db = new UsersContext())
+            using (var db = new UsersContext())
             {
                 UserModel userEntity = db.users.Single(user => user.Id == request.Id);
                 if (userEntity != null)
@@ -105,7 +116,7 @@ namespace grpc4InRowService.Services
                 }
                 db.SaveChanges();
             }
-           return base.UpdateScore(request, context);
+            return base.UpdateScore(request, context);
         }
     }
 }

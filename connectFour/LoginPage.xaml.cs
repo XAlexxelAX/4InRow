@@ -24,6 +24,7 @@ namespace connectFour
         private GrpcChannel channel;
         private User.UserClient userClient;
         public static int myID;
+        public static String myUsername;
         public LoginPage()
         {
             InitializeComponent();
@@ -49,6 +50,7 @@ namespace connectFour
                     return;
                 }
                 myID = gr.Id;
+                myUsername = username.Text;
                 new OnlineUsersList().Show(); // open the list of current active players
 
                 this.Close();

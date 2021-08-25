@@ -17,9 +17,8 @@ namespace connectFour
         private GrpcChannel channel;
         private User.UserClient userClient;
         private Games.GamesClient gameClient;
-        private Timer timer;
-        private bool isFree;
         private ListBoxItem lbi;
+        private Timer timerResponse;
         private int timerCount;
         public OnlineUsersList()
         {
@@ -29,7 +28,6 @@ namespace connectFour
             userClient = new User.UserClient(channel);
             gameClient = new Games.GamesClient(channel);
 
-            isFree = true;
             timerCount = 0;
 
             fillListAsync();
@@ -38,7 +36,7 @@ namespace connectFour
 
         public void InitTimer()
         { // timer invokes each second
-            timer = new Timer();
+            Timer timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = 1000; // listen and update each second
             timer.Start();
@@ -46,16 +44,10 @@ namespace connectFour
 
         public void InitTimer2()
         { // timer invokes each second
-            Timer timer = new Timer();
-            timer.Tick += new EventHandler(timer_Tick2);
-            timer.Interval = 1000; // listen and update each second
-            timer.Start();
-
-            if (timerCount == 10)
-            {
-                timer.Stop();
-                timerCount = 0;
-            }
+            timerResponse = new Timer();
+            timerResponse.Tick += new EventHandler(timer_Tick2);
+            timerResponse.Interval = 1000; // listen and update each second
+            timerResponse.Start();
         }
 
         private async void timer_Tick(object sender, EventArgs e)
@@ -71,14 +63,18 @@ namespace connectFour
 
             if (cr.Answer) // if there exist a request for game
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("New Request Incoming!\nDo you want to play?\nYou have 10 seconds to answer...", "New Game?",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                var result = AutoClosingMessageBox.Show(
+                    text: "Do you want to play?\nYou have 10 seconds to answer...",
+                    caption: LoginPage.myUsername + "- New Request Incoming!",
+                    timeout: 9000,
+                    buttons: MessageBoxButtons.YesNo,
+                    defaultResult: new DialogResult());
                 GameRequest gr = new GameRequest
                 {
                     MyId = (int)lbi.DataContext,
                     OpponentID = LoginPage.myID
                 };
-                if (result == MessageBoxResult.Yes)
+                if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     gr.Answer = AnswerCode.Accepted;
                     new Game().Show();
@@ -90,18 +86,16 @@ namespace connectFour
                 await gameClient.OfferGameAsync(gr);
             }
         }
-        private async void timer_Tick2(object sender, EventArgs e)
-        { // check for answer/response of the game offer
-            timerCount++;
-
-
-        }
+        
         private async Task fillListAsync()
         {
             using (var call = userClient.getOnlineUsers(new GeneralReq()))
             {
                 while (await call.ResponseStream.MoveNext())
                 {
+                    if (call.ResponseStream.Current.Username.Equals(LoginPage.myUsername)) // skip 'my own' (this logged in user) username
+                        continue;
+
                     bool isUserExist = false;
                     foreach (ListBoxItem user in users.Items)
                         if (user.Content.Equals(call.ResponseStream.Current.Username))
@@ -123,7 +117,6 @@ namespace connectFour
 
         private async void userSelected(object sender, SelectionChangedEventArgs e)
         {
-            isFree = false;
             lbi = ((sender as System.Windows.Controls.ListBox).SelectedItem as ListBoxItem);
             //System.Windows.MessageBox.Show("You selected " + lbi.Content.ToString() + ".");
             GameReply gr = await gameClient.OfferGameAsync(new GameRequest
@@ -132,10 +125,9 @@ namespace connectFour
                 OpponentID = (int)lbi.DataContext,
                 Answer = AnswerCode.Unanswered
             });
-            AutoClosingMessageBox.Show("10 seconds until closing...", "Waiting for Opponenet's response", 10000);
+            AutoClosingMessageBox.Show("10 seconds until closing...", LoginPage.myUsername + "- Waiting for Opponenet's response", 10000);
             InitTimer2(); // invoke and check for answer
 
-            isFree = true;
         }
 
         private void dataSearch(object sender, RoutedEventArgs e)

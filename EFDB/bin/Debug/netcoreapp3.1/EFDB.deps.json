@@ -8,12 +8,21 @@
     ".NETCoreApp,Version=v3.1": {
       "EFDB/1.0.0": {
         "dependencies": {
+          "AutoClosingMessageBox": "1.0.0.2",
           "Microsoft.EntityFrameworkCore": "5.0.9",
           "Microsoft.EntityFrameworkCore.Design": "5.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.9"
         },
         "runtime": {
           "EFDB.dll": {}
+        }
+      },
+      "AutoClosingMessageBox/1.0.0.2": {
+        "runtime": {
+          "lib/net40/AutoClosingMessageBox.dll": {
+            "assemblyVersion": "1.0.0.2",
+            "fileVersion": "1.0.0.2"
+          }
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -1084,6 +1093,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoClosingMessageBox/1.0.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Hj9aqZgfLTyMsrCvOWFIiC4NgNnuOWKSZ6I7RUbMk55JXhJAJnM5s5cFv+03aDELFgRz4bUghlm+pSwnDD/76A==",
+      "path": "autoclosingmessagebox/1.0.0.2",
+      "hashPath": "autoclosingmessagebox.1.0.0.2.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

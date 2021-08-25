@@ -314,6 +314,17 @@
           "grpc4InRowService.dll": {}
         }
       },
+      "AutoClosingMessageBox/1.0.0.2": {
+        "runtime": {
+          "lib/net40/AutoClosingMessageBox.dll": {
+            "assemblyVersion": "1.0.0.2",
+            "fileVersion": "1.0.0.2"
+          }
+        },
+        "compile": {
+          "lib/net40/AutoClosingMessageBox.dll": {}
+        }
+      },
       "Google.Protobuf/3.11.2": {
         "dependencies": {
           "System.Memory": "4.5.3"
@@ -1522,6 +1533,7 @@
       },
       "EFDB/1.0.0": {
         "dependencies": {
+          "AutoClosingMessageBox": "1.0.0.2",
           "Microsoft.EntityFrameworkCore": "5.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.9"
         },
@@ -3159,6 +3171,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoClosingMessageBox/1.0.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Hj9aqZgfLTyMsrCvOWFIiC4NgNnuOWKSZ6I7RUbMk55JXhJAJnM5s5cFv+03aDELFgRz4bUghlm+pSwnDD/76A==",
+      "path": "autoclosingmessagebox/1.0.0.2",
+      "hashPath": "autoclosingmessagebox.1.0.0.2.nupkg.sha512"
     },
     "Google.Protobuf/3.11.2": {
       "type": "package",

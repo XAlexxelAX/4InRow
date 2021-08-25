@@ -35,7 +35,6 @@ C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\Google.Protobu
 C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Core.Api.dll
 C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Net.Client.dll
 C:\Users\shaha\Desktop\4inRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Net.Common.dll
-C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csprojAssemblyReference.cache
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\LoginPage.g.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\App.g.cs
@@ -244,3 +243,6 @@ C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\DataSearch.g.c
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\DataSearch.baml
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\DataSearch.g.cs
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\DataSearch.baml
+C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csproj.AssemblyReference.cache
+C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shaha\Desktop\4InRow\connectFour\bin\Debug\netcoreapp3.1\AutoClosingMessageBox.dll
