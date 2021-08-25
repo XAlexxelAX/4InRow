@@ -29,8 +29,10 @@ namespace connectFour
             InitializeComponent();
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             statsClient = new Statistics.StatisticsClient(channel);
+
             usersList = new List<(string, int, int, int, int, float)>();
             DynamicGrid = new Grid();
+
             DynamicGrid.ShowGridLines = true;
             Grid.SetColumn(DynamicGrid, 1);
             Grid.SetRow(DynamicGrid, 4);
@@ -134,10 +136,23 @@ namespace connectFour
                     break;
 
                 case "Players: Data":
+                    users.HorizontalContentAlignment = HorizontalAlignment.Left;
+                    foreach ((String, int, int, int, int, float) username in usersList)
+                    {
+                        ListBoxItem newUser = new ListBoxItem();
+                        newUser.Content = new CheckBox();
+                        TextBlock txt = new TextBlock();
+                        txt.Text = username.Item1;
+                        ((CheckBox)newUser.Content).Content = txt;
+                        ((TextBlock)((CheckBox)newUser.Content).Content).Margin = new Thickness(160,0,0,0);
+
+                        users.Items.Add(newUser);
+                    }
+
                     int amount = playersPicked_amount();
                     if (amount == 0 || amount > 2)
                     {
-                        MessageBox.Show("You can only pick 1 or 2 players!");
+                        MessageBox.Show("You can only pick 1 or 2 players!","Error!");
                         return;
                     }
                     else if (amount == 1)
@@ -179,7 +194,11 @@ namespace connectFour
 
         private int playersPicked_amount()
         {
-            throw new NotImplementedException();
+            int count = 0;
+            foreach (ListBoxItem checkBox in users.Items)
+                if (((CheckBox)checkBox.Content).IsChecked==true)
+                    count++;
+            return count;
         }
 
         private void insertDataToRow(int row, List<Object> data, int cols)

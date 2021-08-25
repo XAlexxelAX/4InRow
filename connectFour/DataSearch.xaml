@@ -39,7 +39,7 @@
             <ComboBoxItem Content="Players: Data"></ComboBoxItem>
         </ComboBox>
 
-        <ListBox Grid.Row="4" Grid.Column="1" x:Name="users">
+        <ListBox Grid.Row="4" Grid.Column="1" x:Name="users" HorizontalContentAlignment="Center">
         </ListBox>
 
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Data Search:" FontFamily="Bell MT Bold"

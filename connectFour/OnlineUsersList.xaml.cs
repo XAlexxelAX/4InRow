@@ -51,7 +51,6 @@ namespace connectFour
 
         private async void timer_Tick(object sender, EventArgs e)
         {
-            //users.Items.Clear();
             fillListAsync();
 
             //if(isFree)
@@ -129,7 +128,7 @@ namespace connectFour
 
         private async void userSelected(object sender, SelectionChangedEventArgs e)
         {
-            lbi = ((sender as System.Windows.Controls.ListBox).SelectedItem as ListBoxItem);
+            lbi = (sender as System.Windows.Controls.ListBox).SelectedItem as ListBoxItem;
             GameReply gr = await gameClient.OfferGameAsync(new GameRequest
             {
                 MyId = LoginPage.myID,
