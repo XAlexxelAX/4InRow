@@ -27,20 +27,20 @@ namespace grpc4InRowService.Protos {
             "ChFQcm90b3MvZ2FtZS5wcm90byIOCgxFbXB0eU1lc3NhZ2UiKAoKT2ZmZXJS",
             "ZXBseRIKCgJpZBgBIAEoBRIOCgZhbnN3ZXIYAiABKAgiIQoFQ2hlY2sSCwoD",
             "aWQxGAEgASgFEgsKA2lkMhgCIAEoBSIsCgVSZXBseRIOCgZhbnN3ZXIYASAB",
-            "KAgSEwoEbW92ZRgCIAEoCzIFLk1vdmUiMAoKQ2hlY2tSZXBseRIOCgZhbnN3",
-            "ZXIYASABKAgSEgoKb2ZmZXJpbmdpZBgCIAEoBSJMCgtHYW1lUmVxdWVzdBIM",
-            "CgRteUlkGAEgASgFEhIKCm9wcG9uZW50SUQYAiABKAUSGwoGYW5zd2VyGAMg",
-            "ASgOMgsuQW5zd2VyQ29kZSIbCglHYW1lUmVwbHkSDgoGYW5zd2VyGAEgASgI",
-            "Ij0KC01vdmVSZXF1ZXN0EgwKBG15SWQYASABKAUSEgoKb3Bwb25lbnRJRBgC",
-            "IAEoBRIMCgRtb3ZlGAMgASgFIi8KBVNjb3JlEgoKAmlkGAEgASgFEg0KBXNj",
-            "b3JlGAIgASgFEgsKA3dvbhgDIAEoCCIgCgRNb3ZlEgoKAmlkGAEgASgFEgwK",
-            "BG1vdmUYAiABKAUqOAoKQW5zd2VyQ29kZRIOCgpVbmFuc3dlcmVkEAASDAoI",
-            "QWNjZXB0ZWQQARIMCghSZWplY3RlZBACMrEBCgVHYW1lcxIjCgxDaGVja0Zv",
-            "ckdhbWUSBi5DaGVjaxoLLkNoZWNrUmVwbHkSJQoJT2ZmZXJHYW1lEgwuR2Ft",
-            "ZVJlcXVlc3QaCi5HYW1lUmVwbHkSIAoITWFrZU1vdmUSDC5Nb3ZlUmVxdWVz",
-            "dBoGLlJlcGx5EhsKCUNoZWNrTW92ZRIGLkNoZWNrGgYuUmVwbHkSHQoLVXBk",
-            "YXRlU2NvcmUSBi5TY29yZRoGLlJlcGx5QhuqAhhncnBjNEluUm93U2Vydmlj",
-            "ZS5Qcm90b3NiBnByb3RvMw=="));
+            "KAgSEwoEbW92ZRgCIAEoCzIFLk1vdmUiTQoKQ2hlY2tSZXBseRIOCgZhbnN3",
+            "ZXIYASABKAgSEgoKb2ZmZXJpbmdpZBgCIAEoBRIbCgZzdGF0dXMYAyABKA4y",
+            "Cy5BbnN3ZXJDb2RlIkwKC0dhbWVSZXF1ZXN0EgwKBG15SWQYASABKAUSEgoK",
+            "b3Bwb25lbnRJRBgCIAEoBRIbCgZhbnN3ZXIYAyABKA4yCy5BbnN3ZXJDb2Rl",
+            "IhsKCUdhbWVSZXBseRIOCgZhbnN3ZXIYASABKAgiPQoLTW92ZVJlcXVlc3QS",
+            "DAoEbXlJZBgBIAEoBRISCgpvcHBvbmVudElEGAIgASgFEgwKBG1vdmUYAyAB",
+            "KAUiLwoFU2NvcmUSCgoCaWQYASABKAUSDQoFc2NvcmUYAiABKAUSCwoDd29u",
+            "GAMgASgIIiAKBE1vdmUSCgoCaWQYASABKAUSDAoEbW92ZRgCIAEoBSo4CgpB",
+            "bnN3ZXJDb2RlEg4KClVuYW5zd2VyZWQQABIMCghBY2NlcHRlZBABEgwKCFJl",
+            "amVjdGVkEAIysQEKBUdhbWVzEiMKDENoZWNrRm9yR2FtZRIGLkNoZWNrGgsu",
+            "Q2hlY2tSZXBseRIlCglPZmZlckdhbWUSDC5HYW1lUmVxdWVzdBoKLkdhbWVS",
+            "ZXBseRIgCghNYWtlTW92ZRIMLk1vdmVSZXF1ZXN0GgYuUmVwbHkSGwoJQ2hl",
+            "Y2tNb3ZlEgYuQ2hlY2saBi5SZXBseRIdCgtVcGRhdGVTY29yZRIGLlNjb3Jl",
+            "GgYuUmVwbHlCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::grpc4InRowService.Protos.AnswerCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -48,7 +48,7 @@ namespace grpc4InRowService.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.OfferReply), global::grpc4InRowService.Protos.OfferReply.Parser, new[]{ "Id", "Answer" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Check), global::grpc4InRowService.Protos.Check.Parser, new[]{ "Id1", "Id2" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Reply), global::grpc4InRowService.Protos.Reply.Parser, new[]{ "Answer", "Move" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.CheckReply), global::grpc4InRowService.Protos.CheckReply.Parser, new[]{ "Answer", "Offeringid" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.CheckReply), global::grpc4InRowService.Protos.CheckReply.Parser, new[]{ "Answer", "Offeringid", "Status" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameRequest), global::grpc4InRowService.Protos.GameRequest.Parser, new[]{ "MyId", "OpponentID", "Answer" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameReply), global::grpc4InRowService.Protos.GameReply.Parser, new[]{ "Answer" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.MoveRequest), global::grpc4InRowService.Protos.MoveRequest.Parser, new[]{ "MyId", "OpponentID", "Move" }, null, null, null, null),
@@ -674,6 +674,7 @@ namespace grpc4InRowService.Protos {
     public CheckReply(CheckReply other) : this() {
       answer_ = other.answer_;
       offeringid_ = other.offeringid_;
+      status_ = other.status_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -704,6 +705,17 @@ namespace grpc4InRowService.Protos {
       }
     }
 
+    /// <summary>Field number for the "status" field.</summary>
+    public const int StatusFieldNumber = 3;
+    private global::grpc4InRowService.Protos.AnswerCode status_ = global::grpc4InRowService.Protos.AnswerCode.Unanswered;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::grpc4InRowService.Protos.AnswerCode Status {
+      get { return status_; }
+      set {
+        status_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as CheckReply);
@@ -719,6 +731,7 @@ namespace grpc4InRowService.Protos {
       }
       if (Answer != other.Answer) return false;
       if (Offeringid != other.Offeringid) return false;
+      if (Status != other.Status) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -727,6 +740,7 @@ namespace grpc4InRowService.Protos {
       int hash = 1;
       if (Answer != false) hash ^= Answer.GetHashCode();
       if (Offeringid != 0) hash ^= Offeringid.GetHashCode();
+      if (Status != global::grpc4InRowService.Protos.AnswerCode.Unanswered) hash ^= Status.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -748,6 +762,10 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(16);
         output.WriteInt32(Offeringid);
       }
+      if (Status != global::grpc4InRowService.Protos.AnswerCode.Unanswered) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) Status);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -761,6 +779,9 @@ namespace grpc4InRowService.Protos {
       }
       if (Offeringid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Offeringid);
+      }
+      if (Status != global::grpc4InRowService.Protos.AnswerCode.Unanswered) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -779,6 +800,9 @@ namespace grpc4InRowService.Protos {
       if (other.Offeringid != 0) {
         Offeringid = other.Offeringid;
       }
+      if (other.Status != global::grpc4InRowService.Protos.AnswerCode.Unanswered) {
+        Status = other.Status;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -796,6 +820,10 @@ namespace grpc4InRowService.Protos {
           }
           case 16: {
             Offeringid = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Status = (global::grpc4InRowService.Protos.AnswerCode) input.ReadEnum();
             break;
           }
         }

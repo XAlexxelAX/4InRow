@@ -247,3 +247,6 @@ C:\Users\shaha\Desktop\4InRow\connectFour\bin\Debug\netcoreapp3.1\AutoClosingMes
 C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.g.cs
 C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.baml
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csprojAssemblyReference.cache
+C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.g.cs
+C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\AutoClosingMessageBox.dll
+C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.baml

@@ -22,15 +22,13 @@ namespace grpc4InRowService.Services
         {
             if (request.Id1 != -1 && Program.gameRequests.ContainsKey(request.Id1))
             {
-                int gameReq = Program.gameRequests[request.Id1];
-                Program.gameRequests.Remove(request.Id1);
-                return Task.FromResult(new CheckReply { Answer = true, Offeringid = gameReq });
-            }
-            else if (request.Id2 != -1 && Program.gameRequests.ContainsKey(request.Id2))
-            {
-                int gameReq = Program.gameRequests[request.Id2];
-                Program.gameRequests.Remove(request.Id2); 
-                return Task.FromResult(new CheckReply { Answer = true, Offeringid = gameReq });
+                if (Program.gameRequests[request.Id1].Item2 == AnswerCode.Unanswered)
+                {
+                    int gameReq = Program.gameRequests[request.Id1].Item1;
+                    return Task.FromResult(new CheckReply { Answer = true, Offeringid = gameReq });
+                }
+                else
+                    return Task.FromResult(new CheckReply { Answer = true, Status = Program.gameRequests[request.Id1].Item2 });
             }
             return Task.FromResult(new CheckReply { Answer = false });
         }
@@ -38,7 +36,10 @@ namespace grpc4InRowService.Services
         {
             try
             {
-                Program.gameRequests.Add(request.OpponentID, request.MyId);
+                if (Program.gameRequests.ContainsKey(request.OpponentID))
+                    Program.gameRequests[request.OpponentID] = (Program.gameRequests[request.OpponentID].Item1, request.Answer);
+                else
+                    Program.gameRequests.Add(request.OpponentID, (request.MyId, AnswerCode.Unanswered));
                 return Task.FromResult(new GameReply { Answer = true });
             }
             catch
@@ -82,7 +83,10 @@ namespace grpc4InRowService.Services
         public override Task<Reply> MakeMove(MoveRequest request, ServerCallContext context)
         {
             if (!(Program.ongoingGames.ContainsKey((request.MyId, request.OpponentID)) || Program.ongoingGames.ContainsKey((request.OpponentID, request.MyId))))
+            {
                 Program.ongoingGames.Add((request.MyId, request.OpponentID), (new System.DateTime(), new List<(int, int)>()));
+                Program.gameRequests.Remove(request.MyId);
+            }
             try
             {
                 try
