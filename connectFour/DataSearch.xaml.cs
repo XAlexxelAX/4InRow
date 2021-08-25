@@ -32,7 +32,7 @@ namespace connectFour
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             statsClient = new Statistics.StatisticsClient(channel);
 
-            usersList = new List<(string, int, int, int, int, float,int)>();
+            usersList = new List<(string, int, int, int, int, float, int)>();
             DynamicGrid = new Grid();
 
             DynamicGrid.ShowGridLines = true;
@@ -164,7 +164,7 @@ namespace connectFour
             else if (amount == 1)
             {
                 rowsData = new List<List<Object>>();
-                rowsData.Add(new List<Object> { "Games", "Wins", "Wins Precentage", "Points" });
+                rowsData.Add(new List<Object> { "Games", "Wins", "Wins Ratio", "Points" });
 
                 var call = statsClient.getUserStats(new StatsRequest { Id1 = getCheckedIDs()[0] });
 
@@ -179,14 +179,14 @@ namespace connectFour
                 //TODO: Insert rows of data to list from DB
                 using (var call = statsClient.getUsersIntersection(new StatsRequest { Id1 = getCheckedIDs()[0], Id2 = getCheckedIDs()[1] }))
                 {
-                    while(await call.ResponseStream.MoveNext())
+                    while (await call.ResponseStream.MoveNext())
                     {
                         rowsData.Add(new List<Object> { call.ResponseStream.Current.Date, call.ResponseStream.Current.Winner
                             ,call.ResponseStream.Current.Score1, call.ResponseStream.Current.Score2 });
                     }
                 }
-
-                    new PlayersData().Show();
+                
+                new PlayersData().Show();
             }
         }
 

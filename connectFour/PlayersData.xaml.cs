@@ -40,6 +40,9 @@ namespace connectFour
             createCols();
             createRows();
             for (int i = 0; i < rows; insertDataToRow(i, DataSearch.rowsData[i], cols), i++) ;
+
+            //TODO: Calculate win ratio for each player if 2 were chosen (winRatioTxt object)
+            //winRatioTxt.Text=...
         }
 
         private void createCols()
@@ -47,7 +50,7 @@ namespace connectFour
             for (int i = 0; i < cols; i++)
             {
                 ColumnDefinition gridCol = new ColumnDefinition();
-                gridCol.Width = new GridLength(dataCol.ActualWidth / cols);
+                gridCol.Width = new GridLength(330 / cols);
                 DynamicGrid.ColumnDefinitions.Add(gridCol);
             }
         }
@@ -60,7 +63,7 @@ namespace connectFour
                 if (i == 0)
                     gridRow.Height = new GridLength(20);
                 else
-                    gridRow.Height = new GridLength((dataRow.ActualHeight - 30) / rows);
+                    gridRow.Height = new GridLength((250 - 30) / rows);
 
                 DynamicGrid.RowDefinitions.Add(gridRow);
             }
