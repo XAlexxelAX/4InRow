@@ -25,6 +25,7 @@ namespace connectFour
         private int[,] board;
         private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score;
         private List<Image> imgs;
+        private bool isMyTurn;
         public Game()
         {
             InitializeComponent();
@@ -44,12 +45,14 @@ namespace connectFour
             p2_score = 0;
             turn = 0;
             imgs = new List<Image>();
+            isMyTurn = false;
         }
 
         private void OnPreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {            
-            if (checkForWinnerOrTie() != 0)
+        {
+            if (!isMyTurn || checkForWinnerOrTie() != 0) // if game over or it's not my turn than ignore the click
                 return;
+
             var point = Mouse.GetPosition(boardView); // mouse ptr cordiante at click event time
 
             int row = 0, col = 0;
@@ -78,6 +81,7 @@ namespace connectFour
                 return;
 
             updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
+            makeOpponentsMove(getOpponentsMove()); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
         }
 
         private void codeAfterAnimation()
@@ -85,6 +89,7 @@ namespace connectFour
             p1_cellCount = turn == 0 ? p1_cellCount + 1 : p1_cellCount;
             p2_cellCount = turn == 1 ? p2_cellCount + 1 : p2_cellCount;
             turn = 1 - turn;
+            isMyTurn = !isMyTurn;
 
             int winnerOrTie = checkForWinnerOrTie();
             if (winnerOrTie != 0) // val!=0 => winner or tie
@@ -127,7 +132,7 @@ namespace connectFour
 
             img.Source = bitmapImage;
 
-                      
+
             //update the image/ball uppon the board
             img.SetValue(Grid.RowProperty, 1);
             img.SetValue(Grid.ColumnProperty, col + 2);
@@ -317,17 +322,19 @@ namespace connectFour
                 msg = "Yellow Player Has Won! ☺\nWould you like to have another round?";
             else msg = "It's a Tie! ☻\nWould you like to have another round?";
 
-            MessageBoxResult result = MessageBoxResult.None;
             new Thread(() =>
-            {// new thread in order for the game to freeze until the answer is given (another round/exit)
-                result = MessageBox.Show(msg, "Game Over",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                if (result == MessageBoxResult.Yes)
+            {// new thread in order for the game to freeze until the answer is given (another round/exit)               
+                if (anotherRoundAnswer(msg) && anotherRoundOpponentsAnswer()) // play another round iff 2 players agreed
                     this.Dispatcher.Invoke(() => // in order to change the UI with another thread
                     {
                         resetBoard(); // reset board to start another round
                     });
-                else Environment.Exit(0); // if the answer was to quit the game - then exit the program
+                else // if the answer was to quit the game - then exit the game and update server with game stats
+                {
+                    //TODO: Update server with game stats (game turned to finished, player points, etc..
+
+                    this.Close(); // close the game window
+                }
             }).Start();
         }
         private void updateBonus()
@@ -360,6 +367,42 @@ namespace connectFour
             foreach (Image img in imgs)
                 boardView.Children.Remove(img);
             imgs.Clear();
+        }
+
+        private int getOpponentsMove()
+        {
+            //TODO: listen to server and  wait for opponent's move
+            //return it's move (chosen col to place ball)
+            return -1;
+        }
+
+        private void makeOpponentsMove(int col)
+        {
+            int emptyCell_row = findEmptyRowCell(col - 2);
+            if (emptyCell_row == -1)
+                return;
+
+            updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
+        }
+
+        private bool anotherRoundAnswer(String msg)
+        {
+            //TODO: when game finished, a pop msg appears along with a question to both users about playing another round
+            MessageBoxResult answer = MessageBox.Show(msg, "Game Over",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+
+            //Here: The answer should be sent to the server
+            // ...
+
+            return answer == MessageBoxResult.Yes; // return true iff accepted another round, else return false
+        }
+        private bool anotherRoundOpponentsAnswer()
+        {
+            //TODO: when game finished, a pop msg appears along with a question to both users about playing another round
+            //In this method we will wait for the answer of the opponent 
+            // if and only if both users accepted another round - another round will be initialized with server implemtations
+
+            return false; // return true iff the opponenet accepted another round, else return false
         }
     }
 }
