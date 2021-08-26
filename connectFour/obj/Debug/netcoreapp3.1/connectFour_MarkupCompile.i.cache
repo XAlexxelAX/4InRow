@@ -1,5 +1,5 @@
 ﻿connectFour
-
+1.0.0.0
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\shaha\Desktop\4InRow\connectFour\App.xaml
 6-2105926937
 
-883287516
+16-363686421
 344-1209110300
 DataSearch.xaml;GameWindow.xaml;LoginPage.xaml;OnlineUsersList.xaml;PlayersData.xaml;Register.xaml;
 
-False
+True
 

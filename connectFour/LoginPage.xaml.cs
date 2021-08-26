@@ -43,7 +43,7 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-                GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = password.Password });
+                GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
                 if (!gr.IsSuccessfull)
                 {
                     MessageBox.Show("Couldn't login :(");
@@ -54,13 +54,31 @@ namespace connectFour
                 new OnlineUsersList().Show(); // open the list of current active players
 
                 this.Close();
-                
+
             }
         }
 
         private void register_Click(object sender, RoutedEventArgs e)
         {
             new Register().Show(); // open the list of current active players
+        }
+
+        private string CreateMD5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                // Convert the byte array to hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                return sb.ToString();
+            }
         }
     }
 }
