@@ -20,6 +20,7 @@ namespace connectFour
         private ListBoxItem lbi;
         private Timer timerResponse;
         private int timerCount;
+        private System.Threading.Thread msgBoxThread;
         public OnlineUsersList()
         {
             InitializeComponent();
@@ -91,6 +92,7 @@ namespace connectFour
             if (timerCount == 10)
             {
                 timerResponse.Stop();
+                msgBoxThread.Abort();
                 timerCount = 0;
                 System.Windows.MessageBox.Show("Your opponent didn't responed to your game request.");
             }
@@ -103,16 +105,18 @@ namespace connectFour
                 else if (cr.Status == AnswerCode.Accepted)
                 {
                     timerResponse.Stop();
+                    msgBoxThread.Abort();
                     timerCount = 0;
-                    new Game().Show();                    
+                    new Game().Show();
                 }
                 else
                 {
                     timerResponse.Stop();
+                    msgBoxThread.Abort();
                     timerCount = 0;
                     System.Windows.MessageBox.Show("Your opponent denied the game request.");
                 }
-            }            
+            }
         }
         private async Task fillListAsync()
         {
@@ -151,7 +155,11 @@ namespace connectFour
                 OpponentID = (int)lbi.DataContext,
                 Answer = AnswerCode.Unanswered
             });
-            AutoClosingMessageBox.Show("10 seconds until closing...", LoginPage.myUsername + "- Waiting for Opponenet's response", 10000);
+            msgBoxThread = new System.Threading.Thread(() =>
+            {
+                AutoClosingMessageBox.Show("10 seconds until closing...", LoginPage.myUsername + "- Waiting for Opponenet's response", 10000);
+            });
+            msgBoxThread.Start();
             InitTimer2(); // invoke and check for answer
         }
 
