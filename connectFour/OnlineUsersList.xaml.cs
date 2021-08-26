@@ -92,6 +92,7 @@ namespace connectFour
             {
                 timerResponse.Stop();
                 timerCount = 0;
+                System.Windows.MessageBox.Show("Your opponent didn't responed to your game request.");
             }
 
             CheckReply cr = await gameClient.CheckForGameAsync(new Check { Id1 = (int)lbi.DataContext });
@@ -100,16 +101,18 @@ namespace connectFour
                 if (cr.Status == AnswerCode.Unanswered)
                     return;
                 else if (cr.Status == AnswerCode.Accepted)
-                    new Game().Show();
+                {
+                    timerResponse.Stop();
+                    timerCount = 0;
+                    new Game().Show();                    
+                }
                 else
                 {
                     timerResponse.Stop();
                     timerCount = 0;
+                    System.Windows.MessageBox.Show("Your opponent denied the game request.");
                 }
-            }
-            //TODO: check for response of the other player
-            //if rejqcted: pop msgBox and inform user
-            //if accepted: open a game screen
+            }            
         }
         private async Task fillListAsync()
         {

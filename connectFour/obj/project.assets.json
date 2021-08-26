@@ -6178,11 +6178,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\shaha\\Desktop\\4inRow\\connectFour\\connectFour.csproj",
+      "projectUniqueName": "C:\\Users\\shaha\\Desktop\\4InRow\\connectFour\\connectFour.csproj",
       "projectName": "connectFour",
-      "projectPath": "C:\\Users\\shaha\\Desktop\\4inRow\\connectFour\\connectFour.csproj",
+      "projectPath": "C:\\Users\\shaha\\Desktop\\4InRow\\connectFour\\connectFour.csproj",
       "packagesPath": "C:\\Users\\shaha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shaha\\Desktop\\4inRow\\connectFour\\obj\\",
+      "outputPath": "C:\\Users\\shaha\\Desktop\\4InRow\\connectFour\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6203,8 +6203,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\shaha\\Desktop\\4inRow\\grpc4InRowService\\grpc4InRowService.csproj": {
-              "projectPath": "C:\\Users\\shaha\\Desktop\\4inRow\\grpc4InRowService\\grpc4InRowService.csproj"
+            "C:\\Users\\shaha\\Desktop\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj": {
+              "projectPath": "C:\\Users\\shaha\\Desktop\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj"
             }
           }
         }

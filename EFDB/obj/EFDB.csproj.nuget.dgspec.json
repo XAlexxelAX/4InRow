@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shaha\\Desktop\\4inRow\\EFDB\\EFDB.csproj": {}
+    "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\EFDB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shaha\\Desktop\\4inRow\\EFDB\\EFDB.csproj": {
+    "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\EFDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shaha\\Desktop\\4inRow\\EFDB\\EFDB.csproj",
+        "projectUniqueName": "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\EFDB.csproj",
         "projectName": "EFDB",
-        "projectPath": "C:\\Users\\shaha\\Desktop\\4inRow\\EFDB\\EFDB.csproj",
+        "projectPath": "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\EFDB.csproj",
         "packagesPath": "C:\\Users\\shaha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shaha\\Desktop\\4inRow\\EFDB\\obj\\",
+        "outputPath": "C:\\Users\\shaha\\Desktop\\4InRow\\EFDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
