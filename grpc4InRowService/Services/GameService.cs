@@ -20,37 +20,47 @@ namespace grpc4InRowService.Services
 
         public override Task<CheckReply> CheckForGame(Check request, ServerCallContext context)
         {
-            if (request.Id1 != -1 && Program.gameRequests.ContainsKey(request.Id1))
+            try
             {
-                if (Program.gameRequests[request.Id1].Item2 == AnswerCode.Unanswered)
-                {
-                    int gameReq = Program.gameRequests[request.Id1].Item1;
-                    return Task.FromResult(new CheckReply { Answer = true, Offeringid = gameReq, Status = AnswerCode.Unanswered });
-                }
+                if (Program.gameRequests.ContainsKey(request.MyId))//some player checks if someone offered him a game, receives back Answer if someone offered and if so, gets the offering ID
+                    return Task.FromResult(new CheckReply { Answer = true, Offeringid = Program.gameRequests[request.MyId].Item1 });
+                else if (Program.gameRequests.ContainsKey(request.OpponentID))//offering player checks if request was answered
+                    return Task.FromResult(new CheckReply { Answer = true, Status = Program.gameRequests[request.OpponentID].Item2 });
                 else
-                    return Task.FromResult(new CheckReply { Answer = true, Status = Program.gameRequests[request.Id1].Item2 });
+                    return Task.FromResult(new CheckReply { Answer = false });
             }
-            return Task.FromResult(new CheckReply { Answer = false });
+            catch
+            {
+                return Task.FromResult(new CheckReply { Answer = false });
+            }
         }
+
         public override Task<GameReply> OfferGame(GameRequest request, ServerCallContext context)
         {
             try
             {
                 if (Program.gameRequests.ContainsKey(request.OpponentID))
-                    Program.gameRequests[request.OpponentID] = (Program.gameRequests[request.OpponentID].Item1, request.Answer);
-                else
-                    Program.gameRequests.Add(request.OpponentID, (request.MyId, AnswerCode.Unanswered));
+                {
+                    if (Program.gameRequests[request.OpponentID].Item1 != request.MyId)//Can't offer game because someone already offered him a game.
+                        return Task.FromResult(new GameReply { Answer = false });
+                    else
+                    {
+                        Program.gameRequests[request.OpponentID] = (request.MyId, request.Answer);//Offered player answers the game request
+                        return Task.FromResult(new GameReply { Answer = true });
+                    }
+                }
+                Program.gameRequests.Add(request.OpponentID, (request.MyId, AnswerCode.Unanswered));//new offered game
                 return Task.FromResult(new GameReply { Answer = true });
             }
             catch
             {
-                return Task.FromResult(new GameReply { Answer = false });
+                return Task.FromResult(new GameReply { Answer = false });//some error with offering
             }
         }
 
-        public override Task<Reply> CheckMove(Check request, ServerCallContext context)
+        public override Task<Reply> CheckMove(MoveCheck request, ServerCallContext context)
         {
-            if (Program.ongoingGames.ContainsKey((request.Id1, request.Id2)) || Program.ongoingGames.ContainsKey((request.Id2, request.Id2)))
+            if (Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))
             {
                 try
                 {
@@ -59,22 +69,14 @@ namespace grpc4InRowService.Services
                         Answer = true,
                         Move = new Move
                         {
-                            Id = Program.ongoingGames[(request.Id1, request.Id2)].Item2[-1].Item1,
-                            Move_ = Program.ongoingGames[(request.Id1, request.Id2)].Item2[-1].Item2
+                            Id = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2[-1].Item1,
+                            Move_ = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2[-1].Item2
                         }
                     });
                 }
                 catch
                 {
-                    return Task.FromResult(new Reply
-                    {
-                        Answer = true,
-                        Move = new Move
-                        {
-                            Id = Program.ongoingGames[(request.Id2, request.Id1)].Item2[-1].Item1,
-                            Move_ = Program.ongoingGames[(request.Id2, request.Id1)].Item2[-1].Item2
-                        }
-                    });
+                    return Task.FromResult(new Reply { Answer = false });
                 }
             }
             return Task.FromResult(new Reply { Answer = false });
@@ -82,22 +84,17 @@ namespace grpc4InRowService.Services
 
         public override Task<Reply> MakeMove(MoveRequest request, ServerCallContext context)
         {
-            if (!(Program.ongoingGames.ContainsKey((request.MyId, request.OpponentID)) || Program.ongoingGames.ContainsKey((request.OpponentID, request.MyId))))
+            if (!(Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID))))//If it's a new game and isn't in ongoing game, a new game added, key is a tuple of (game initiator,game accepter)
             {
-                Program.ongoingGames.Add((request.MyId, request.OpponentID), (new System.DateTime(), new List<(int, int)>()));
-                Program.gameRequests.Remove(request.MyId);
+                Program.ongoingGames.Add((request.InitiatorID, request.InitiatedID), (new System.DateTime(), new List<(int, int)>()));
+                Program.gameRequests.Remove(request.InitiatedID);
             }
             try
             {
-                try
-                {
-                    Program.ongoingGames[(request.MyId, request.OpponentID)].Item2.Add((request.MyId, request.Move));
-                }
-                catch
-                {
-                    Program.ongoingGames[(request.OpponentID, request.MyId)].Item2.Add((request.MyId, request.Move));
-                    return Task.FromResult(new Reply { Answer = true });
-                }
+                if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2[-1].Item1 == request.InitiatedID)
+                    Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Add((request.InitiatorID, request.Move));
+                else
+                    Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Add((request.InitiatedID, request.Move));
                 return Task.FromResult(new Reply { Answer = true });
             }
             catch

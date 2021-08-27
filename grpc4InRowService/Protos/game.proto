@@ -6,7 +6,7 @@ service Games{
 	rpc CheckForGame (Check) returns (CheckReply);// invokes server with check that contains user id, returns reply if there's a waiting game request
 	rpc OfferGame (GameRequest) returns (GameReply);// sends to server game request
 	rpc MakeMove (MoveRequest) returns (Reply);// send a move in an ongoing game
-	rpc CheckMove (Check) returns (Reply);// checks if a move was made by the opponent
+	rpc CheckMove (MoveCheck) returns (Reply);// checks if a move was made by the opponent
 	rpc UpdateScore (Score) returns (Reply);
 }
 
@@ -18,8 +18,13 @@ message OfferReply{
 }
 
 message Check{
-	int32 id1=1;
-	int32 id2=2;
+	int32 myId=1;
+	int32 opponentID=2;
+}
+
+message MoveCheck{
+	int32 initiatorID = 1;
+	int32 initiatedID = 2;
 }
 
 message Reply{
@@ -44,8 +49,8 @@ message GameReply{
 }
 
 message MoveRequest{
-	int32 myId = 1;
-	int32 opponentID = 2;
+	int32 initiatorID = 1;
+	int32 initiatedID = 2;
 	int32 move = 3;
 }
 

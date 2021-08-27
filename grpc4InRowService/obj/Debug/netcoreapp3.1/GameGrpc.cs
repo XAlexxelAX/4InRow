@@ -18,6 +18,7 @@ namespace grpc4InRowService.Protos {
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.GameReply> __Marshaller_GameReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.GameReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.MoveRequest> __Marshaller_MoveRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.MoveRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.Reply> __Marshaller_Reply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.Reply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::grpc4InRowService.Protos.MoveCheck> __Marshaller_MoveCheck = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.MoveCheck.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::grpc4InRowService.Protos.Score> __Marshaller_Score = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::grpc4InRowService.Protos.Score.Parser.ParseFrom);
 
     static readonly grpc::Method<global::grpc4InRowService.Protos.Check, global::grpc4InRowService.Protos.CheckReply> __Method_CheckForGame = new grpc::Method<global::grpc4InRowService.Protos.Check, global::grpc4InRowService.Protos.CheckReply>(
@@ -41,11 +42,11 @@ namespace grpc4InRowService.Protos {
         __Marshaller_MoveRequest,
         __Marshaller_Reply);
 
-    static readonly grpc::Method<global::grpc4InRowService.Protos.Check, global::grpc4InRowService.Protos.Reply> __Method_CheckMove = new grpc::Method<global::grpc4InRowService.Protos.Check, global::grpc4InRowService.Protos.Reply>(
+    static readonly grpc::Method<global::grpc4InRowService.Protos.MoveCheck, global::grpc4InRowService.Protos.Reply> __Method_CheckMove = new grpc::Method<global::grpc4InRowService.Protos.MoveCheck, global::grpc4InRowService.Protos.Reply>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CheckMove",
-        __Marshaller_Check,
+        __Marshaller_MoveCheck,
         __Marshaller_Reply);
 
     static readonly grpc::Method<global::grpc4InRowService.Protos.Score, global::grpc4InRowService.Protos.Reply> __Method_UpdateScore = new grpc::Method<global::grpc4InRowService.Protos.Score, global::grpc4InRowService.Protos.Reply>(
@@ -104,7 +105,7 @@ namespace grpc4InRowService.Protos {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.Reply> CheckMove(global::grpc4InRowService.Protos.Check request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.Reply> CheckMove(global::grpc4InRowService.Protos.MoveCheck request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -279,7 +280,7 @@ namespace grpc4InRowService.Protos {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::grpc4InRowService.Protos.Reply CheckMove(global::grpc4InRowService.Protos.Check request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::grpc4InRowService.Protos.Reply CheckMove(global::grpc4InRowService.Protos.MoveCheck request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CheckMove(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -289,7 +290,7 @@ namespace grpc4InRowService.Protos {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::grpc4InRowService.Protos.Reply CheckMove(global::grpc4InRowService.Protos.Check request, grpc::CallOptions options)
+      public virtual global::grpc4InRowService.Protos.Reply CheckMove(global::grpc4InRowService.Protos.MoveCheck request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_CheckMove, null, options, request);
       }
@@ -301,7 +302,7 @@ namespace grpc4InRowService.Protos {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.Reply> CheckMoveAsync(global::grpc4InRowService.Protos.Check request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.Reply> CheckMoveAsync(global::grpc4InRowService.Protos.MoveCheck request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CheckMoveAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -311,7 +312,7 @@ namespace grpc4InRowService.Protos {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.Reply> CheckMoveAsync(global::grpc4InRowService.Protos.Check request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.Reply> CheckMoveAsync(global::grpc4InRowService.Protos.MoveCheck request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CheckMove, null, options, request);
       }
@@ -359,7 +360,7 @@ namespace grpc4InRowService.Protos {
       serviceBinder.AddMethod(__Method_CheckForGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.Check, global::grpc4InRowService.Protos.CheckReply>(serviceImpl.CheckForGame));
       serviceBinder.AddMethod(__Method_OfferGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.GameRequest, global::grpc4InRowService.Protos.GameReply>(serviceImpl.OfferGame));
       serviceBinder.AddMethod(__Method_MakeMove, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.MoveRequest, global::grpc4InRowService.Protos.Reply>(serviceImpl.MakeMove));
-      serviceBinder.AddMethod(__Method_CheckMove, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.Check, global::grpc4InRowService.Protos.Reply>(serviceImpl.CheckMove));
+      serviceBinder.AddMethod(__Method_CheckMove, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.MoveCheck, global::grpc4InRowService.Protos.Reply>(serviceImpl.CheckMove));
       serviceBinder.AddMethod(__Method_UpdateScore, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.Score, global::grpc4InRowService.Protos.Reply>(serviceImpl.UpdateScore));
     }
 
