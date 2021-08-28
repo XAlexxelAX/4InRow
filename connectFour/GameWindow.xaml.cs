@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Grpc.Net.Client;
+using grpc4InRowService.Protos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,16 +25,24 @@ namespace connectFour
     public partial class Game : Window
     {
         private int[,] board;
-        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score;
+        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2;
         private List<Image> imgs;
         private bool isMyTurn;
-        public Game()
+        private GrpcChannel channel;
+        private Games.GamesClient gameClient;
+        public Game(bool isMyTurn, int id1, int id2)
         {
             InitializeComponent();
-            initVars();
+            initVars(isMyTurn, id1, id2);
+
+            if (!isMyTurn)
+                new Thread(() =>
+                {
+                    makeOpponentsMove(getOpponentsMove()); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
+                }).Start();
         }
 
-        private void initVars()
+        private void initVars(bool isMyTurn, int id1, int id2)
         {
             board = new int[7, 6];
             for (int i = 0; i < board.GetLength(0); i++)
@@ -45,10 +55,14 @@ namespace connectFour
             p2_score = 0;
             turn = 0;
             imgs = new List<Image>();
-            isMyTurn = false;
+            this.isMyTurn = isMyTurn;
+            channel = GrpcChannel.ForAddress("https://localhost:5001");
+            gameClient = new Games.GamesClient(channel);
+            this.id1 = id1;
+            this.id2 = id2;
         }
 
-        private void OnPreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private async void OnPreviewMouseLeftButtonDownAsync(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (!isMyTurn || checkForWinnerOrTie() != 0) // if game over or it's not my turn than ignore the click
                 return;
@@ -76,12 +90,13 @@ namespace connectFour
                 col++;
             }
 
+            Reply call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col - 2, InitiatorID = id1, InitiatedID = id2 });
+
             int emptyCell_row = findEmptyRowCell(col - 2);
             if (emptyCell_row == -1)
                 return;
 
             updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
-            makeOpponentsMove(getOpponentsMove()); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
         }
 
         private void codeAfterAnimation()
@@ -164,11 +179,12 @@ namespace connectFour
             {
                 // animY.Completed -= onComplete;
                 codeAfterAnimation(); // check for winner + update score etc
+                                      //boardView.IsHitTestVisible = true; // enable mouse clicks again for next move
 
-                boardView.IsHitTestVisible = true; // enable mouse clicks again for next move
-                                                   // update turn title view
-                turnTitle.Text = turn == 1 ? "Yellow Player Turn" : "Red Player Turn";
+                turnTitle.Text = turn == 1 ? "Yellow Player Turn" : "Red Player Turn";  // update turn title view
                 turnTitle.Foreground = turn == 1 ? new SolidColorBrush(Colors.Yellow) : new SolidColorBrush(Colors.Red);
+
+                makeOpponentsMove(getOpponentsMove()); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
             };
             animY.Completed += onComplete;
             trans.BeginAnimation(TranslateTransform.YProperty, animY);
@@ -369,20 +385,22 @@ namespace connectFour
             imgs.Clear();
         }
 
-        private int getOpponentsMove()
+        private async Task<int> getOpponentsMove()
         {
-            //TODO: listen to server and  wait for opponent's move
-            //return it's move (chosen col to place ball)
-            return -1;
+            Reply call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
+            while (!call.Answer || call.Move.Id == LoginPage.myID)
+                Thread.Sleep(1000);
+
+            return call.Move.Move_;
         }
 
-        private void makeOpponentsMove(int col)
+        private void makeOpponentsMove(Task<int> col)
         {
-            int emptyCell_row = findEmptyRowCell(col - 2);
+            int emptyCell_row = findEmptyRowCell(col.Result - 2);
             if (emptyCell_row == -1)
                 return;
 
-            updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
+            updateBoard(emptyCell_row, col.Result - 2); // update 2D board + make animation of sliding ball
         }
 
         private bool anotherRoundAnswer(String msg)

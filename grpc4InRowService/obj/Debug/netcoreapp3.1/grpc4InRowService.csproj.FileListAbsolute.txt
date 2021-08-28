@@ -215,5 +215,4 @@ C:\Users\USER\Desktop\4InRow\grpc4InRowService\bin\Debug\netcoreapp3.1\EFDB.dll
 C:\Users\USER\Desktop\4InRow\grpc4InRowService\bin\Debug\netcoreapp3.1\EFDB.pdb
 C:\Users\shaha\Desktop\4InRow\grpc4InRowService\bin\Debug\netcoreapp3.1\AutoClosingMessageBox.dll
 C:\Users\Alex\source\repos\4InRow\grpc4InRowService\bin\Debug\netcoreapp3.1\AutoClosingMessageBox.dll
-C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.csproj.AssemblyReference.cache
-C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shaha\Desktop\4InRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.csprojAssemblyReference.cache

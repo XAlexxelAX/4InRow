@@ -21,6 +21,7 @@ namespace connectFour
         private Timer timerResponse;
         private int timerCount;
         private System.Threading.Thread msgBoxThread;
+        private bool isFree;
         public OnlineUsersList()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace connectFour
             gameClient = new Games.GamesClient(channel);
 
             timerCount = 0;
+            isFree = true;
 
             fillListAsync();
             InitTimer();
@@ -54,20 +56,23 @@ namespace connectFour
         {
             fillListAsync();
 
-            //if(isFree)
+            if (!isFree)
+                return;
             CheckReply cr = await gameClient.CheckForGameAsync(new Check
             {
-                Id1 = LoginPage.myID
+                MyId = LoginPage.myID
             });
 
             if (cr.Answer) // if there exist a request for game
             {
+                isFree = false;
                 var result = AutoClosingMessageBox.Show(
                     caption: LoginPage.myUsername + "- New Request Incoming!",
                     text: "Do you want to play?\nYou have 10 seconds to answer...",
                     timeout: 9000,
                     buttons: MessageBoxButtons.YesNo,
                     defaultResult: new DialogResult());
+
                 GameRequest gr = new GameRequest
                 {
                     MyId = cr.Offeringid,
@@ -76,12 +81,11 @@ namespace connectFour
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     gr.Answer = AnswerCode.Accepted;
-                    new Game().Show();
+                    new Game(false, LoginPage.myID, cr.Offeringid).Show();
                 }
                 else
-                {
                     gr.Answer = AnswerCode.Rejected;
-                }
+
                 await gameClient.OfferGameAsync(gr);
             }
         }
@@ -92,12 +96,12 @@ namespace connectFour
             if (timerCount == 10)
             {
                 timerResponse.Stop();
-                msgBoxThread.Abort();
+                // msgBoxThread.Suspend();
                 timerCount = 0;
                 System.Windows.MessageBox.Show("Your opponent didn't responed to your game request.");
             }
 
-            CheckReply cr = await gameClient.CheckForGameAsync(new Check { Id1 = (int)lbi.DataContext });
+            CheckReply cr = await gameClient.CheckForGameAsync(new Check { OpponentID = (int)lbi.DataContext });
             if (cr.Answer)
             {
                 if (cr.Status == AnswerCode.Unanswered)
@@ -105,14 +109,14 @@ namespace connectFour
                 else if (cr.Status == AnswerCode.Accepted)
                 {
                     timerResponse.Stop();
-                    msgBoxThread.Abort();
+                    //    msgBoxThread.Abort();
                     timerCount = 0;
-                    new Game().Show();
+                    new Game(true, (int)lbi.DataContext, LoginPage.myID).Show();
                 }
                 else
                 {
                     timerResponse.Stop();
-                    msgBoxThread.Abort();
+                    // msgBoxThread.Abort();
                     timerCount = 0;
                     System.Windows.MessageBox.Show("Your opponent denied the game request.");
                 }

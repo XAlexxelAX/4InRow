@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="680"
         Background="DarkGray" Icon="Resources\icon.ico">
-    <Grid x:Name="boardView" PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown">
+    <Grid x:Name="boardView" PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDownAsync">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="220"/>

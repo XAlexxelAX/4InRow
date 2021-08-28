@@ -25,33 +25,36 @@ namespace grpc4InRowService.Protos {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChFQcm90b3MvZ2FtZS5wcm90byIOCgxFbXB0eU1lc3NhZ2UiKAoKT2ZmZXJS",
-            "ZXBseRIKCgJpZBgBIAEoBRIOCgZhbnN3ZXIYAiABKAgiIQoFQ2hlY2sSCwoD",
-            "aWQxGAEgASgFEgsKA2lkMhgCIAEoBSIsCgVSZXBseRIOCgZhbnN3ZXIYASAB",
-            "KAgSEwoEbW92ZRgCIAEoCzIFLk1vdmUiTQoKQ2hlY2tSZXBseRIOCgZhbnN3",
-            "ZXIYASABKAgSEgoKb2ZmZXJpbmdpZBgCIAEoBRIbCgZzdGF0dXMYAyABKA4y",
-            "Cy5BbnN3ZXJDb2RlIkwKC0dhbWVSZXF1ZXN0EgwKBG15SWQYASABKAUSEgoK",
-            "b3Bwb25lbnRJRBgCIAEoBRIbCgZhbnN3ZXIYAyABKA4yCy5BbnN3ZXJDb2Rl",
-            "IhsKCUdhbWVSZXBseRIOCgZhbnN3ZXIYASABKAgiPQoLTW92ZVJlcXVlc3QS",
-            "DAoEbXlJZBgBIAEoBRISCgpvcHBvbmVudElEGAIgASgFEgwKBG1vdmUYAyAB",
-            "KAUiLwoFU2NvcmUSCgoCaWQYASABKAUSDQoFc2NvcmUYAiABKAUSCwoDd29u",
-            "GAMgASgIIiAKBE1vdmUSCgoCaWQYASABKAUSDAoEbW92ZRgCIAEoBSo4CgpB",
-            "bnN3ZXJDb2RlEg4KClVuYW5zd2VyZWQQABIMCghBY2NlcHRlZBABEgwKCFJl",
-            "amVjdGVkEAIysQEKBUdhbWVzEiMKDENoZWNrRm9yR2FtZRIGLkNoZWNrGgsu",
-            "Q2hlY2tSZXBseRIlCglPZmZlckdhbWUSDC5HYW1lUmVxdWVzdBoKLkdhbWVS",
-            "ZXBseRIgCghNYWtlTW92ZRIMLk1vdmVSZXF1ZXN0GgYuUmVwbHkSGwoJQ2hl",
-            "Y2tNb3ZlEgYuQ2hlY2saBi5SZXBseRIdCgtVcGRhdGVTY29yZRIGLlNjb3Jl",
-            "GgYuUmVwbHlCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
+            "ZXBseRIKCgJpZBgBIAEoBRIOCgZhbnN3ZXIYAiABKAgiKQoFQ2hlY2sSDAoE",
+            "bXlJZBgBIAEoBRISCgpvcHBvbmVudElEGAIgASgFIjUKCU1vdmVDaGVjaxIT",
+            "Cgtpbml0aWF0b3JJRBgBIAEoBRITCgtpbml0aWF0ZWRJRBgCIAEoBSIsCgVS",
+            "ZXBseRIOCgZhbnN3ZXIYASABKAgSEwoEbW92ZRgCIAEoCzIFLk1vdmUiTQoK",
+            "Q2hlY2tSZXBseRIOCgZhbnN3ZXIYASABKAgSEgoKb2ZmZXJpbmdpZBgCIAEo",
+            "BRIbCgZzdGF0dXMYAyABKA4yCy5BbnN3ZXJDb2RlIkwKC0dhbWVSZXF1ZXN0",
+            "EgwKBG15SWQYASABKAUSEgoKb3Bwb25lbnRJRBgCIAEoBRIbCgZhbnN3ZXIY",
+            "AyABKA4yCy5BbnN3ZXJDb2RlIhsKCUdhbWVSZXBseRIOCgZhbnN3ZXIYASAB",
+            "KAgiRQoLTW92ZVJlcXVlc3QSEwoLaW5pdGlhdG9ySUQYASABKAUSEwoLaW5p",
+            "dGlhdGVkSUQYAiABKAUSDAoEbW92ZRgDIAEoBSIvCgVTY29yZRIKCgJpZBgB",
+            "IAEoBRINCgVzY29yZRgCIAEoBRILCgN3b24YAyABKAgiIAoETW92ZRIKCgJp",
+            "ZBgBIAEoBRIMCgRtb3ZlGAIgASgFKjgKCkFuc3dlckNvZGUSDgoKVW5hbnN3",
+            "ZXJlZBAAEgwKCEFjY2VwdGVkEAESDAoIUmVqZWN0ZWQQAjK1AQoFR2FtZXMS",
+            "IwoMQ2hlY2tGb3JHYW1lEgYuQ2hlY2saCy5DaGVja1JlcGx5EiUKCU9mZmVy",
+            "R2FtZRIMLkdhbWVSZXF1ZXN0GgouR2FtZVJlcGx5EiAKCE1ha2VNb3ZlEgwu",
+            "TW92ZVJlcXVlc3QaBi5SZXBseRIfCglDaGVja01vdmUSCi5Nb3ZlQ2hlY2sa",
+            "Bi5SZXBseRIdCgtVcGRhdGVTY29yZRIGLlNjb3JlGgYuUmVwbHlCG6oCGGdy",
+            "cGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::grpc4InRowService.Protos.AnswerCode), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.EmptyMessage), global::grpc4InRowService.Protos.EmptyMessage.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.OfferReply), global::grpc4InRowService.Protos.OfferReply.Parser, new[]{ "Id", "Answer" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Check), global::grpc4InRowService.Protos.Check.Parser, new[]{ "Id1", "Id2" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Check), global::grpc4InRowService.Protos.Check.Parser, new[]{ "MyId", "OpponentID" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.MoveCheck), global::grpc4InRowService.Protos.MoveCheck.Parser, new[]{ "InitiatorID", "InitiatedID" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Reply), global::grpc4InRowService.Protos.Reply.Parser, new[]{ "Answer", "Move" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.CheckReply), global::grpc4InRowService.Protos.CheckReply.Parser, new[]{ "Answer", "Offeringid", "Status" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameRequest), global::grpc4InRowService.Protos.GameRequest.Parser, new[]{ "MyId", "OpponentID", "Answer" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameReply), global::grpc4InRowService.Protos.GameReply.Parser, new[]{ "Answer" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.MoveRequest), global::grpc4InRowService.Protos.MoveRequest.Parser, new[]{ "MyId", "OpponentID", "Move" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.MoveRequest), global::grpc4InRowService.Protos.MoveRequest.Parser, new[]{ "InitiatorID", "InitiatedID", "Move" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Score), global::grpc4InRowService.Protos.Score.Parser, new[]{ "Id", "Score_", "Won" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Move), global::grpc4InRowService.Protos.Move.Parser, new[]{ "Id", "Move_" }, null, null, null, null)
           }));
@@ -442,8 +445,8 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Check(Check other) : this() {
-      id1_ = other.id1_;
-      id2_ = other.id2_;
+      myId_ = other.myId_;
+      opponentID_ = other.opponentID_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -452,25 +455,25 @@ namespace grpc4InRowService.Protos {
       return new Check(this);
     }
 
-    /// <summary>Field number for the "id1" field.</summary>
-    public const int Id1FieldNumber = 1;
-    private int id1_;
+    /// <summary>Field number for the "myId" field.</summary>
+    public const int MyIdFieldNumber = 1;
+    private int myId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id1 {
-      get { return id1_; }
+    public int MyId {
+      get { return myId_; }
       set {
-        id1_ = value;
+        myId_ = value;
       }
     }
 
-    /// <summary>Field number for the "id2" field.</summary>
-    public const int Id2FieldNumber = 2;
-    private int id2_;
+    /// <summary>Field number for the "opponentID" field.</summary>
+    public const int OpponentIDFieldNumber = 2;
+    private int opponentID_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id2 {
-      get { return id2_; }
+    public int OpponentID {
+      get { return opponentID_; }
       set {
-        id2_ = value;
+        opponentID_ = value;
       }
     }
 
@@ -487,16 +490,16 @@ namespace grpc4InRowService.Protos {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Id1 != other.Id1) return false;
-      if (Id2 != other.Id2) return false;
+      if (MyId != other.MyId) return false;
+      if (OpponentID != other.OpponentID) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Id1 != 0) hash ^= Id1.GetHashCode();
-      if (Id2 != 0) hash ^= Id2.GetHashCode();
+      if (MyId != 0) hash ^= MyId.GetHashCode();
+      if (OpponentID != 0) hash ^= OpponentID.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -513,13 +516,13 @@ namespace grpc4InRowService.Protos {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Id1 != 0) {
+      if (MyId != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(Id1);
+        output.WriteInt32(MyId);
       }
-      if (Id2 != 0) {
+      if (OpponentID != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(Id2);
+        output.WriteInt32(OpponentID);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -530,13 +533,13 @@ namespace grpc4InRowService.Protos {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Id1 != 0) {
+      if (MyId != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(Id1);
+        output.WriteInt32(MyId);
       }
-      if (Id2 != 0) {
+      if (OpponentID != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(Id2);
+        output.WriteInt32(OpponentID);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -547,11 +550,11 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Id1 != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id1);
+      if (MyId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MyId);
       }
-      if (Id2 != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id2);
+      if (OpponentID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(OpponentID);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -564,11 +567,11 @@ namespace grpc4InRowService.Protos {
       if (other == null) {
         return;
       }
-      if (other.Id1 != 0) {
-        Id1 = other.Id1;
+      if (other.MyId != 0) {
+        MyId = other.MyId;
       }
-      if (other.Id2 != 0) {
-        Id2 = other.Id2;
+      if (other.OpponentID != 0) {
+        OpponentID = other.OpponentID;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -585,11 +588,11 @@ namespace grpc4InRowService.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Id1 = input.ReadInt32();
+            MyId = input.ReadInt32();
             break;
           }
           case 16: {
-            Id2 = input.ReadInt32();
+            OpponentID = input.ReadInt32();
             break;
           }
         }
@@ -607,11 +610,219 @@ namespace grpc4InRowService.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            Id1 = input.ReadInt32();
+            MyId = input.ReadInt32();
             break;
           }
           case 16: {
-            Id2 = input.ReadInt32();
+            OpponentID = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class MoveCheck : pb::IMessage<MoveCheck>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<MoveCheck> _parser = new pb::MessageParser<MoveCheck>(() => new MoveCheck());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MoveCheck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveCheck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveCheck(MoveCheck other) : this() {
+      initiatorID_ = other.initiatorID_;
+      initiatedID_ = other.initiatedID_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveCheck Clone() {
+      return new MoveCheck(this);
+    }
+
+    /// <summary>Field number for the "initiatorID" field.</summary>
+    public const int InitiatorIDFieldNumber = 1;
+    private int initiatorID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int InitiatorID {
+      get { return initiatorID_; }
+      set {
+        initiatorID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "initiatedID" field.</summary>
+    public const int InitiatedIDFieldNumber = 2;
+    private int initiatedID_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int InitiatedID {
+      get { return initiatedID_; }
+      set {
+        initiatedID_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MoveCheck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MoveCheck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (InitiatorID != other.InitiatorID) return false;
+      if (InitiatedID != other.InitiatedID) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (InitiatorID != 0) hash ^= InitiatorID.GetHashCode();
+      if (InitiatedID != 0) hash ^= InitiatedID.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (InitiatorID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(InitiatorID);
+      }
+      if (InitiatedID != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(InitiatedID);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (InitiatorID != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(InitiatorID);
+      }
+      if (InitiatedID != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(InitiatedID);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (InitiatorID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(InitiatorID);
+      }
+      if (InitiatedID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(InitiatedID);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MoveCheck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.InitiatorID != 0) {
+        InitiatorID = other.InitiatorID;
+      }
+      if (other.InitiatedID != 0) {
+        InitiatedID = other.InitiatedID;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            InitiatorID = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            InitiatedID = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            InitiatorID = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            InitiatedID = input.ReadInt32();
             break;
           }
         }
@@ -633,7 +844,7 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[3]; }
+      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -850,7 +1061,7 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[4]; }
+      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1094,7 +1305,7 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[5]; }
+      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1338,7 +1549,7 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[6]; }
+      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1510,7 +1721,7 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[7]; }
+      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1527,8 +1738,8 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MoveRequest(MoveRequest other) : this() {
-      myId_ = other.myId_;
-      opponentID_ = other.opponentID_;
+      initiatorID_ = other.initiatorID_;
+      initiatedID_ = other.initiatedID_;
       move_ = other.move_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1538,25 +1749,25 @@ namespace grpc4InRowService.Protos {
       return new MoveRequest(this);
     }
 
-    /// <summary>Field number for the "myId" field.</summary>
-    public const int MyIdFieldNumber = 1;
-    private int myId_;
+    /// <summary>Field number for the "initiatorID" field.</summary>
+    public const int InitiatorIDFieldNumber = 1;
+    private int initiatorID_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int MyId {
-      get { return myId_; }
+    public int InitiatorID {
+      get { return initiatorID_; }
       set {
-        myId_ = value;
+        initiatorID_ = value;
       }
     }
 
-    /// <summary>Field number for the "opponentID" field.</summary>
-    public const int OpponentIDFieldNumber = 2;
-    private int opponentID_;
+    /// <summary>Field number for the "initiatedID" field.</summary>
+    public const int InitiatedIDFieldNumber = 2;
+    private int initiatedID_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int OpponentID {
-      get { return opponentID_; }
+    public int InitiatedID {
+      get { return initiatedID_; }
       set {
-        opponentID_ = value;
+        initiatedID_ = value;
       }
     }
 
@@ -1584,8 +1795,8 @@ namespace grpc4InRowService.Protos {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (MyId != other.MyId) return false;
-      if (OpponentID != other.OpponentID) return false;
+      if (InitiatorID != other.InitiatorID) return false;
+      if (InitiatedID != other.InitiatedID) return false;
       if (Move != other.Move) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1593,8 +1804,8 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (MyId != 0) hash ^= MyId.GetHashCode();
-      if (OpponentID != 0) hash ^= OpponentID.GetHashCode();
+      if (InitiatorID != 0) hash ^= InitiatorID.GetHashCode();
+      if (InitiatedID != 0) hash ^= InitiatedID.GetHashCode();
       if (Move != 0) hash ^= Move.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1612,13 +1823,13 @@ namespace grpc4InRowService.Protos {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (MyId != 0) {
+      if (InitiatorID != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(MyId);
+        output.WriteInt32(InitiatorID);
       }
-      if (OpponentID != 0) {
+      if (InitiatedID != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(OpponentID);
+        output.WriteInt32(InitiatedID);
       }
       if (Move != 0) {
         output.WriteRawTag(24);
@@ -1633,13 +1844,13 @@ namespace grpc4InRowService.Protos {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (MyId != 0) {
+      if (InitiatorID != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(MyId);
+        output.WriteInt32(InitiatorID);
       }
-      if (OpponentID != 0) {
+      if (InitiatedID != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(OpponentID);
+        output.WriteInt32(InitiatedID);
       }
       if (Move != 0) {
         output.WriteRawTag(24);
@@ -1654,11 +1865,11 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (MyId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MyId);
+      if (InitiatorID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(InitiatorID);
       }
-      if (OpponentID != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(OpponentID);
+      if (InitiatedID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(InitiatedID);
       }
       if (Move != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Move);
@@ -1674,11 +1885,11 @@ namespace grpc4InRowService.Protos {
       if (other == null) {
         return;
       }
-      if (other.MyId != 0) {
-        MyId = other.MyId;
+      if (other.InitiatorID != 0) {
+        InitiatorID = other.InitiatorID;
       }
-      if (other.OpponentID != 0) {
-        OpponentID = other.OpponentID;
+      if (other.InitiatedID != 0) {
+        InitiatedID = other.InitiatedID;
       }
       if (other.Move != 0) {
         Move = other.Move;
@@ -1698,11 +1909,11 @@ namespace grpc4InRowService.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            MyId = input.ReadInt32();
+            InitiatorID = input.ReadInt32();
             break;
           }
           case 16: {
-            OpponentID = input.ReadInt32();
+            InitiatedID = input.ReadInt32();
             break;
           }
           case 24: {
@@ -1724,11 +1935,11 @@ namespace grpc4InRowService.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 8: {
-            MyId = input.ReadInt32();
+            InitiatorID = input.ReadInt32();
             break;
           }
           case 16: {
-            OpponentID = input.ReadInt32();
+            InitiatedID = input.ReadInt32();
             break;
           }
           case 24: {
@@ -1754,7 +1965,7 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[8]; }
+      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1998,7 +2209,7 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[9]; }
+      get { return global::grpc4InRowService.Protos.GameReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
