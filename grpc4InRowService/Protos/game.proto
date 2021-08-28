@@ -63,6 +63,7 @@ message Score{
 message Move{
 	int32 id = 1;
 	int32 move = 2;
+	int32 index = 3;
 }
 
 enum AnswerCode{

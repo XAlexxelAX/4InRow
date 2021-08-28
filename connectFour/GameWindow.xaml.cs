@@ -25,21 +25,29 @@ namespace connectFour
     public partial class Game : Window
     {
         private int[,] board;
-        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2;
+        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex;
         private List<Image> imgs;
-        private bool isMyTurn;
+        private bool isMyTurn, hasAnimationFinished;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
+
         public Game(bool isMyTurn, int id1, int id2)
         {
             InitializeComponent();
             initVars(isMyTurn, id1, id2);
 
-            if (!isMyTurn)
-                new Thread(() =>
-                {
-                    makeOpponentsMove(getOpponentsMove()); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
-                }).Start();
+            /* if (!isMyTurn)
+             {
+                 /*  Application.Current.Dispatcher.Invoke((Action)delegate {
+                       makeOpponentsMove(getOpponentsMove());
+                   });*/
+            /* Thread t = new Thread(() =>
+                 {
+                     makeOpponentsMove(getOpponentsMove()); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
+                 });
+             t.SetApartmentState(ApartmentState.STA);
+             t.Start();
+         }*/
         }
 
         private void initVars(bool isMyTurn, int id1, int id2)
@@ -60,13 +68,21 @@ namespace connectFour
             gameClient = new Games.GamesClient(channel);
             this.id1 = id1;
             this.id2 = id2;
+            lastIndex = -1;
+            hasAnimationFinished = true;
         }
+
 
         private async void OnPreviewMouseLeftButtonDownAsync(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (!hasAnimationFinished)
+                return;
+            if (!isMyTurn)
+                makeOpponentsMove(/*getOpponentsMove()*/);
             if (!isMyTurn || checkForWinnerOrTie() != 0) // if game over or it's not my turn than ignore the click
                 return;
-
+            //boardView.IsHitTestVisible = false;
+            hasAnimationFinished = false;
             var point = Mouse.GetPosition(boardView); // mouse ptr cordiante at click event time
 
             int row = 0, col = 0;
@@ -90,13 +106,16 @@ namespace connectFour
                 col++;
             }
 
-            Reply call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col - 2, InitiatorID = id1, InitiatedID = id2 });
+            Reply call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col, InitiatorID = id1, InitiatedID = id2 });
 
             int emptyCell_row = findEmptyRowCell(col - 2);
             if (emptyCell_row == -1)
+            {
+                boardView.IsHitTestVisible = false;
                 return;
-
+            }
             updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
+            //boardView.IsHitTestVisible = false;
         }
 
         private void codeAfterAnimation()
@@ -134,7 +153,6 @@ namespace connectFour
 
         private void makeAnimation(int emptyCell_row, int col)
         {
-            boardView.IsHitTestVisible = false; // disable mouse clicks again until full move and animation is over
             Image img = new Image { Width = 70, Height = 70 }, img2;
             BitmapImage bitmapImage;
             String path = Environment.CurrentDirectory.Split("connectFour")[0] + "connectFour\\Resources\\"; // current project dir.
@@ -180,11 +198,12 @@ namespace connectFour
                 // animY.Completed -= onComplete;
                 codeAfterAnimation(); // check for winner + update score etc
                                       //boardView.IsHitTestVisible = true; // enable mouse clicks again for next move
-
+                hasAnimationFinished = true;
                 turnTitle.Text = turn == 1 ? "Yellow Player Turn" : "Red Player Turn";  // update turn title view
                 turnTitle.Foreground = turn == 1 ? new SolidColorBrush(Colors.Yellow) : new SolidColorBrush(Colors.Red);
-
-                makeOpponentsMove(getOpponentsMove()); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
+                //if(!isMyTurn)
+                makeOpponentsMove(); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
+                //boardView.IsHitTestVisible = true;
             };
             animY.Completed += onComplete;
             trans.BeginAnimation(TranslateTransform.YProperty, animY);
@@ -385,22 +404,21 @@ namespace connectFour
             imgs.Clear();
         }
 
-        private async Task<int> getOpponentsMove()
+        private async void makeOpponentsMove()
         {
-            Reply call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
-            while (!call.Answer || call.Move.Id == LoginPage.myID)
-                Thread.Sleep(1000);
-
-            return call.Move.Move_;
-        }
-
-        private void makeOpponentsMove(Task<int> col)
-        {
-            int emptyCell_row = findEmptyRowCell(col.Result - 2);
+            Reply call;
+            while (true)
+            {
+                call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
+                if (call.Answer && call.Move.Id != LoginPage.myID && lastIndex != call.Move.Index)
+                    break;
+                //else Thread.Sleep(1000);
+            }
+            lastIndex = call.Move.Index;
+            int emptyCell_row = findEmptyRowCell(call.Move.Move_ - 2);
             if (emptyCell_row == -1)
                 return;
-
-            updateBoard(emptyCell_row, col.Result - 2); // update 2D board + make animation of sliding ball
+            updateBoard(emptyCell_row, call.Move.Move_ - 2); // update 2D board + make animation of sliding ball
         }
 
         private bool anotherRoundAnswer(String msg)

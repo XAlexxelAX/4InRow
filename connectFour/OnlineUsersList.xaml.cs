@@ -98,7 +98,7 @@ namespace connectFour
                 timerResponse.Stop();
                 // msgBoxThread.Suspend();
                 timerCount = 0;
-                System.Windows.MessageBox.Show("Your opponent didn't responed to your game request.");
+                //System.Windows.MessageBox.Show("Your opponent didn't responed to your game request.");
             }
 
             CheckReply cr = await gameClient.CheckForGameAsync(new Check { OpponentID = (int)lbi.DataContext });

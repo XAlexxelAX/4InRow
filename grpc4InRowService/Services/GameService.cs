@@ -69,8 +69,9 @@ namespace grpc4InRowService.Services
                         Answer = true,
                         Move = new Move
                         {
-                            Id = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2[-1].Item1,
-                            Move_ = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2[-1].Item2
+                            Id = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Last().Item1,
+                            Move_ = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Last().Item2,
+                            Index = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Count - 1
                         }
                     });
                 }
@@ -91,7 +92,9 @@ namespace grpc4InRowService.Services
             }
             try
             {
-                if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2[-1].Item1 == request.InitiatedID)
+                if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Count == 0)
+                    Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Add((request.InitiatedID, request.Move));
+                else if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Last().Item1 == request.InitiatedID)
                     Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Add((request.InitiatorID, request.Move));
                 else
                     Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Add((request.InitiatedID, request.Move));
