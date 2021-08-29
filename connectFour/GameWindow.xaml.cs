@@ -2,6 +2,7 @@
 using grpc4InRowService.Protos;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -357,16 +358,17 @@ namespace connectFour
                 msg = "Yellow Player Has Won! ☺\nWould you like to have another round?";
             else msg = "It's a Tie! ☻\nWould you like to have another round?";
 
+            //TODO: Update server with game stats (game turned to finished, player points, etc..
+
             new Thread(() =>
             {// new thread in order for the game to freeze until the answer is given (another round/exit)               
                 if (anotherRoundAnswer(msg) && anotherRoundOpponentsAnswer()) // play another round iff 2 players agreed
                     this.Dispatcher.Invoke(() => // in order to change the UI with another thread
-                    {
+                    {                        
                         resetBoard(); // reset board to start another round
                     });
-                else // if the answer was to quit the game - then exit the game and update server with game stats
+                else // if the answer was to quit the game
                 {
-                    //TODO: Update server with game stats (game turned to finished, player points, etc..
 
                     this.Close(); // close the game window
                 }
@@ -439,6 +441,12 @@ namespace connectFour
             // if and only if both users accepted another round - another round will be initialized with server implemtations
 
             return false; // return true iff the opponenet accepted another round, else return false
+        }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            //TODO: sign out of the current user and update online users list in the server
+            //send a msg to to the other opponent of it's disconnection
         }
     }
 }

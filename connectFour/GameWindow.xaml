@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="680"
-        Background="DarkGray" Icon="Resources\icon.ico">
+        Background="DarkGray" Icon="Resources\icon.ico"
+        x:Name="viewModel" Closing="OnWindowClosing">
     <Grid x:Name="boardView" PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDownAsync">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

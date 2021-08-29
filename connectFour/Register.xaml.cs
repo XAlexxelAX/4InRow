@@ -39,13 +39,13 @@ namespace connectFour
             else
             {
                 var response = await userClient.RegisterAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
+
                 if (!response.IsSuccessfull)
                 {
                     MessageBox.Show("Couldn't Register :(");
                     return;
                 }
-                // TODO: ADD USER TO DB
-
+                
                 this.Close();
             }
         }
@@ -64,7 +64,7 @@ namespace connectFour
                 {
                     sb.Append(hashBytes[i].ToString("X2"));
                 }
-                return sb.ToString();
+                return sb.ToString(); // return the MD5 encryption as string
             }
         }
     }

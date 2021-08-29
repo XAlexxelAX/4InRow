@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -170,6 +171,12 @@ namespace connectFour
         private void dataSearch(object sender, RoutedEventArgs e)
         {
             new DataSearch().Show();
+        }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            //TODO: sign out of the current user and update online users list in the server
+            //send a msg to to the other opponent of it's disconnection
         }
     }
 }

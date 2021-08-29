@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
         Title="OnlineUsersList" Height="450" Width="400"
-        Background="Azure">
+        Background="Azure"
+        Closing="OnWindowClosing">
     <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="*"/>
