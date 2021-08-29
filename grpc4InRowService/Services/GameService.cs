@@ -110,17 +110,38 @@ namespace grpc4InRowService.Services
         {
             using (var db = new UsersContext())
             {
-                UserModel userEntity = db.users.Single(user => user.Id == request.Id);
+                UserModel userEntity = db.users.Single(user => user.Id == request.Key1);
                 if (userEntity != null)
                 {
-                    userEntity.Score += request.Score_;
+                    userEntity.Score += request.Score1;
                     userEntity.GamesPlayed++;
-                    if (request.Won)
+                    if (request.Won == 1)
                         userEntity.GamesWon++;
+                }
+                userEntity = db.users.Single(user => user.Id == request.Key2);
+                if (userEntity != null)
+                {
+                    userEntity.Score += request.Score2;
+                    userEntity.GamesPlayed++;
+                    if (request.Won == 2)
+                        userEntity.GamesWon++;
+                }
+                if (Program.ongoingGames.ContainsKey((request.Key1, request.Key2)))
+                {
+                    db.games.Add(new Game
+                    {
+                        FinishTime = Program.ongoingGames[(request.Key1, request.Key2)].Item1,
+                        Player1 = request.Key1,
+                        Player2 = request.Key2,
+                        Player1Score = request.Score1,
+                        Player2Score = request.Score2,
+                        WinnerId = request.Won
+                    });
+                    Program.ongoingGames.Remove((request.Key1, request.Key2));
                 }
                 db.SaveChanges();
             }
-            return base.UpdateScore(request, context);
+            return Task.FromResult(new Reply { Answer = true });
         }
     }
 }

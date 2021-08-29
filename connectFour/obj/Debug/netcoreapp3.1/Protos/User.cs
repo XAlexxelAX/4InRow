@@ -24,18 +24,21 @@ namespace grpc4InRowService.Protos {
     static UserReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFQcm90b3MvdXNlci5wcm90byIYCgpHZW5lcmFsUmVxEgoKAmlkGAEgASgF",
-            "IigKCFVzZXJEYXRhEgoKAmlkGAEgASgFEhAKCHVzZXJuYW1lGAIgASgJIisK",
-            "C1VzZXJSZXF1ZXN0EhAKCHVzZXJuYW1lGAEgASgJEgoKAnB3GAIgASgJIjEK",
-            "DEdlbmVyYWxSZXBseRIVCg1pc1N1Y2Nlc3NmdWxsGAEgASgIEgoKAmlkGAIg",
-            "ASgFMoEBCgRVc2VyEioKDmdldE9ubGluZVVzZXJzEgsuR2VuZXJhbFJlcRoJ",
-            "LlVzZXJEYXRhMAESJAoFTG9naW4SDC5Vc2VyUmVxdWVzdBoNLkdlbmVyYWxS",
-            "ZXBseRInCghSZWdpc3RlchIMLlVzZXJSZXF1ZXN0Gg0uR2VuZXJhbFJlcGx5",
-            "QhuqAhhncnBjNEluUm93U2VydmljZS5Qcm90b3NiBnByb3RvMw=="));
+            "ChFQcm90b3MvdXNlci5wcm90byIqCgpHZW5lcmFsUmVxEgoKAmlkGAEgASgF",
+            "EhAKCHVzZXJuYW1lGAIgASgJIigKCFVzZXJEYXRhEgoKAmlkGAEgASgFEhAK",
+            "CHVzZXJuYW1lGAIgASgJIisKC1VzZXJSZXF1ZXN0EhAKCHVzZXJuYW1lGAEg",
+            "ASgJEgoKAnB3GAIgASgJIjEKDEdlbmVyYWxSZXBseRIVCg1pc1N1Y2Nlc3Nm",
+            "dWxsGAEgASgIEgoKAmlkGAIgASgFMtwBCgRVc2VyEioKDmdldE9ubGluZVVz",
+            "ZXJzEgsuR2VuZXJhbFJlcRoJLlVzZXJEYXRhMAESJAoFTG9naW4SDC5Vc2Vy",
+            "UmVxdWVzdBoNLkdlbmVyYWxSZXBseRInCghSZWdpc3RlchIMLlVzZXJSZXF1",
+            "ZXN0Gg0uR2VuZXJhbFJlcGx5Ei4KEFJlbW92ZUZyb21PbmxpbmUSCy5HZW5l",
+            "cmFsUmVxGg0uR2VuZXJhbFJlcGx5EikKC0FkZFRvT25saW5lEgsuR2VuZXJh",
+            "bFJlcRoNLkdlbmVyYWxSZXBseUIbqgIYZ3JwYzRJblJvd1NlcnZpY2UuUHJv",
+            "dG9zYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GeneralReq), global::grpc4InRowService.Protos.GeneralReq.Parser, new[]{ "Id" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GeneralReq), global::grpc4InRowService.Protos.GeneralReq.Parser, new[]{ "Id", "Username" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserData), global::grpc4InRowService.Protos.UserData.Parser, new[]{ "Id", "Username" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserRequest), global::grpc4InRowService.Protos.UserRequest.Parser, new[]{ "Username", "Pw" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GeneralReply), global::grpc4InRowService.Protos.GeneralReply.Parser, new[]{ "IsSuccessfull", "Id" }, null, null, null, null)
@@ -75,6 +78,7 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GeneralReq(GeneralReq other) : this() {
       id_ = other.id_;
+      username_ = other.username_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -94,6 +98,17 @@ namespace grpc4InRowService.Protos {
       }
     }
 
+    /// <summary>Field number for the "username" field.</summary>
+    public const int UsernameFieldNumber = 2;
+    private string username_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Username {
+      get { return username_; }
+      set {
+        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GeneralReq);
@@ -108,6 +123,7 @@ namespace grpc4InRowService.Protos {
         return true;
       }
       if (Id != other.Id) return false;
+      if (Username != other.Username) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -115,6 +131,7 @@ namespace grpc4InRowService.Protos {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
+      if (Username.Length != 0) hash ^= Username.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -135,6 +152,10 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
       }
+      if (Username.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Username);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -148,6 +169,10 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
       }
+      if (Username.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Username);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -159,6 +184,9 @@ namespace grpc4InRowService.Protos {
       int size = 0;
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (Username.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -173,6 +201,9 @@ namespace grpc4InRowService.Protos {
       }
       if (other.Id != 0) {
         Id = other.Id;
+      }
+      if (other.Username.Length != 0) {
+        Username = other.Username;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -192,6 +223,10 @@ namespace grpc4InRowService.Protos {
             Id = input.ReadInt32();
             break;
           }
+          case 18: {
+            Username = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -208,6 +243,10 @@ namespace grpc4InRowService.Protos {
             break;
           case 8: {
             Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Username = input.ReadString();
             break;
           }
         }

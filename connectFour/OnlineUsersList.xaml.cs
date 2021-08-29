@@ -57,7 +57,7 @@ namespace connectFour
         private async void timer_Tick(object sender, EventArgs e)
         {
             fillListAsync();
-                       
+
             CheckReply cr = await gameClient.CheckForGameAsync(new Check
             {
                 MyId = LoginPage.myID
@@ -80,6 +80,7 @@ namespace connectFour
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     gr.Answer = AnswerCode.Accepted;
+                    await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
                     new Game(false, LoginPage.myID, cr.Offeringid).Show();
                 }
                 else
@@ -90,7 +91,7 @@ namespace connectFour
         }
         private async void timer_Tick2(object sender, EventArgs e)
         { // check for answer/response of the game offer
-            if(timerCount==0)
+            if (timerCount == 0)
                 msgBoxWindow.Show();
 
             timerCount++;
@@ -98,7 +99,7 @@ namespace connectFour
             if (timerCount == 10)
             {
                 timerResponse.Stop();
-                msgBoxWindow.Close();              
+                msgBoxWindow.Close();
                 timerCount = 0;
                 System.Windows.MessageBox.Show("Your opponent didn't responed to your game request.");
                 return;
@@ -112,20 +113,21 @@ namespace connectFour
                 else if (cr.Status == AnswerCode.Accepted)
                 {
                     timerResponse.Stop();
-                    msgBoxWindow.Close();                 
+                    msgBoxWindow.Close();
                     timerCount = 0;
+                    await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
                     new Game(true, (int)lbi.DataContext, LoginPage.myID).Show();
                 }
                 else
                 {
                     timerResponse.Stop();
-                    msgBoxWindow.Close();                   
+                    msgBoxWindow.Close();
                     timerCount = 0;
                     System.Windows.MessageBox.Show("Your opponent denied the game request.");
                 }
             }
         }
-                
+
         private async Task fillListAsync()
         {
             using (var call = userClient.getOnlineUsers(new GeneralReq()))

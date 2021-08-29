@@ -3,13 +3,16 @@ syntax = "proto3";
 option csharp_namespace = "grpc4InRowService.Protos";
 
 service User {
-	rpc getOnlineUsers(GeneralReq) returns (stream UserData);// sends GeneralReq with user id, returns a stream of online users from Program.onlineUsers
+	rpc getOnlineUsers (GeneralReq) returns (stream UserData);// sends GeneralReq with user id, returns a stream of online users from Program.onlineUsers
 	rpc Login (UserRequest) returns (GeneralReply);// sends LoginRequest with username and pw, returns a GeneralReply with user id from db if successfull
 	rpc Register (UserRequest) returns (GeneralReply);// sends RegisterRequest with username and pw, returns a GeneralReply with user id from db if successfull
+	rpc RemoveFromOnline (GeneralReq) returns (GeneralReply);
+	rpc AddToOnline (GeneralReq) returns (GeneralReply);
 }
 
 message GeneralReq{
 	int32 id=1;
+	string username = 2;
 }
 
 message UserData{

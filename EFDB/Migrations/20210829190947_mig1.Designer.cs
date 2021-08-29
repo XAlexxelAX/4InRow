@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDB.Migrations
 {
     [DbContext(typeof(UsersContext))]
-    [Migration("20210824200944_mig1")]
+    [Migration("20210829190947_mig1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,11 +53,6 @@ namespace EFDB.Migrations
 
             modelBuilder.Entity("EFDB.Models.UserModel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(450)");
 
@@ -67,13 +62,18 @@ namespace EFDB.Migrations
                     b.Property<int>("GamesWon")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("PW")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.HasKey("Id", "Username");
+                    b.HasKey("Username");
 
                     b.ToTable("users");
                 });

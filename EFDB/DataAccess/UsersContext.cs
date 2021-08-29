@@ -18,8 +18,6 @@ namespace EFDB.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserModel>()
-                .HasKey(u => new { u.Id, u.Username });
-            modelBuilder.Entity<UserModel>()
                 .Property(u => u.Id)
                 .ValueGeneratedOnAdd();
         }

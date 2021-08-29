@@ -34,15 +34,16 @@ namespace grpc4InRowService.Protos {
             "EgwKBG15SWQYASABKAUSEgoKb3Bwb25lbnRJRBgCIAEoBRIbCgZhbnN3ZXIY",
             "AyABKA4yCy5BbnN3ZXJDb2RlIhsKCUdhbWVSZXBseRIOCgZhbnN3ZXIYASAB",
             "KAgiRQoLTW92ZVJlcXVlc3QSEwoLaW5pdGlhdG9ySUQYASABKAUSEwoLaW5p",
-            "dGlhdGVkSUQYAiABKAUSDAoEbW92ZRgDIAEoBSIvCgVTY29yZRIKCgJpZBgB",
-            "IAEoBRINCgVzY29yZRgCIAEoBRILCgN3b24YAyABKAgiLwoETW92ZRIKCgJp",
-            "ZBgBIAEoBRIMCgRtb3ZlGAIgASgFEg0KBWluZGV4GAMgASgFKjgKCkFuc3dl",
-            "ckNvZGUSDgoKVW5hbnN3ZXJlZBAAEgwKCEFjY2VwdGVkEAESDAoIUmVqZWN0",
-            "ZWQQAjK1AQoFR2FtZXMSIwoMQ2hlY2tGb3JHYW1lEgYuQ2hlY2saCy5DaGVj",
-            "a1JlcGx5EiUKCU9mZmVyR2FtZRIMLkdhbWVSZXF1ZXN0GgouR2FtZVJlcGx5",
-            "EiAKCE1ha2VNb3ZlEgwuTW92ZVJlcXVlc3QaBi5SZXBseRIfCglDaGVja01v",
-            "dmUSCi5Nb3ZlQ2hlY2saBi5SZXBseRIdCgtVcGRhdGVTY29yZRIGLlNjb3Jl",
-            "GgYuUmVwbHlCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
+            "dGlhdGVkSUQYAiABKAUSDAoEbW92ZRgDIAEoBSJQCgVTY29yZRIMCgRrZXkx",
+            "GAEgASgFEgwKBGtleTIYAiABKAUSDgoGc2NvcmUxGAMgASgFEg4KBnNjb3Jl",
+            "MhgEIAEoBRILCgN3b24YBSABKAUiLwoETW92ZRIKCgJpZBgBIAEoBRIMCgRt",
+            "b3ZlGAIgASgFEg0KBWluZGV4GAMgASgFKjgKCkFuc3dlckNvZGUSDgoKVW5h",
+            "bnN3ZXJlZBAAEgwKCEFjY2VwdGVkEAESDAoIUmVqZWN0ZWQQAjK1AQoFR2Ft",
+            "ZXMSIwoMQ2hlY2tGb3JHYW1lEgYuQ2hlY2saCy5DaGVja1JlcGx5EiUKCU9m",
+            "ZmVyR2FtZRIMLkdhbWVSZXF1ZXN0GgouR2FtZVJlcGx5EiAKCE1ha2VNb3Zl",
+            "EgwuTW92ZVJlcXVlc3QaBi5SZXBseRIfCglDaGVja01vdmUSCi5Nb3ZlQ2hl",
+            "Y2saBi5SZXBseRIdCgtVcGRhdGVTY29yZRIGLlNjb3JlGgYuUmVwbHlCG6oC",
+            "GGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::grpc4InRowService.Protos.AnswerCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -55,7 +56,7 @@ namespace grpc4InRowService.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameRequest), global::grpc4InRowService.Protos.GameRequest.Parser, new[]{ "MyId", "OpponentID", "Answer" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameReply), global::grpc4InRowService.Protos.GameReply.Parser, new[]{ "Answer" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.MoveRequest), global::grpc4InRowService.Protos.MoveRequest.Parser, new[]{ "InitiatorID", "InitiatedID", "Move" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Score), global::grpc4InRowService.Protos.Score.Parser, new[]{ "Id", "Score_", "Won" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Score), global::grpc4InRowService.Protos.Score.Parser, new[]{ "Key1", "Key2", "Score1", "Score2", "Won" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.Move), global::grpc4InRowService.Protos.Move.Parser, new[]{ "Id", "Move_", "Index" }, null, null, null, null)
           }));
     }
@@ -1516,8 +1517,10 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Score(Score other) : this() {
-      id_ = other.id_;
-      score_ = other.score_;
+      key1_ = other.key1_;
+      key2_ = other.key2_;
+      score1_ = other.score1_;
+      score2_ = other.score2_;
       won_ = other.won_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1527,33 +1530,55 @@ namespace grpc4InRowService.Protos {
       return new Score(this);
     }
 
-    /// <summary>Field number for the "id" field.</summary>
-    public const int IdFieldNumber = 1;
-    private int id_;
+    /// <summary>Field number for the "key1" field.</summary>
+    public const int Key1FieldNumber = 1;
+    private int key1_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id {
-      get { return id_; }
+    public int Key1 {
+      get { return key1_; }
       set {
-        id_ = value;
+        key1_ = value;
       }
     }
 
-    /// <summary>Field number for the "score" field.</summary>
-    public const int Score_FieldNumber = 2;
-    private int score_;
+    /// <summary>Field number for the "key2" field.</summary>
+    public const int Key2FieldNumber = 2;
+    private int key2_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Score_ {
-      get { return score_; }
+    public int Key2 {
+      get { return key2_; }
       set {
-        score_ = value;
+        key2_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "score1" field.</summary>
+    public const int Score1FieldNumber = 3;
+    private int score1_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Score1 {
+      get { return score1_; }
+      set {
+        score1_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "score2" field.</summary>
+    public const int Score2FieldNumber = 4;
+    private int score2_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Score2 {
+      get { return score2_; }
+      set {
+        score2_ = value;
       }
     }
 
     /// <summary>Field number for the "won" field.</summary>
-    public const int WonFieldNumber = 3;
-    private bool won_;
+    public const int WonFieldNumber = 5;
+    private int won_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Won {
+    public int Won {
       get { return won_; }
       set {
         won_ = value;
@@ -1573,8 +1598,10 @@ namespace grpc4InRowService.Protos {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Id != other.Id) return false;
-      if (Score_ != other.Score_) return false;
+      if (Key1 != other.Key1) return false;
+      if (Key2 != other.Key2) return false;
+      if (Score1 != other.Score1) return false;
+      if (Score2 != other.Score2) return false;
       if (Won != other.Won) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1582,9 +1609,11 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Id != 0) hash ^= Id.GetHashCode();
-      if (Score_ != 0) hash ^= Score_.GetHashCode();
-      if (Won != false) hash ^= Won.GetHashCode();
+      if (Key1 != 0) hash ^= Key1.GetHashCode();
+      if (Key2 != 0) hash ^= Key2.GetHashCode();
+      if (Score1 != 0) hash ^= Score1.GetHashCode();
+      if (Score2 != 0) hash ^= Score2.GetHashCode();
+      if (Won != 0) hash ^= Won.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1598,17 +1627,25 @@ namespace grpc4InRowService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Id != 0) {
+      if (Key1 != 0) {
         output.WriteRawTag(8);
-        output.WriteInt32(Id);
+        output.WriteInt32(Key1);
       }
-      if (Score_ != 0) {
+      if (Key2 != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(Score_);
+        output.WriteInt32(Key2);
       }
-      if (Won != false) {
+      if (Score1 != 0) {
         output.WriteRawTag(24);
-        output.WriteBool(Won);
+        output.WriteInt32(Score1);
+      }
+      if (Score2 != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Score2);
+      }
+      if (Won != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Won);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1618,14 +1655,20 @@ namespace grpc4InRowService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Id != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      if (Key1 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Key1);
       }
-      if (Score_ != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score_);
+      if (Key2 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Key2);
       }
-      if (Won != false) {
-        size += 1 + 1;
+      if (Score1 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score1);
+      }
+      if (Score2 != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score2);
+      }
+      if (Won != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Won);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1638,13 +1681,19 @@ namespace grpc4InRowService.Protos {
       if (other == null) {
         return;
       }
-      if (other.Id != 0) {
-        Id = other.Id;
+      if (other.Key1 != 0) {
+        Key1 = other.Key1;
       }
-      if (other.Score_ != 0) {
-        Score_ = other.Score_;
+      if (other.Key2 != 0) {
+        Key2 = other.Key2;
       }
-      if (other.Won != false) {
+      if (other.Score1 != 0) {
+        Score1 = other.Score1;
+      }
+      if (other.Score2 != 0) {
+        Score2 = other.Score2;
+      }
+      if (other.Won != 0) {
         Won = other.Won;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1659,15 +1708,23 @@ namespace grpc4InRowService.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Id = input.ReadInt32();
+            Key1 = input.ReadInt32();
             break;
           }
           case 16: {
-            Score_ = input.ReadInt32();
+            Key2 = input.ReadInt32();
             break;
           }
           case 24: {
-            Won = input.ReadBool();
+            Score1 = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Score2 = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            Won = input.ReadInt32();
             break;
           }
         }

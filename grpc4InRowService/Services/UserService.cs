@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace grpc4InRowService.Services
 {
-    public class UserService: User.UserBase
+    public class UserService : User.UserBase
     {
         //private Dictionary<Int32,String> userStreams = new Dictionary<int, String>();
         private readonly ILogger<UserService> _logger;
@@ -18,7 +18,7 @@ namespace grpc4InRowService.Services
             _logger = logger;
         }
 
-        
+
         public override Task<GeneralReply> Login(UserRequest request, ServerCallContext context)
         {
             try
@@ -28,16 +28,17 @@ namespace grpc4InRowService.Services
                     UserModel userEntity = db.users.Single(user => user.Username == request.Username);
                     if (userEntity != null && userEntity.PW == request.Pw)
                     {
-                        Program.onlineUsers.Add(userEntity.Id, userEntity.Username);
-                        return Task.FromResult(new GeneralReply { IsSuccessfull = true,Id = userEntity.Id });
+                        //Program.onlineUsers.Add(userEntity.Id, userEntity.Username);
+                        AddToOnline(new GeneralReq { Id = userEntity.Id, Username = userEntity.Username },context);
+                        return Task.FromResult(new GeneralReply { IsSuccessfull = true, Id = userEntity.Id });
                     }
                     return Task.FromResult(new GeneralReply { IsSuccessfull = false });
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                if(e.InnerException!=null)
+                if (e.InnerException != null)
                     Console.WriteLine(e.InnerException.Message);
                 return Task.FromResult(new GeneralReply { IsSuccessfull = false });
             }
@@ -75,6 +76,26 @@ namespace grpc4InRowService.Services
                     Username = u.Value
                 });
             }
+        }
+
+        public override Task<GeneralReply> AddToOnline(GeneralReq request, ServerCallContext context)
+        {
+            try
+            {
+                Program.onlineUsers.Add(request.Id, request.Username);
+                return Task.FromResult(new GeneralReply { IsSuccessfull = true });
+            }
+            catch { return Task.FromResult(new GeneralReply { IsSuccessfull = false }); }
+        }
+
+        public override Task<GeneralReply> RemoveFromOnline(GeneralReq request, ServerCallContext context)
+        {
+            try
+            {
+                Program.onlineUsers.Remove(request.Id);
+                return Task.FromResult(new GeneralReply { IsSuccessfull = true });
+            }
+            catch { return Task.FromResult(new GeneralReply { IsSuccessfull = false }); }
         }
     }
 }

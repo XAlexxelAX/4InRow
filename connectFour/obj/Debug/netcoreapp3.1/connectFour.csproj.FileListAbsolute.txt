@@ -164,14 +164,12 @@ C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\grpc4InRow
 C:\Users\Alex\source\repos\4InRow\connectFour\bin\Debug\netcoreapp3.1\EFDB.pdb
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csproj.AssemblyReference.cache
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\LoginPage.g.cs
-C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\OnlineUsersList.g.cs
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\Register.g.cs
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour_MarkupCompile.cache
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour_MarkupCompile.lref
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\LoginPage.baml
-C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\MainWindow.baml
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\OnlineUsersList.baml
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\Register.baml
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.g.resources
@@ -253,3 +251,7 @@ C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.cs
 C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.g.cs
 C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.baml
+C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\GameWindow.g.cs
+C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.g.cs
+C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\GameWindow.baml
+C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.baml

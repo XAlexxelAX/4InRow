@@ -29,9 +29,9 @@ namespace EFDB.Migrations
                 name: "users",
                 columns: table => new
                 {
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PW = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<int>(type: "int", nullable: false),
                     GamesPlayed = table.Column<int>(type: "int", nullable: false),
@@ -39,7 +39,7 @@ namespace EFDB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_users", x => new { x.Id, x.Username });
+                    table.PrimaryKey("PK_users", x => x.Username);
                 });
         }
 

@@ -55,9 +55,11 @@ message MoveRequest{
 }
 
 message Score{
-	int32 id = 1;
-	int32 score = 2;
-	bool won = 3;
+	int32 key1 = 1;
+	int32 key2 = 2;
+	int32 score1 = 3;
+	int32 score2 = 4;
+	int32 won = 5;
 }
 
 message Move{

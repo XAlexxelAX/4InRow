@@ -8,6 +8,7 @@ namespace EFDB.Models
     public class UserModel
     {
         public int Id { get; set; }
+        [Key]
         public string Username { get; set; }
         public string PW { get; set; }
         public int Score { get; set; }

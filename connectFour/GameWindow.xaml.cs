@@ -31,6 +31,7 @@ namespace connectFour
         private bool isMyTurn, hasAnimationFinished;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
+        private User.UserClient userClient;
         private Timer timer;
 
         public Game(bool isMyTurn, int id1, int id2)
@@ -68,6 +69,7 @@ namespace connectFour
             this.isMyTurn = isMyTurn;
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             gameClient = new Games.GamesClient(channel);
+            userClient = new User.UserClient(channel);
             this.id1 = id1;
             this.id2 = id2;
             lastIndex = -1;
@@ -166,7 +168,7 @@ namespace connectFour
                 p1Score.Text = "" + p1_score;
                 p2Score.Text = "" + p2_score;
 
-                winner_tie_msgBox(winnerOrTie);
+                winner_tie_msgBoxAsync(winnerOrTie);
             }
         }
 
@@ -219,7 +221,7 @@ namespace connectFour
                 hasAnimationFinished = true;
                 turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
                 turnTitle.Foreground = isMyTurn ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Yellow);
-                makeOpponentsMove(); 
+                makeOpponentsMove();
             };
             animY.Completed += onComplete;
             trans.BeginAnimation(TranslateTransform.YProperty, animY);
@@ -363,7 +365,7 @@ namespace connectFour
             }
         }
 
-        private void winner_tie_msgBox(int p)
+        private async void winner_tie_msgBoxAsync(int p)
         {
             String msg;
 
@@ -372,10 +374,12 @@ namespace connectFour
             else if (p == 2)
                 msg = "Yellow Player Has Won! ☺\nWould you like to have another round?";
             else msg = "It's a Tie! ☻\nWould you like to have another round?";
-
+            Reply r;
+            if (id1 == LoginPage.myID)
+                r = await gameClient.UpdateScoreAsync(new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p });//CHECK + need to add field Won = ??
             //TODO: Update server with game stats (game turned to finished, player points, etc..
 
-            new System.Threading.Thread(() =>
+            new System.Threading.Thread(async () =>
             {// new thread in order for the game to freeze until the answer is given (another round/exit)               
                 if (anotherRoundAnswer(msg) && anotherRoundOpponentsAnswer()) // play another round iff 2 players agreed
                     this.Dispatcher.Invoke(() => // in order to change the UI with another thread
@@ -384,7 +388,7 @@ namespace connectFour
                     });
                 else // if the answer was to quit the game
                 {
-
+                    await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
                     this.Close(); // close the game window
                 }
             }).Start();

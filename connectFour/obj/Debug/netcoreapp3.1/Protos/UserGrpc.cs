@@ -78,6 +78,22 @@ namespace grpc4InRowService.Protos {
         __Marshaller_UserRequest,
         __Marshaller_GeneralReply);
 
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.GeneralReply> __Method_RemoveFromOnline = new grpc::Method<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.GeneralReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "RemoveFromOnline",
+        __Marshaller_GeneralReq,
+        __Marshaller_GeneralReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.GeneralReply> __Method_AddToOnline = new grpc::Method<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.GeneralReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "AddToOnline",
+        __Marshaller_GeneralReq,
+        __Marshaller_GeneralReply);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -121,6 +137,18 @@ namespace grpc4InRowService.Protos {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.GeneralReply> Register(global::grpc4InRowService.Protos.UserRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.GeneralReply> RemoveFromOnline(global::grpc4InRowService.Protos.GeneralReq request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.GeneralReply> AddToOnline(global::grpc4InRowService.Protos.GeneralReq request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -274,6 +302,46 @@ namespace grpc4InRowService.Protos {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Register, null, options, request);
       }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::grpc4InRowService.Protos.GeneralReply RemoveFromOnline(global::grpc4InRowService.Protos.GeneralReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RemoveFromOnline(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::grpc4InRowService.Protos.GeneralReply RemoveFromOnline(global::grpc4InRowService.Protos.GeneralReq request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_RemoveFromOnline, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GeneralReply> RemoveFromOnlineAsync(global::grpc4InRowService.Protos.GeneralReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RemoveFromOnlineAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GeneralReply> RemoveFromOnlineAsync(global::grpc4InRowService.Protos.GeneralReq request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_RemoveFromOnline, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::grpc4InRowService.Protos.GeneralReply AddToOnline(global::grpc4InRowService.Protos.GeneralReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddToOnline(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::grpc4InRowService.Protos.GeneralReply AddToOnline(global::grpc4InRowService.Protos.GeneralReq request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_AddToOnline, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GeneralReply> AddToOnlineAsync(global::grpc4InRowService.Protos.GeneralReq request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddToOnlineAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GeneralReply> AddToOnlineAsync(global::grpc4InRowService.Protos.GeneralReq request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_AddToOnline, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override UserClient NewInstance(ClientBaseConfiguration configuration)
@@ -290,7 +358,9 @@ namespace grpc4InRowService.Protos {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_getOnlineUsers, serviceImpl.getOnlineUsers)
           .AddMethod(__Method_Login, serviceImpl.Login)
-          .AddMethod(__Method_Register, serviceImpl.Register).Build();
+          .AddMethod(__Method_Register, serviceImpl.Register)
+          .AddMethod(__Method_RemoveFromOnline, serviceImpl.RemoveFromOnline)
+          .AddMethod(__Method_AddToOnline, serviceImpl.AddToOnline).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -303,6 +373,8 @@ namespace grpc4InRowService.Protos {
       serviceBinder.AddMethod(__Method_getOnlineUsers, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.UserData>(serviceImpl.getOnlineUsers));
       serviceBinder.AddMethod(__Method_Login, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.UserRequest, global::grpc4InRowService.Protos.GeneralReply>(serviceImpl.Login));
       serviceBinder.AddMethod(__Method_Register, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.UserRequest, global::grpc4InRowService.Protos.GeneralReply>(serviceImpl.Register));
+      serviceBinder.AddMethod(__Method_RemoveFromOnline, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.GeneralReply>(serviceImpl.RemoveFromOnline));
+      serviceBinder.AddMethod(__Method_AddToOnline, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.GeneralReq, global::grpc4InRowService.Protos.GeneralReply>(serviceImpl.AddToOnline));
     }
 
   }
