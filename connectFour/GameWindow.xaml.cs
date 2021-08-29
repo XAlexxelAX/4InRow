@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -31,6 +31,7 @@ namespace connectFour
         private bool isMyTurn, hasAnimationFinished;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
+        private Timer timer;
 
         public Game(bool isMyTurn, int id1, int id2)
         {
@@ -71,15 +72,32 @@ namespace connectFour
             this.id2 = id2;
             lastIndex = -1;
             hasAnimationFinished = true;
+            turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
+            turnTitle.Foreground = isMyTurn ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Yellow);
+
+            if (!isMyTurn)
+            { // check for oponent's first move iff your are the not the initator of the game (= it's not your turn at the start)
+                hasAnimationFinished = false;
+                timer = new Timer();
+                timer.Tick += new EventHandler(timer_Tick);
+                timer.Interval = 200; // listen and update after 1/5 of a second (for the consturtor to finished)
+                timer.Start();
+            }
         }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            makeOpponentsMove();
+            timer.Stop();
+            timer.Dispose();
+            hasAnimationFinished = true;
+        }
 
         private async void OnPreviewMouseLeftButtonDownAsync(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (!hasAnimationFinished)
                 return;
-            if (!isMyTurn)
-                makeOpponentsMove(/*getOpponentsMove()*/);
+
             if (!isMyTurn || checkForWinnerOrTie() != 0) // if game over or it's not my turn than ignore the click
                 return;
             //boardView.IsHitTestVisible = false;
@@ -196,15 +214,12 @@ namespace connectFour
 
             EventHandler onComplete = (s, e) =>
             {
-                // animY.Completed -= onComplete;
                 codeAfterAnimation(); // check for winner + update score etc
                                       //boardView.IsHitTestVisible = true; // enable mouse clicks again for next move
                 hasAnimationFinished = true;
-                turnTitle.Text = turn == 1 ? "Yellow Player Turn" : "Red Player Turn";  // update turn title view
-                turnTitle.Foreground = turn == 1 ? new SolidColorBrush(Colors.Yellow) : new SolidColorBrush(Colors.Red);
-                //if(!isMyTurn)
-                makeOpponentsMove(); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
-                //boardView.IsHitTestVisible = true;
+                turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
+                turnTitle.Foreground = isMyTurn ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Yellow);
+                makeOpponentsMove(); 
             };
             animY.Completed += onComplete;
             trans.BeginAnimation(TranslateTransform.YProperty, animY);
@@ -360,11 +375,11 @@ namespace connectFour
 
             //TODO: Update server with game stats (game turned to finished, player points, etc..
 
-            new Thread(() =>
+            new System.Threading.Thread(() =>
             {// new thread in order for the game to freeze until the answer is given (another round/exit)               
                 if (anotherRoundAnswer(msg) && anotherRoundOpponentsAnswer()) // play another round iff 2 players agreed
                     this.Dispatcher.Invoke(() => // in order to change the UI with another thread
-                    {                        
+                    {
                         resetBoard(); // reset board to start another round
                     });
                 else // if the answer was to quit the game
@@ -426,7 +441,7 @@ namespace connectFour
         private bool anotherRoundAnswer(String msg)
         {
             //TODO: when game finished, a pop msg appears along with a question to both users about playing another round
-            MessageBoxResult answer = MessageBox.Show(msg, "Game Over",
+            MessageBoxResult answer = System.Windows.MessageBox.Show(msg, "Game Over",
                     MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
 
             //Here: The answer should be sent to the server
