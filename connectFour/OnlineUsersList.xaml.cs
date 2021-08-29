@@ -22,6 +22,8 @@ namespace connectFour
         private Timer timerResponse;
         private int timerCount;
         private MyMsgBox msgBoxWindow;
+        private bool isFree;
+
         public OnlineUsersList()
         {
             InitializeComponent();
@@ -31,6 +33,7 @@ namespace connectFour
             gameClient = new Games.GamesClient(channel);
 
             timerCount = 0;
+            isFree = true;
 
             fillListAsync();
             InitTimer();
@@ -45,18 +48,17 @@ namespace connectFour
         }
         public void InitTimer2()
         { // timer invokes each second
-            if (timerResponse != null)
-            {
-                timerResponse = new Timer();
-                timerResponse.Tick += new EventHandler(timer_Tick2);
-                timerResponse.Interval = 1000; // listen and update each second
-            }
+            timerResponse = new Timer();
+            timerResponse.Tick += new EventHandler(timer_Tick2);
+            timerResponse.Interval = 1000; // listen and update each second
             timerResponse.Start();
         }
 
         private async void timer_Tick(object sender, EventArgs e)
         {
             fillListAsync();
+            if (!isFree)
+                return;
 
             CheckReply cr = await gameClient.CheckForGameAsync(new Check
             {
@@ -65,6 +67,7 @@ namespace connectFour
 
             if (cr.Answer) // if there exist a request for game
             {
+                isFree = false;
                 var result = AutoClosingMessageBox.Show(
                     caption: LoginPage.myUsername + "- New Request Incoming!",
                     text: "Do you want to play?\nYou have 10 seconds to answer...",
@@ -84,8 +87,10 @@ namespace connectFour
                     new Game(false, LoginPage.myID, cr.Offeringid).Show();
                 }
                 else
+                {
                     gr.Answer = AnswerCode.Rejected;
-
+                    isFree = true;
+                }
                 await gameClient.OfferGameAsync(gr);
             }
         }
@@ -157,7 +162,7 @@ namespace connectFour
 
         private async void userSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (timerResponse.Enabled) // if another request is in the process of waiting for an answer
+            if (timerCount > 0/*timerResponse.Enabled*/) // if another request is in the process of waiting for an answer
                 return; // then dont allow another request to send
 
             lbi = (sender as System.Windows.Controls.ListBox).SelectedItem as ListBoxItem;
@@ -177,8 +182,10 @@ namespace connectFour
             new DataSearch().Show();
         }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e)
+        public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
+
+            await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
             //TODO: sign out of the current user and update online users list in the server
             //send a msg to to the other opponent of the game has been disconnected
         }

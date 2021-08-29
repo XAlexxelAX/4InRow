@@ -30,7 +30,7 @@ message GameStats{
 	int32 id2 = 4;
 	string user2 = 5;
 	int32 score2 = 6;
-	int32 winner = 7;
+	string winner = 7;
 	DateTime date = 8;
 }
 

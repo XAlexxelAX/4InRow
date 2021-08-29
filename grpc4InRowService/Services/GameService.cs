@@ -87,7 +87,7 @@ namespace grpc4InRowService.Services
         {
             if (!(Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID))))//If it's a new game and isn't in ongoing game, a new game added, key is a tuple of (game initiator,game accepter)
             {
-                Program.ongoingGames.Add((request.InitiatorID, request.InitiatedID), (new System.DateTime(), new List<(int, int)>()));
+                Program.ongoingGames.Add((request.InitiatorID, request.InitiatedID), (System.DateTime.Now/*new System.DateTime()*/, new List<(int, int)>()));
                 Program.gameRequests.Remove(request.InitiatedID);
             }
             try

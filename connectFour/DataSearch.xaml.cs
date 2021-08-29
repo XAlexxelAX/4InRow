@@ -109,8 +109,9 @@ namespace connectFour
                     {
                         while (await call.ResponseStream.MoveNext())
                         {
+                            string Date = String.Format(" {0}:{1}  {2}/{3}/{4}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
                             rowsData.Add(new List<Object>{call.ResponseStream.Current.User1, call.ResponseStream.Current.User2, call.ResponseStream.Current.Winner,
-                                call.ResponseStream.Current.Score1,call.ResponseStream.Current.Score2,call.ResponseStream.Current.Date });
+                                call.ResponseStream.Current.Score1,call.ResponseStream.Current.Score2,Date });
                         }
                     }
                     rows = rowsData.Count;
@@ -130,7 +131,8 @@ namespace connectFour
                     {
                         while (await call.ResponseStream.MoveNext())
                         {
-                            rowsData.Add(new List<Object> { call.ResponseStream.Current.User1, call.ResponseStream.Current.User2, call.ResponseStream.Current.Date });
+                            string Date = String.Format(" {0}:{1}  {2}/{3}/{4}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
+                            rowsData.Add(new List<Object> { call.ResponseStream.Current.User1, call.ResponseStream.Current.User2, Date });
                         }
                     }
                     rows = rowsData.Count;
@@ -182,11 +184,12 @@ namespace connectFour
                 {
                     while (await call.ResponseStream.MoveNext())
                     {
-                        rowsData.Add(new List<Object> { call.ResponseStream.Current.Date, call.ResponseStream.Current.Winner
+                        string Date = String.Format(" {0}:{1}  {2}/{3}/{4}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
+                        rowsData.Add(new List<Object> { Date, call.ResponseStream.Current.Winner
                             ,call.ResponseStream.Current.Score1, call.ResponseStream.Current.Score2 });
                     }
                 }
-                
+
                 new PlayersData().Show();
             }
         }
@@ -241,7 +244,7 @@ namespace connectFour
             }
         }
 
-        private List<(String,int)> getCheckedUsers()
+        private List<(String, int)> getCheckedUsers()
         {
             if (pickedUsers == null)
                 pickedUsers = new List<(String, int)>();
@@ -250,7 +253,7 @@ namespace connectFour
 
             foreach (ListBoxItem checkBox in users.Items)
                 if (((CheckBox)checkBox.Content).IsChecked == true)
-                    pickedUsers.Add(((String)((CheckBox)checkBox.Content).Content,(int)((CheckBox)checkBox.Content).DataContext));
+                    pickedUsers.Add((((CheckBox)checkBox.Content).Content.ToString(), (int)((CheckBox)checkBox.Content).DataContext));
             return pickedUsers;
         }
     }

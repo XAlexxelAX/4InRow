@@ -20,8 +20,8 @@ namespace grpc4InRowService.Services
 
         public override async Task getAllUsersStats(StatsRequest request, IServerStreamWriter<UserStats> responseStream, ServerCallContext context)
         {
-            using(var db = new UsersContext())
-                foreach(var user in db.users)
+            using (var db = new UsersContext())
+                foreach (var user in db.users)
                     await responseStream.WriteAsync(new UserStats
                     {
                         Id = user.Id,
@@ -35,26 +35,31 @@ namespace grpc4InRowService.Services
 
         public override async Task getFinisedGames(StatsRequest request, IServerStreamWriter<GameStats> responseStream, ServerCallContext context)
         {
-            using(var db = new UsersContext())
+            using (var db = new UsersContext())
                 foreach (var game in db.games)
-                    await responseStream.WriteAsync(new GameStats
+                    using (var db2 = new UsersContext())
                     {
-                        Id1 = game.Player1,
-                        Id2 = game.Player2,
-                        User1 = db.users.Single(user => user.Id == game.Player1).Username,
-                        User2 = db.users.Single(user => user.Id == game.Player2).Username,
-                        Score1 = game.Player1Score,
-                        Score2 = game.Player2Score,
-                        Winner = game.WinnerId,
-                        Date = new Protos.DateTime
+                        string User1 = db2.users.Single(user => user.Id == game.Player1).Username;
+                        string User2 = db2.users.Single(user => user.Id == game.Player2).Username;
+                        await responseStream.WriteAsync(new GameStats
                         {
-                            Hour = game.FinishTime.Hour,
-                            Minute = game.FinishTime.Minute,
-                            Day = game.FinishTime.Day,
-                            Month = game.FinishTime.Month,
-                            Year = game.FinishTime.Year
-                        }
-                    });
+                            Id1 = game.Player1,
+                            Id2 = game.Player2,
+                            User1 = db2.users.Single(user => user.Id == game.Player1).Username,
+                            User2 = db2.users.Single(user => user.Id == game.Player2).Username,
+                            Score1 = game.Player1Score,
+                            Score2 = game.Player2Score,
+                            Winner = game.WinnerId == 1 ? User1 : game.WinnerId == 2 ? User2 : "Tie",
+                            Date = new Protos.DateTime
+                            {
+                                Hour = game.FinishTime.Hour,
+                                Minute = game.FinishTime.Minute,
+                                Day = game.FinishTime.Day,
+                                Month = game.FinishTime.Month,
+                                Year = game.FinishTime.Year
+                            }
+                        });
+                    }
         }
 
         public override async Task getOngoingGames(StatsRequest request, IServerStreamWriter<GameStats> responseStream, ServerCallContext context)
@@ -82,22 +87,29 @@ namespace grpc4InRowService.Services
         {
             using (var db = new UsersContext())
                 foreach (var game in db.games.Where(g => g.Player1 == request.Id1 && g.Player2 == request.Id2 || g.Player1 == request.Id2 && g.Player2 == request.Id1))
-                    await responseStream.WriteAsync(new GameStats
+                    using (var db2 = new UsersContext())
                     {
-                        Id1 = game.Player1,
-                        Id2 = game.Player2,
-                        User1 = db.users.Single(user => user.Id == game.Player1).Username,
-                        User2 = db.users.Single(user => user.Id == game.Player2).Username,
-                        Winner = game.WinnerId,
-                        Date = new Protos.DateTime
+                        string User1 = db2.users.Single(user => user.Id == game.Player1).Username;
+                        string User2 = db2.users.Single(user => user.Id == game.Player2).Username;
+                        await responseStream.WriteAsync(new GameStats
                         {
-                            Hour = game.FinishTime.Hour,
-                            Minute = game.FinishTime.Minute,
-                            Day = game.FinishTime.Day,
-                            Month = game.FinishTime.Month,
-                            Year = game.FinishTime.Year
-                        }
-                    });
+                            Id1 = game.Player1,
+                            Id2 = game.Player2,
+                            User1 = User1,
+                            User2 = User2,
+                            Score1 = game.Player1Score,
+                            Score2 = game.Player2Score,
+                            Winner = game.WinnerId == 1 ? User1 : game.WinnerId == 2 ? User2 : "Tie",
+                            Date = new Protos.DateTime
+                            {
+                                Hour = game.FinishTime.Hour,
+                                Minute = game.FinishTime.Minute,
+                                Day = game.FinishTime.Day,
+                                Month = game.FinishTime.Month,
+                                Year = game.FinishTime.Year
+                            }
+                        });
+                    }
         }
 
         public override Task<UserStats> getUserStats(StatsRequest request, ServerCallContext context)

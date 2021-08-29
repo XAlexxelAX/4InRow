@@ -29,7 +29,7 @@ namespace grpc4InRowService.Protos {
             "CHVzZXJuYW1lGAIgASgJEg0KBWdhbWVzGAMgASgFEgwKBHdpbnMYBCABKAUS",
             "DQoFc2NvcmUYBSABKAUijAEKCUdhbWVTdGF0cxILCgNpZDEYASABKAUSDQoF",
             "dXNlcjEYAiABKAkSDgoGc2NvcmUxGAMgASgFEgsKA2lkMhgEIAEoBRINCgV1",
-            "c2VyMhgFIAEoCRIOCgZzY29yZTIYBiABKAUSDgoGd2lubmVyGAcgASgFEhcK",
+            "c2VyMhgFIAEoCRIOCgZzY29yZTIYBiABKAUSDgoGd2lubmVyGAcgASgJEhcK",
             "BGRhdGUYCCABKAsyCS5EYXRlVGltZSJSCghEYXRlVGltZRIMCgRob3VyGAEg",
             "ASgFEg4KBm1pbnV0ZRgCIAEoBRILCgNkYXkYAyABKAUSDQoFbW9udGgYBCAB",
             "KAUSDAoEeWVhchgFIAEoBTL9AQoKU3RhdGlzdGljcxIvChBnZXRBbGxVc2Vy",
@@ -559,12 +559,12 @@ namespace grpc4InRowService.Protos {
 
     /// <summary>Field number for the "winner" field.</summary>
     public const int WinnerFieldNumber = 7;
-    private int winner_;
+    private string winner_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Winner {
+    public string Winner {
       get { return winner_; }
       set {
-        winner_ = value;
+        winner_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -612,7 +612,7 @@ namespace grpc4InRowService.Protos {
       if (Id2 != 0) hash ^= Id2.GetHashCode();
       if (User2.Length != 0) hash ^= User2.GetHashCode();
       if (Score2 != 0) hash ^= Score2.GetHashCode();
-      if (Winner != 0) hash ^= Winner.GetHashCode();
+      if (Winner.Length != 0) hash ^= Winner.GetHashCode();
       if (date_ != null) hash ^= Date.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -651,9 +651,9 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(48);
         output.WriteInt32(Score2);
       }
-      if (Winner != 0) {
-        output.WriteRawTag(56);
-        output.WriteInt32(Winner);
+      if (Winner.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Winner);
       }
       if (date_ != null) {
         output.WriteRawTag(66);
@@ -685,8 +685,8 @@ namespace grpc4InRowService.Protos {
       if (Score2 != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Score2);
       }
-      if (Winner != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Winner);
+      if (Winner.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Winner);
       }
       if (date_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Date);
@@ -720,7 +720,7 @@ namespace grpc4InRowService.Protos {
       if (other.Score2 != 0) {
         Score2 = other.Score2;
       }
-      if (other.Winner != 0) {
+      if (other.Winner.Length != 0) {
         Winner = other.Winner;
       }
       if (other.date_ != null) {
@@ -764,8 +764,8 @@ namespace grpc4InRowService.Protos {
             Score2 = input.ReadInt32();
             break;
           }
-          case 56: {
-            Winner = input.ReadInt32();
+          case 58: {
+            Winner = input.ReadString();
             break;
           }
           case 66: {
