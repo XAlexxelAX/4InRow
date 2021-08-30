@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="OnlineUsersList" Height="450" Width="400"
         Background="Azure"
-        Closing="OnWindowClosing">
+        Closing="OnWindowClosing" Icon="Resources\users_group.png">
     <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="*"/>

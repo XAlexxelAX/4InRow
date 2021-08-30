@@ -68,7 +68,7 @@ namespace connectFour
                 MyId = LoginPage.myID
             });
 
-            if (cr.Answer) // if there exist a request for game
+            if (cr.Answer && cr.Status == AnswerCode.Unanswered) // if there exist a request for game
             {
                 isFree = false;
                 var result = AutoClosingMessageBox.Show(
@@ -111,6 +111,7 @@ namespace connectFour
                 timerResponse.Stop();
                 msgBoxWindow.Close();
                 timerCount = 0;
+                await gameClient.RemoveRequestAsync(new GameRequest { OpponentID = (int)lb_itemBtn.DataContext });
                 System.Windows.MessageBox.Show("Your opponent didn't responed to your game request.");
                 return;
             }

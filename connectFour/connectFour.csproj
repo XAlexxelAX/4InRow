@@ -21,6 +21,8 @@
 		<None Remove="Resources\predMarked.png" />
 		<None Remove="Resources\pyellow.png" />
 		<None Remove="Resources\pyellowMarked.png" />
+		<None Remove="Resources\users_data.png" />
+		<None Remove="Resources\users_group.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -61,6 +63,12 @@
 		</Resource>
 		<Resource Include="Resources\pyellowMarked.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\users_data.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\users_group.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 	</ItemGroup>
 

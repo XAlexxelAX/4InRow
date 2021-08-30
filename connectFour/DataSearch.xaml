@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
         Title="DataSearch" Height="500" Width="520"
-        Background="Azure">
+        Background="Azure" Icon="Resources\users_data.png">
 
     <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>

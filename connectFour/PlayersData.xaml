@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:connectFour"
         mc:Ignorable="d"
-        Title="PlayersData" Height="450" Width="400" Background="Azure">
+        Title="PlayersData" Height="450" Width="400" Background="Azure"
+        Icon="Resources\users_data.png">
     <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
