@@ -60,10 +60,9 @@ namespace grpc4InRowService.Services
 
         public override Task<Reply> CheckMove(MoveCheck request, ServerCallContext context)
         {
-            if (Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))
+            try
             {
-                try
-                {
+                if (Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))
                     return Task.FromResult(new Reply
                     {
                         Answer = true,
@@ -74,11 +73,10 @@ namespace grpc4InRowService.Services
                             Index = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Count - 1
                         }
                     });
-                }
-                catch
-                {
-                    return Task.FromResult(new Reply { Answer = false });
-                }
+            }
+            catch
+            {
+                return Task.FromResult(new Reply { Answer = false });
             }
             return Task.FromResult(new Reply { Answer = false });
         }

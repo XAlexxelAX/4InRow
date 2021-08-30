@@ -51,6 +51,7 @@ namespace connectFour
             DynamicGrid.ColumnDefinitions.Clear();
             DynamicGrid.Visibility = Visibility.Hidden;
             searchBtn.Visibility = Visibility.Hidden;
+            users.HorizontalContentAlignment = HorizontalAlignment.Center;
 
             int rows, cols;
 
@@ -120,19 +121,19 @@ namespace connectFour
                     for (int i = 0; i < rows; insertDataToRow(i, rowsData[i], cols), i++) ;
                     break;
 
-                case "Games: Live":
+                case "Games: Live (since first move)":
                     cols = 3;
                     DynamicGrid.Visibility = Visibility.Visible;
                     createCols(cols);
 
                     rowsData = new List<List<Object>>();
-                    rowsData.Add(new List<Object> { "P1", "P2", "Date" });
+                    rowsData.Add(new List<Object> { "Date", "P1", "P2" });
                     using (var call = statsClient.getOngoingGames(new StatsRequest()))
                     {
                         while (await call.ResponseStream.MoveNext())
                         {
                             string Date = String.Format("{2}/{3}/{4}\n{0}:{1}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
-                            rowsData.Add(new List<Object> { call.ResponseStream.Current.User1, call.ResponseStream.Current.User2, Date });
+                            rowsData.Add(new List<Object> { Date, call.ResponseStream.Current.User1, call.ResponseStream.Current.User2 });
                         }
                     }
                     rows = rowsData.Count;

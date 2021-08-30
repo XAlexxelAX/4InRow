@@ -34,7 +34,7 @@
             <ComboBoxItem Content="Users: Sorted by points amount"></ComboBoxItem>
 
             <ComboBoxItem Content="Games: Until now"></ComboBoxItem>
-            <ComboBoxItem Content="Games: Live"></ComboBoxItem>
+            <ComboBoxItem Content="Games: Live (since first move)"></ComboBoxItem>
 
             <ComboBoxItem Content="Players: Data"></ComboBoxItem>
         </ComboBox>

@@ -28,7 +28,7 @@ namespace connectFour
         private int[,] board;
         private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex;
         private List<Image> imgs;
-        private bool isMyTurn, hasAnimationFinished;
+        private bool isMyTurn, hasAnimationFinished, amIfirst;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
         private User.UserClient userClient;
@@ -61,8 +61,9 @@ namespace connectFour
             this.id2 = id2;
             lastIndex = -1;
             hasAnimationFinished = true;
+            amIfirst = isMyTurn;
             turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
-            turnTitle.Foreground = isMyTurn ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Yellow);
+            turnTitle.Foreground = new SolidColorBrush(Colors.Red);
 
             if (!isMyTurn)
             { // check for oponent's first move iff your are the not the initator of the game (= it's not your turn at the start)
@@ -207,7 +208,7 @@ namespace connectFour
                                       //boardView.IsHitTestVisible = true; // enable mouse clicks again for next move
                 hasAnimationFinished = true;
                 turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
-                turnTitle.Foreground = isMyTurn ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Yellow);
+                turnTitle.Foreground = isMyTurn && amIfirst || !isMyTurn && !amIfirst ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Yellow);
                 makeOpponentsMove();
             };
             animY.Completed += onComplete;
