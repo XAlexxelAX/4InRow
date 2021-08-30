@@ -5,6 +5,8 @@ option csharp_namespace = "grpc4InRowService.Protos";
 service Games{
 	rpc CheckForGame (Check) returns (CheckReply);// invokes server with check that contains user id, returns reply if there's a waiting game request
 	rpc OfferGame (GameRequest) returns (GameReply);// sends to server game request
+	rpc RemoveRequest (GameRequest) returns (GameReply);
+	rpc CreateGame (MoveRequest) returns (Reply);// creates a new game to be played
 	rpc MakeMove (MoveRequest) returns (Reply);// send a move in an ongoing game
 	rpc CheckMove (MoveCheck) returns (Reply);// checks if a move was made by the opponent
 	rpc UpdateScore (Score) returns (Reply);

@@ -34,4 +34,3 @@ C:\Users\USER\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.genruntimeconfig.
 C:\Users\USER\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.AssemblyReference.cache
 C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.AssemblyReference.cache
 C:\Users\shaha\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Alex\source\repos\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.AssemblyReference.cache

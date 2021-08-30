@@ -81,13 +81,40 @@ namespace grpc4InRowService.Services
             return Task.FromResult(new Reply { Answer = false });
         }
 
+        public override Task<Reply> CreateGame(MoveRequest request, ServerCallContext context)
+        {
+            try
+            {
+                if (!Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))//If it's a new game and isn't in ongoing game, a new game added, key is a tuple of (game initiator,game accepter)
+                {
+                    Program.ongoingGames.Add((request.InitiatorID, request.InitiatedID), (System.DateTime.Now, new List<(int, int)>()));
+                    RemoveRequest(new GameRequest { OpponentID = request.InitiatedID }, context);//Program.gameRequests.Remove(request.InitiatedID);
+                }
+                return Task.FromResult(new Reply { Answer = true });
+            }
+            catch
+            {
+                return Task.FromResult(new Reply { Answer = false });
+            }
+        }
+
+        public override Task<GameReply> RemoveRequest(GameRequest request, ServerCallContext context)
+        {
+            try
+            {
+                Program.gameRequests.Remove(request.OpponentID);
+                return Task.FromResult(new GameReply { Answer = true });
+            }
+            catch
+            {
+                return Task.FromResult(new GameReply { Answer = false });
+            }
+        }
+
         public override Task<Reply> MakeMove(MoveRequest request, ServerCallContext context)
         {
-            if (!Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))//If it's a new game and isn't in ongoing game, a new game added, key is a tuple of (game initiator,game accepter)
-            {
-                Program.ongoingGames.Add((request.InitiatorID, request.InitiatedID), (System.DateTime.Now, new List<(int, int)>()));
-                Program.gameRequests.Remove(request.InitiatedID);
-            }
+            if (!Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))
+                CreateGame(request, context);
             try
             {
                 if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Count == 0)

@@ -79,6 +79,22 @@ namespace grpc4InRowService.Protos {
         __Marshaller_GameReply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::grpc4InRowService.Protos.GameRequest, global::grpc4InRowService.Protos.GameReply> __Method_RemoveRequest = new grpc::Method<global::grpc4InRowService.Protos.GameRequest, global::grpc4InRowService.Protos.GameReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "RemoveRequest",
+        __Marshaller_GameRequest,
+        __Marshaller_GameReply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::grpc4InRowService.Protos.MoveRequest, global::grpc4InRowService.Protos.Reply> __Method_CreateGame = new grpc::Method<global::grpc4InRowService.Protos.MoveRequest, global::grpc4InRowService.Protos.Reply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "CreateGame",
+        __Marshaller_MoveRequest,
+        __Marshaller_Reply);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::grpc4InRowService.Protos.MoveRequest, global::grpc4InRowService.Protos.Reply> __Method_MakeMove = new grpc::Method<global::grpc4InRowService.Protos.MoveRequest, global::grpc4InRowService.Protos.Reply>(
         grpc::MethodType.Unary,
         __ServiceName,
@@ -132,6 +148,24 @@ namespace grpc4InRowService.Protos {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.GameReply> OfferGame(global::grpc4InRowService.Protos.GameRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.GameReply> RemoveRequest(global::grpc4InRowService.Protos.GameRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// creates a new game to be played
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::grpc4InRowService.Protos.Reply> CreateGame(global::grpc4InRowService.Protos.MoveRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -291,6 +325,74 @@ namespace grpc4InRowService.Protos {
       {
         return CallInvoker.AsyncUnaryCall(__Method_OfferGame, null, options, request);
       }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::grpc4InRowService.Protos.GameReply RemoveRequest(global::grpc4InRowService.Protos.GameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RemoveRequest(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::grpc4InRowService.Protos.GameReply RemoveRequest(global::grpc4InRowService.Protos.GameRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_RemoveRequest, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GameReply> RemoveRequestAsync(global::grpc4InRowService.Protos.GameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return RemoveRequestAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.GameReply> RemoveRequestAsync(global::grpc4InRowService.Protos.GameRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_RemoveRequest, null, options, request);
+      }
+      /// <summary>
+      /// creates a new game to be played
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::grpc4InRowService.Protos.Reply CreateGame(global::grpc4InRowService.Protos.MoveRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateGame(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// creates a new game to be played
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::grpc4InRowService.Protos.Reply CreateGame(global::grpc4InRowService.Protos.MoveRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_CreateGame, null, options, request);
+      }
+      /// <summary>
+      /// creates a new game to be played
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.Reply> CreateGameAsync(global::grpc4InRowService.Protos.MoveRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return CreateGameAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// creates a new game to be played
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::grpc4InRowService.Protos.Reply> CreateGameAsync(global::grpc4InRowService.Protos.MoveRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_CreateGame, null, options, request);
+      }
       /// <summary>
       /// send a move in an ongoing game
       /// </summary>
@@ -423,6 +525,8 @@ namespace grpc4InRowService.Protos {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_CheckForGame, serviceImpl.CheckForGame)
           .AddMethod(__Method_OfferGame, serviceImpl.OfferGame)
+          .AddMethod(__Method_RemoveRequest, serviceImpl.RemoveRequest)
+          .AddMethod(__Method_CreateGame, serviceImpl.CreateGame)
           .AddMethod(__Method_MakeMove, serviceImpl.MakeMove)
           .AddMethod(__Method_CheckMove, serviceImpl.CheckMove)
           .AddMethod(__Method_UpdateScore, serviceImpl.UpdateScore).Build();
@@ -437,6 +541,8 @@ namespace grpc4InRowService.Protos {
     {
       serviceBinder.AddMethod(__Method_CheckForGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.Check, global::grpc4InRowService.Protos.CheckReply>(serviceImpl.CheckForGame));
       serviceBinder.AddMethod(__Method_OfferGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.GameRequest, global::grpc4InRowService.Protos.GameReply>(serviceImpl.OfferGame));
+      serviceBinder.AddMethod(__Method_RemoveRequest, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.GameRequest, global::grpc4InRowService.Protos.GameReply>(serviceImpl.RemoveRequest));
+      serviceBinder.AddMethod(__Method_CreateGame, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.MoveRequest, global::grpc4InRowService.Protos.Reply>(serviceImpl.CreateGame));
       serviceBinder.AddMethod(__Method_MakeMove, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.MoveRequest, global::grpc4InRowService.Protos.Reply>(serviceImpl.MakeMove));
       serviceBinder.AddMethod(__Method_CheckMove, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.MoveCheck, global::grpc4InRowService.Protos.Reply>(serviceImpl.CheckMove));
       serviceBinder.AddMethod(__Method_UpdateScore, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::grpc4InRowService.Protos.Score, global::grpc4InRowService.Protos.Reply>(serviceImpl.UpdateScore));
