@@ -26,18 +26,18 @@ namespace connectFour
     public partial class Game : Window
     {
         private int[,] board;
-        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex;
+        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex, timeCounter;
         private List<Image> imgs;
-        private bool isMyTurn, hasAnimationFinished, amIfirst;
+        private bool isMyTurn, hasAnimationFinished, amIfirst, isNewRound;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
         private User.UserClient userClient;
-        private Timer timer;
+        private Timer timer,timer2;
 
         public Game(bool isMyTurn, int id1, int id2)
         {
             InitializeComponent();
-            initVars(isMyTurn, id1, id2);           
+            initVars(isMyTurn, id1, id2);
         }
 
         private void initVars(bool isMyTurn, int id1, int id2)
@@ -62,6 +62,9 @@ namespace connectFour
             lastIndex = -1;
             hasAnimationFinished = true;
             amIfirst = isMyTurn;
+            isNewRound = false;
+            timeCounter = 0;
+
             turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
             turnTitle.Foreground = new SolidColorBrush(Colors.Red);
 
@@ -81,6 +84,18 @@ namespace connectFour
             timer.Stop();
             timer.Dispose();
             hasAnimationFinished = true;
+        }
+
+        private void timer_Tick2(object sender, EventArgs e)
+        {
+            timeCounter++;
+
+            if(timeCounter==10)
+            {
+                timer2.Stop();
+                timeCounter = 0;
+
+            }
         }
 
         private async void OnPreviewMouseLeftButtonDownAsync(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -364,18 +379,32 @@ namespace connectFour
             else msg = "It's a Tie! ☻\nWould you like to have another round?";
             Reply r;
             if (id1 == LoginPage.myID)
-                r = await gameClient.UpdateScoreAsync(new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p });//CHECK + need to add field Won = ??
-                                                                                                                                         //TODO: Update server with game stats (game turned to finished, player points, etc..
-            //new System.Threading.Thread(async () =>
-            // {// new thread in order for the game to freeze until the answer is given (another round/exit)               
-            if (anotherRoundAnswer(msg) && anotherRoundOpponentsAnswer()) // play another round iff 2 players agreed
-                this.Dispatcher.Invoke(() => // in order to change the UI with another thread
+                r = await gameClient.UpdateScoreAsync(new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p });
+
+            //anotherRoundOpponentsAnswer();
+            if (anotherRoundAnswer(msg)) //if i said yes
+            {
+                var call = await gameClient.CheckForGameAsync(new Check { MyId = LoginPage.myID });
+                if (call.Answer)
                 {
-                    resetBoard(); // reset board to start another round
-                });
+                    await gameClient.OfferGameAsync(new GameRequest { Answer = AnswerCode.Accepted, MyId = LoginPage.myID, OpponentID = id1 == LoginPage.myID ? id2 : id1 });
+
+                    this.Dispatcher.Invoke(() => // in order to change the UI with another thread
+                    {
+                        resetBoard(); // reset board to start another round
+                    });
+                }
+                else
+                {
+                    timer2 = new Timer();
+                    timer2.Tick += new EventHandler(timer_Tick2);
+                    timer2.Interval = 1000; // listen and update each second
+                    timer2.Start();
+                }
+            }
             else // if the answer was to quit the game
             {
-               // await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
+                // await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
                 this.Close(); // close the game window
             }
             //   }).Start();
@@ -440,13 +469,13 @@ namespace connectFour
 
             return answer == MessageBoxResult.Yes; // return true iff accepted another round, else return false
         }
-        private bool anotherRoundOpponentsAnswer()
+        private async void anotherRoundOpponentsAnswer()
         {
             //TODO: when game finished, a pop msg appears along with a question to both users about playing another round
             //In this method we will wait for the answer of the opponent 
             // if and only if both users accepted another round - another round will be initialized with server implemtations
-
-            return false; // return true iff the opponenet accepted another round, else return false
+            var call = await gameClient.CheckForGameAsync(new Check { MyId = LoginPage.myID });
+            isNewRound = call.Answer;  // return true iff the opponenet accepted another round, else return false
         }
 
         public async void OnWindowClosing(object sender, CancelEventArgs e)
