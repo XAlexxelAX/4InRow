@@ -32,7 +32,7 @@ namespace connectFour
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
         private User.UserClient userClient;
-        private Timer timer,timer2;
+        private Timer timer, timer2;
 
         public Game(bool isMyTurn, int id1, int id2)
         {
@@ -86,15 +86,27 @@ namespace connectFour
             hasAnimationFinished = true;
         }
 
-        private void timer_Tick2(object sender, EventArgs e)
+        private async void timer_Tick2(object sender, EventArgs e)
         {
             timeCounter++;
+            var call = await gameClient.CheckForGameAsync(new Check { MyId = id1 == LoginPage.myID ? id2 : id1 });
+            if (call.Status == AnswerCode.Accepted)
+            {
+                await gameClient.CreateGameAsync(new MoveRequest { InitiatedID = id1 == LoginPage.myID ? id2 : id1, InitiatorID = LoginPage.myID });
+                id1 = id1 == LoginPage.myID ? id2 : id1;
+                id2 = LoginPage.myID;
+                this.Dispatcher.Invoke(() => // in order to change the UI with another thread
+                {
+                    resetBoard(); // reset board to start another round
+                });
+            }
 
-            if(timeCounter==10)
+            if (timeCounter == 10)
             {
                 timer2.Stop();
                 timeCounter = 0;
-
+                await gameClient.RemoveRequestAsync(new GameRequest { OpponentID = id1 == LoginPage.myID ? id2 : id1 });
+                this.Close();
             }
         }
 
@@ -483,6 +495,9 @@ namespace connectFour
             //TODO: sign out of the current user and update online users list in the server
             //send a msg to to the other opponent of it's disconnected
             await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
+            var call = await gameClient.CheckForGameAsync(new Check { MyId = LoginPage.myID });
+            if (call.Answer)
+                await gameClient.OfferGameAsync(new GameRequest { Answer = AnswerCode.Rejected, MyId = LoginPage.myID, OpponentID = id1 == LoginPage.myID ? id2 : id1 });
         }
     }
 }
