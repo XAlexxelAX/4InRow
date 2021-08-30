@@ -64,23 +64,23 @@ namespace grpc4InRowService.Services
 
         public override async Task getOngoingGames(StatsRequest request, IServerStreamWriter<GameStats> responseStream, ServerCallContext context)
         {
-            using (var db = new UsersContext())
-                foreach (var game in Program.ongoingGames)
-                    await responseStream.WriteAsync(new GameStats
-                    {
-                        Id1 = game.Key.Item1,
-                        Id2 = game.Key.Item2,
-                        User1 = db.users.Single(user => user.Id == game.Key.Item1).Username,
-                        User2 = db.users.Single(user => user.Id == game.Key.Item2).Username,
-                        Date = new Protos.DateTime
+                using (var db = new UsersContext())
+                    foreach (var game in Program.ongoingGames)
+                        await responseStream.WriteAsync(new GameStats
                         {
-                            Hour = game.Value.Item1.Hour,
-                            Minute = game.Value.Item1.Minute,
-                            Day = game.Value.Item1.Day,
-                            Month = game.Value.Item1.Month,
-                            Year = game.Value.Item1.Year
-                        }
-                    });
+                            Id1 = game.Key.Item1,
+                            Id2 = game.Key.Item2,
+                            User1 = db.users.Single(user => user.Id == game.Key.Item1).Username,
+                            User2 = db.users.Single(user => user.Id == game.Key.Item2).Username,
+                            Date = new Protos.DateTime
+                            {
+                                Hour = game.Value.Item1.Hour,
+                                Minute = game.Value.Item1.Minute,
+                                Day = game.Value.Item1.Day,
+                                Month = game.Value.Item1.Month,
+                                Year = game.Value.Item1.Year
+                            }
+                        });
         }
 
         public override async Task getUsersIntersection(StatsRequest request, IServerStreamWriter<GameStats> responseStream, ServerCallContext context)

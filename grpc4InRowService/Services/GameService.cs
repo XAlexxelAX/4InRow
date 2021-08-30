@@ -23,7 +23,10 @@ namespace grpc4InRowService.Services
             try
             {
                 if (Program.gameRequests.ContainsKey(request.MyId))//some player checks if someone offered him a game, receives back Answer if someone offered and if so, gets the offering ID
-                    return Task.FromResult(new CheckReply { Answer = true, Offeringid = Program.gameRequests[request.MyId].Item1 });
+                    if (Program.gameRequests[request.MyId].Item2 != AnswerCode.Unanswered) 
+                        return Task.FromResult(new CheckReply { Answer = false });
+                    else 
+                        return Task.FromResult(new CheckReply { Answer = true, Offeringid = Program.gameRequests[request.MyId].Item1 });
                 else if (Program.gameRequests.ContainsKey(request.OpponentID))//offering player checks if request was answered
                     return Task.FromResult(new CheckReply { Answer = true, Status = Program.gameRequests[request.OpponentID].Item2 });
                 else

@@ -127,7 +127,7 @@ namespace connectFour
                     msgBoxWindow.Close();
                     timerCount = 0;
                     await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
-                    await gameClient.CreateGameAsync(new MoveRequest { InitiatedID = (int)lb_itemBtn.DataContext });
+                    await gameClient.CreateGameAsync(new MoveRequest { InitiatedID = (int)lb_itemBtn.DataContext, InitiatorID = LoginPage.myID });
                     game = new Game(true, (int)lb_itemBtn.DataContext, LoginPage.myID);
                     game.Closed += (sender, args) => { game = null; isFree = true; };
                     game.Show();

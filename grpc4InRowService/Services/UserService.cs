@@ -26,12 +26,15 @@ namespace grpc4InRowService.Services
                 using (var db = new UsersContext())
                 {
                     UserModel userEntity = db.users.Single(user => user.Username == request.Username);
-                    if (userEntity != null && userEntity.PW == request.Pw)
-                    {
-                        //Program.onlineUsers.Add(userEntity.Id, userEntity.Username);
-                        AddToOnline(new GeneralReq { Id = userEntity.Id, Username = userEntity.Username },context);
-                        return Task.FromResult(new GeneralReply { IsSuccessfull = true, Id = userEntity.Id });
-                    }
+                    if (userEntity != null)
+                        if (Program.onlineUsers.ContainsKey(userEntity.Id))
+                            return Task.FromResult(new GeneralReply { IsSuccessfull = false });
+                        else if (userEntity.PW == request.Pw)
+                        {
+                            //Program.onlineUsers.Add(userEntity.Id, userEntity.Username);
+                            AddToOnline(new GeneralReq { Id = userEntity.Id, Username = userEntity.Username }, context);
+                            return Task.FromResult(new GeneralReply { IsSuccessfull = true, Id = userEntity.Id });
+                        }
                     return Task.FromResult(new GeneralReply { IsSuccessfull = false });
                 }
             }
