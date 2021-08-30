@@ -27,8 +27,8 @@
                    Foreground="DeepSkyBlue" VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
 
-        <ListBox Grid.Row="3" Grid.Column="1" SelectionChanged="userSelected" x:Name="users"
-                          HorizontalContentAlignment="Center">
+        <ListBox Grid.Row="3" Grid.Column="1" x:Name="users"
+                          HorizontalContentAlignment="Stretch">
         </ListBox>
 
         <Button Content="Data Search" Grid.Column="1" Grid.Row="4"

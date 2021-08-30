@@ -37,20 +37,7 @@ namespace connectFour
         public Game(bool isMyTurn, int id1, int id2)
         {
             InitializeComponent();
-            initVars(isMyTurn, id1, id2);
-
-            /* if (!isMyTurn)
-             {
-                 /*  Application.Current.Dispatcher.Invoke((Action)delegate {
-                       makeOpponentsMove(getOpponentsMove());
-                   });*/
-            /* Thread t = new Thread(() =>
-                 {
-                     makeOpponentsMove(getOpponentsMove()); // TODO: UNIMPLEMENTED!!! (should not be called more than once)
-                 });
-             t.SetApartmentState(ApartmentState.STA);
-             t.Start();
-         }*/
+            initVars(isMyTurn, id1, id2);           
         }
 
         private void initVars(bool isMyTurn, int id1, int id2)
@@ -377,21 +364,20 @@ namespace connectFour
             Reply r;
             if (id1 == LoginPage.myID)
                 r = await gameClient.UpdateScoreAsync(new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p });//CHECK + need to add field Won = ??
-            //TODO: Update server with game stats (game turned to finished, player points, etc..
-
-            new System.Threading.Thread(async () =>
-            {// new thread in order for the game to freeze until the answer is given (another round/exit)               
-                if (anotherRoundAnswer(msg) && anotherRoundOpponentsAnswer()) // play another round iff 2 players agreed
-                    this.Dispatcher.Invoke(() => // in order to change the UI with another thread
-                    {
-                        resetBoard(); // reset board to start another round
-                    });
-                else // if the answer was to quit the game
+                                                                                                                                         //TODO: Update server with game stats (game turned to finished, player points, etc..
+            //new System.Threading.Thread(async () =>
+            // {// new thread in order for the game to freeze until the answer is given (another round/exit)               
+            if (anotherRoundAnswer(msg) && anotherRoundOpponentsAnswer()) // play another round iff 2 players agreed
+                this.Dispatcher.Invoke(() => // in order to change the UI with another thread
                 {
-                    await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
-                    this.Close(); // close the game window
-                }
-            }).Start();
+                    resetBoard(); // reset board to start another round
+                });
+            else // if the answer was to quit the game
+            {
+               // await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
+                this.Close(); // close the game window
+            }
+            //   }).Start();
         }
         private void updateBonus()
         {
@@ -462,10 +448,11 @@ namespace connectFour
             return false; // return true iff the opponenet accepted another round, else return false
         }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e)
+        public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
             //TODO: sign out of the current user and update online users list in the server
-            //send a msg to to the other opponent of it's disconnection
+            //send a msg to to the other opponent of it's disconnected
+            await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
         }
     }
 }
