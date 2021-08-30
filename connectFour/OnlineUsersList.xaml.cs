@@ -89,7 +89,7 @@ namespace connectFour
                     await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
 
                     game = new Game(false, LoginPage.myID, cr.Offeringid);
-                    game.Closed += (sender, args) => game = null;
+                    game.Closed += (sender, args) => { game = null; isFree = true; };
                     game.Show();
                 }
                 else
@@ -129,7 +129,7 @@ namespace connectFour
                     await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
 
                     game = new Game(true, (int)lb_itemBtn.DataContext, LoginPage.myID);
-                    game.Closed += (sender, args) => game = null;
+                    game.Closed += (sender, args) => { game = null; isFree = true; };
                     game.Show();
                 }
                 else
