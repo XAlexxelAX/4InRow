@@ -28,7 +28,7 @@ namespace connectFour
         private int[,] board;
         private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex, timeCounter;
         private List<Image> imgs;
-        private bool isMyTurn, hasAnimationFinished, amIfirst, isNewRound;
+        private bool isMyTurn, hasAnimationFinished, amIfirst;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
         private User.UserClient userClient;
