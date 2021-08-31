@@ -8,18 +8,25 @@
         Title="OnlineUsersList" Height="450" Width="400"
         Background="Azure"
         Closing="OnWindowClosing" Icon="Resources\users_group.png">
+
+    <!--main grid of window-->
     <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="*"/>
+            <!--users list coloumn-->
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions >
+            <!--margin left-->
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
+            <!--margin between title and list-->
             <RowDefinition Height="10"/>
+            <!--row of list-->
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
+            <!--margin right-->
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
@@ -27,10 +34,11 @@
                    Foreground="DeepSkyBlue" VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
 
+        <!--list of players-->
         <ListBox Grid.Row="3" Grid.Column="1" x:Name="users"
-                          HorizontalContentAlignment="Stretch">
-        </ListBox>
+                          HorizontalContentAlignment="Stretch"/>
 
+        <!--button to open data search window-->
         <Button Content="Data Search" Grid.Column="1" Grid.Row="4"
                 FontSize="22" FontFamily="Bell MT Bold" Foreground="RoyalBlue" Click="dataSearch"/>
     </Grid>

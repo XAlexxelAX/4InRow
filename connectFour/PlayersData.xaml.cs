@@ -43,17 +43,25 @@ namespace connectFour
 
             int p1Wins = 0;
 
-            if (DataSearch.rowsData.Count > 1 && DataSearch.rowsData[0].Contains("Game Date")) // 2 players were picked
+            if (DataSearch.rowsData.Count > 1 && DataSearch.rowsData[0][0].Equals("Game Date")) // 2 players were picked
             {
+                winRatioTxt.Visibility = Visibility.Visible;
+
                 foreach (List<Object> rowData in DataSearch.rowsData)
-                    if (rowData[1].Equals(DataSearch.rowsData[0][1]))
+                    if (rowData[1].Equals(DataSearch.rowsData[1][1]))
                         p1Wins++;
-                if (DataSearch.rowsData[0][1].Equals(DataSearch.pickedUsers[0]))
-                    winRatioTxt.Text = "Win Ratio:\n" + DataSearch.pickedUsers[0].Item1 + ":" + (float)p1Wins / (DataSearch.rowsData.Count - 1) * 100 + "%" +
-                            "\n" + DataSearch.pickedUsers[1].Item1 + ":" + (1 - (float)p1Wins / (DataSearch.rowsData.Count - 1)) * 100 + "%";
+
+                if (DataSearch.rowsData[1][1].Equals(DataSearch.pickedUsers[0].Item1))
+                    winRatioTxt.Text = "Win Ratio:\n" + DataSearch.pickedUsers[0].Item1 + ": " + (float)p1Wins / (DataSearch.rowsData.Count - 1) * 100 + "%" +
+                            " <> " + DataSearch.pickedUsers[1].Item1 + ": " + (1 - (float)p1Wins / (DataSearch.rowsData.Count - 1)) * 100 + "%";
+                else winRatioTxt.Text = "Win Ratio:\n" + DataSearch.pickedUsers[1].Item1 + ": " + (float)p1Wins / (DataSearch.rowsData.Count - 1) * 100 + "%" +
+                           " <> " + DataSearch.pickedUsers[0].Item1 + ": " + (1 - (float)p1Wins / (DataSearch.rowsData.Count - 1)) * 100 + "%";
             }
-            else
-                winRatioTxt.Text = "These 2 players haven't played yet";
+            else if (DataSearch.rowsData[0][0].Equals("Game Date"))// 2 players were picked
+            {
+                winRatioTxt.Visibility = Visibility.Visible;
+                winRatioTxt.Text = "These 2 players haven't played each other yet.";
+            }
         }
 
         private void createCols()

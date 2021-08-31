@@ -8,17 +8,22 @@
         WindowStyle="None"
         Height="140" Width="167">
 
-
+    <!--main grid of window-->
     <Grid>
         <Grid.ColumnDefinitions>
+            <!--full column -->
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <!--title row-->
             <RowDefinition Height="15"/>
+            <!--messege-->
             <RowDefinition Height="*"/>
+            <!--margin down-->
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
+        <!--text blocks of title and messege-->
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
                    FontSize="11"
                    Text="Waiting For Opponent's Reply..."
@@ -26,6 +31,6 @@
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="myMsgBox" Foreground="Black" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"
                    FontSize="12"/>
-       
+
     </Grid>
 </Window>

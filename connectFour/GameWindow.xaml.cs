@@ -384,42 +384,19 @@ namespace connectFour
         {
             String msg;
 
+            //make a relevant message
             if (p == 1)
-                msg = "Red Player Has Won! ☺\nWould you like to have another round?";
+                msg = "Red Player Has Won! ☺";
             else if (p == 2)
-                msg = "Yellow Player Has Won! ☺\nWould you like to have another round?";
-            else msg = "It's a Tie! ☻\nWould you like to have another round?";
+                msg = "Yellow Player Has Won! ☺";
+            else msg = "It's a Tie! ☻";
+
             Reply r;
-            if (id1 == LoginPage.myID)
+            if (id1 == LoginPage.myID) // update score in server
                 r = await gameClient.UpdateScoreAsync(new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p });
 
-            //anotherRoundOpponentsAnswer();
-            if (anotherRoundAnswer(msg)) //if i said yes
-            {
-                var call = await gameClient.CheckForGameAsync(new Check { MyId = LoginPage.myID });
-                if (call.Answer)
-                {
-                    await gameClient.OfferGameAsync(new GameRequest { Answer = AnswerCode.Accepted, MyId = LoginPage.myID, OpponentID = id1 == LoginPage.myID ? id2 : id1 });
-
-                    this.Dispatcher.Invoke(() => // in order to change the UI with another thread
-                    {
-                        resetBoard(); // reset board to start another round
-                    });
-                }
-                else
-                {
-                    timer2 = new Timer();
-                    timer2.Tick += new EventHandler(timer_Tick2);
-                    timer2.Interval = 1000; // listen and update each second
-                    timer2.Start();
-                }
-            }
-            else // if the answer was to quit the game
-            {
-                // await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
-                this.Close(); // close the game window
-            }
-            //   }).Start();
+            if (System.Windows.MessageBox.Show(msg, "Game Over", MessageBoxButton.OK) == MessageBoxResult.OK)
+                this.Close(); // close window when game finished
         }
         private void updateBonus()
         {
@@ -470,26 +447,12 @@ namespace connectFour
             updateBoard(emptyCell_row, call.Move.Move_ - 2); // update 2D board + make animation of sliding ball
         }
 
-        private bool anotherRoundAnswer(String msg)
-        {
-            //TODO: when game finished, a pop msg appears along with a question to both users about playing another round
-            MessageBoxResult answer = System.Windows.MessageBox.Show(msg, "Game Over",
-                    MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-
-            //Here: The answer should be sent to the server
-            // ...
-
-            return answer == MessageBoxResult.Yes; // return true iff accepted another round, else return false
-        }
-
         public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            //TODO: sign out of the current user and update online users list in the server
-            //send a msg to to the other opponent of it's disconnected
             await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
-            var call = await gameClient.CheckForGameAsync(new Check { MyId = LoginPage.myID });
-            if (call.Answer)
-                await gameClient.OfferGameAsync(new GameRequest { Answer = AnswerCode.Rejected, MyId = LoginPage.myID, OpponentID = id1 == LoginPage.myID ? id2 : id1 });
+          
+            //TODO: send a msg to to the other opponent of it's disconnected and make oppnent win
+           // if(checkForWinnerOrTie()==0) // if game unfinished but this player exited the game than a meessage should be sent to server
         }
     }
 }

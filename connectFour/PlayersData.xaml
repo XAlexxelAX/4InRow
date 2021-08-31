@@ -7,26 +7,36 @@
         mc:Ignorable="d"
         Title="PlayersData" Height="450" Width="400" Background="Azure"
         Icon="Resources\users_data.png">
+    
+    <!--main grid of window-->
     <Grid x:Name="mainGrid">
         <Grid.ColumnDefinitions>
+            <!--margin up-->
             <ColumnDefinition Width="30"/>
+            <!--list of players/table of data coloumn-->
             <ColumnDefinition Width="*" x:Name="dataCol"/>
+            <!--margin down-->
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <!--margin left-->
             <RowDefinition Height="30"/>
             <RowDefinition Height="40"/>
+            <!--list of players/table of data row-->
             <RowDefinition Height="*" x:Name="dataRow"/>
             <RowDefinition Height="40"/>
+            <!--margin right-->
             <RowDefinition Height="30"/>
-
         </Grid.RowDefinitions>
 
+        <!--text blocks of title and info-->
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Chosen Players Data:" FontFamily="Bell MT Bold"
                    Foreground="DeepSkyBlue" VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center" 
                     TextDecorations="Underline"/>
         <TextBlock Grid.Row="3" Grid.Column="1" x:Name="winRatioTxt"
                     VerticalAlignment="Center" FontSize="15" HorizontalAlignment="Center" Visibility="Hidden"/>
+
+        <!--list of data-->
         <ListBox Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Window>

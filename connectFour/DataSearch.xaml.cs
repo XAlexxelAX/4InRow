@@ -121,7 +121,7 @@ namespace connectFour
                     for (int i = 0; i < rows; insertDataToRow(i, rowsData[i], cols), i++) ;
                     break;
 
-                case "Games: Live (since first move)":
+                case "Games: Live":
                     cols = 3;
                     DynamicGrid.Visibility = Visibility.Visible;
                     createCols(cols);
@@ -180,7 +180,6 @@ namespace connectFour
             {
                 rowsData = new List<List<Object>>();
                 rowsData.Add(new List<Object> { "Game Date", "Winner", "P1 Points", "P2 Points" });
-                //TODO: Insert rows of data to list from DB
                 using (var call = statsClient.getUsersIntersection(new StatsRequest { Id1 = getCheckedUsers()[0].Item2, Id2 = getCheckedUsers()[1].Item2 }))
                 {
                     while (await call.ResponseStream.MoveNext())
@@ -190,7 +189,6 @@ namespace connectFour
                             ,call.ResponseStream.Current.Score1, call.ResponseStream.Current.Score2 });
                     }
                 }
-
                 new PlayersData().Show();
             }
         }
@@ -252,9 +250,9 @@ namespace connectFour
             else
                 pickedUsers.Clear();
 
-            foreach (ListBoxItem checkBox in users.Items)
-                if (((CheckBox)checkBox.Content).IsChecked == true)
-                    pickedUsers.Add((((CheckBox)checkBox.Content).Content.ToString(), (int)((CheckBox)checkBox.Content).DataContext));
+            foreach (ListBoxItem listBoxItem in users.Items) // make list of pairs of (username,id) that are picked
+                if (((CheckBox)listBoxItem.Content).IsChecked == true)
+                    pickedUsers.Add((((TextBlock)((CheckBox)listBoxItem.Content).Content).Text, (int)((CheckBox)listBoxItem.Content).DataContext));
             return pickedUsers;
         }
     }

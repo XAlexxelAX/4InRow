@@ -34,7 +34,7 @@
             <ComboBoxItem Content="Users: Sorted by points amount"></ComboBoxItem>
 
             <ComboBoxItem Content="Games: Until now"></ComboBoxItem>
-            <ComboBoxItem Content="Games: Live (since first move)"></ComboBoxItem>
+            <ComboBoxItem Content="Games: Live"></ComboBoxItem>
 
             <ComboBoxItem Content="Players: Data"></ComboBoxItem>
         </ComboBox>
@@ -49,7 +49,7 @@
         <TextBlock Grid.Row="5" Grid.Column="1" x:Name="playersData"
                     VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Center" />
 
-        <Button x:Name="searchBtn" Content="Search Data of Selected Players" 
+        <Button x:Name="searchBtn" Content="Show Data of Selected Players" 
                 HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="5"
                 FontFamily="Bell MT Bold" FontSize="23" Visibility="Hidden"
                 Click="DataSearch_ClickedAsync"/>
