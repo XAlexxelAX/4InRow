@@ -7,25 +7,25 @@
         mc:Ignorable="d"
         Title="Register" Height="450" Width="400"
         Background="Azure" Icon="Resources\loginIcon.ico">
-    <Grid>
+    <Grid> <!-- Initiate main grid of the window -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/> <!-- margin left -->
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/> <!-- margin right -->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/> <!-- margin up -->
+            <RowDefinition Height="*"/> <!-- photo -->
+            <RowDefinition Height="20"/> <!-- margin -->
+            <RowDefinition Height="25"/> <!-- username -->
+            <RowDefinition Height="40"/> <!-- username input -->
+            <RowDefinition Height="10"/> <!-- margin -->
+            <RowDefinition Height="25"/> <!-- password -->
+            <RowDefinition Height="40"/> <!-- password input -->
+            <RowDefinition Height="50"/> <!-- button -->
             <RowDefinition Height="20"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="50"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/> <!-- margin down -->
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Register:" FontFamily="Bell MT Bold"
