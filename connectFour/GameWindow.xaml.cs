@@ -62,7 +62,6 @@ namespace connectFour
             lastIndex = -1;
             hasAnimationFinished = true;
             amIfirst = isMyTurn;
-            isNewRound = false;
             timeCounter = 0;
 
             turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
@@ -450,9 +449,9 @@ namespace connectFour
         public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
             await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
-          
+
             //TODO: send a msg to to the other opponent of it's disconnected and make oppnent win
-           // if(checkForWinnerOrTie()==0) // if game unfinished but this player exited the game than a meessage should be sent to server
+            // if(checkForWinnerOrTie()==0) // if game unfinished but this player exited the game than a meessage should be sent to server
         }
     }
 }
