@@ -29,22 +29,29 @@ namespace EFDB.Migrations
                     b.Property<DateTime>("FinishTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Player1")
+                    b.Property<int>("Moves")
                         .HasColumnType("int");
 
                     b.Property<int>("Player1Score")
                         .HasColumnType("int");
 
-                    b.Property<int>("Player2")
-                        .HasColumnType("int");
+                    b.Property<string>("Player1Username")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Player2Score")
                         .HasColumnType("int");
+
+                    b.Property<string>("Player2Username")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("WinnerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Player1Username");
+
+                    b.HasIndex("Player2Username");
 
                     b.ToTable("games");
                 });
@@ -74,6 +81,21 @@ namespace EFDB.Migrations
                     b.HasKey("Username");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("EFDB.Models.Game", b =>
+                {
+                    b.HasOne("EFDB.Models.UserModel", "Player1")
+                        .WithMany()
+                        .HasForeignKey("Player1Username");
+
+                    b.HasOne("EFDB.Models.UserModel", "Player2")
+                        .WithMany()
+                        .HasForeignKey("Player2Username");
+
+                    b.Navigation("Player1");
+
+                    b.Navigation("Player2");
                 });
 #pragma warning restore 612, 618
         }

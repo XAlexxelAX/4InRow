@@ -21,7 +21,6 @@ C:\Users\USER\Desktop\4InRow\EFDB\bin\Debug\netcoreapp3.1\EFDB.runtimeconfig.jso
 C:\Users\USER\Desktop\4InRow\EFDB\bin\Debug\netcoreapp3.1\EFDB.runtimeconfig.dev.json
 C:\Users\USER\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.genruntimeconfig.cache
 C:\Users\USER\Desktop\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.AssemblyReference.cache
-C:\Users\Alex\source\repos\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.AssemblyReference.cache
 C:\Users\shaha\Desktop\4inRow\EFDB\bin\Debug\netcoreapp3.1\EFDB.deps.json
 C:\Users\shaha\Desktop\4inRow\EFDB\bin\Debug\netcoreapp3.1\EFDB.runtimeconfig.json
 C:\Users\shaha\Desktop\4inRow\EFDB\bin\Debug\netcoreapp3.1\EFDB.runtimeconfig.dev.json
@@ -34,3 +33,4 @@ C:\Users\shaha\Desktop\4inRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.CoreCompi
 C:\Users\shaha\Desktop\4inRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.dll
 C:\Users\shaha\Desktop\4inRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.pdb
 C:\Users\shaha\Desktop\4inRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.genruntimeconfig.cache
+C:\Users\Alex\source\repos\4InRow\EFDB\obj\Debug\netcoreapp3.1\EFDB.csproj.AssemblyReference.cache

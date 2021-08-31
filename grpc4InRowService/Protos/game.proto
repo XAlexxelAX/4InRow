@@ -62,6 +62,7 @@ message Score{
 	int32 score1 = 3;
 	int32 score2 = 4;
 	int32 won = 5;
+	int32 moves = 6;
 }
 
 message Move{

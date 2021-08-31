@@ -1,18 +1,8 @@
-﻿using Grpc.Core;
-using Grpc.Net.Client;
+﻿using Grpc.Net.Client;
 using grpc4InRowService.Protos;
 using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace connectFour
 {
@@ -46,7 +36,7 @@ namespace connectFour
                 GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
                 if (!gr.IsSuccessfull)
                 {
-                    MessageBox.Show("Couldn't login :(");
+                    MessageBox.Show(gr.Error);
                     return;
                 }
                 myID = gr.Id;

@@ -42,7 +42,7 @@ namespace connectFour
 
                 if (!response.IsSuccessfull)
                 {
-                    MessageBox.Show("Couldn't Register :(");
+                    MessageBox.Show(response.Error);
                     return;
                 }
                 

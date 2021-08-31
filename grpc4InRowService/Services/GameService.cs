@@ -23,9 +23,9 @@ namespace grpc4InRowService.Services
             try
             {
                 if (Program.gameRequests.ContainsKey(request.MyId))//some player checks if someone offered him a game, receives back Answer if someone offered and if so, gets the offering ID
-                    if (Program.gameRequests[request.MyId].Item2 != AnswerCode.Unanswered) 
+                    if (Program.gameRequests[request.MyId].Item2 != AnswerCode.Unanswered)
                         return Task.FromResult(new CheckReply { Answer = false });
-                    else 
+                    else
                         return Task.FromResult(new CheckReply { Answer = true, Offeringid = Program.gameRequests[request.MyId].Item1 });
                 else if (Program.gameRequests.ContainsKey(request.OpponentID))//offering player checks if request was answered
                     return Task.FromResult(new CheckReply { Answer = true, Status = Program.gameRequests[request.OpponentID].Item2 });
@@ -159,11 +159,12 @@ namespace grpc4InRowService.Services
                     db.games.Add(new Game
                     {
                         FinishTime = Program.ongoingGames[(request.Key1, request.Key2)].Item1,
-                        Player1 = request.Key1,
-                        Player2 = request.Key2,
+                        Player1 = db.users.Single(user => user.Id == request.Key1),
+                        Player2 = db.users.Single(user => user.Id == request.Key2),
                         Player1Score = request.Score1,
                         Player2Score = request.Score2,
-                        WinnerId = request.Won
+                        WinnerId = request.Won,
+                        Moves = request.Moves
                     });
                     Program.ongoingGames.Remove((request.Key1, request.Key2));
                 }

@@ -2,6 +2,7 @@
 using EFDB.Models;
 using Grpc.Core;
 using grpc4InRowService.Protos;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
@@ -11,7 +12,6 @@ namespace grpc4InRowService.Services
 {
     public class UserService : User.UserBase
     {
-        //private Dictionary<Int32,String> userStreams = new Dictionary<int, String>();
         private readonly ILogger<UserService> _logger;
         public UserService(ILogger<UserService> logger)
         {
@@ -25,25 +25,25 @@ namespace grpc4InRowService.Services
             {
                 using (var db = new UsersContext())
                 {
-                    UserModel userEntity = db.users.Single(user => user.Username == request.Username);
-                    if (userEntity != null)
-                        if (Program.onlineUsers.ContainsKey(userEntity.Id))
-                            return Task.FromResult(new GeneralReply { IsSuccessfull = false });
-                        else if (userEntity.PW == request.Pw)
+                    UserModel userEntity = db.users.Single(user => user.Username == request.Username);//gets user reference from db by username(the primary key)
+                    if (userEntity != null)//if found user in db
+                        if (Program.onlineUsers.ContainsKey(userEntity.Id))// if user already logged in
+                            throw new Exception("User already logged in");
+                        else if (userEntity.PW == request.Pw)//else checks if password matches the db
                         {
-                            //Program.onlineUsers.Add(userEntity.Id, userEntity.Username);
                             AddToOnline(new GeneralReq { Id = userEntity.Id, Username = userEntity.Username }, context);
                             return Task.FromResult(new GeneralReply { IsSuccessfull = true, Id = userEntity.Id });
                         }
                     return Task.FromResult(new GeneralReply { IsSuccessfull = false });
                 }
             }
+            catch (InvalidOperationException e)
+            {
+                return Task.FromResult(new GeneralReply { IsSuccessfull = false, Error = "User doesn't exists" });//if user is already logged in returns a error messege
+            }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                if (e.InnerException != null)
-                    Console.WriteLine(e.InnerException.Message);
-                return Task.FromResult(new GeneralReply { IsSuccessfull = false });
+                return Task.FromResult(new GeneralReply { IsSuccessfull = false, Error = e.Message });//if user is already logged in returns a error messege
             }
         }
 
@@ -54,24 +54,22 @@ namespace grpc4InRowService.Services
             {
                 using (var db = new UsersContext())
                 {
-                    var user = new UserModel { Username = request.Username, PW = request.Pw };
+                    var user = new UserModel { Username = request.Username, PW = request.Pw };// creates new user model to be added to db
                     db.users.Add(user);
                     db.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (DbUpdateException e)// if user by the same primary key(username) already in db, exception is thrown
             {
-                Console.WriteLine(e.Message);
-                if (e.InnerException != null)
-                    Console.WriteLine(e.InnerException.Message);
                 rr.IsSuccessfull = false;
+                rr.Error = "A user with this name exists already.";
             }
             return Task.FromResult(rr);
         }
 
         public override async Task getOnlineUsers(GeneralReq request, IServerStreamWriter<UserData> responseStream, ServerCallContext context)
         {
-            foreach (var u in Program.onlineUsers)
+            foreach (var u in Program.onlineUsers)// writes async all users from onlineusers dict
             {
                 await responseStream.WriteAsync(new UserData
                 {
@@ -81,7 +79,7 @@ namespace grpc4InRowService.Services
             }
         }
 
-        public override Task<GeneralReply> AddToOnline(GeneralReq request, ServerCallContext context)
+        public override Task<GeneralReply> AddToOnline(GeneralReq request, ServerCallContext context)//adds a user to onlineusers dict
         {
             try
             {
@@ -91,14 +89,14 @@ namespace grpc4InRowService.Services
             catch { return Task.FromResult(new GeneralReply { IsSuccessfull = false }); }
         }
 
-        public override Task<GeneralReply> RemoveFromOnline(GeneralReq request, ServerCallContext context)
+        public override Task<GeneralReply> RemoveFromOnline(GeneralReq request, ServerCallContext context)// removes a user from onlineusers dict
         {
             try
             {
                 Program.onlineUsers.Remove(request.Id);
                 return Task.FromResult(new GeneralReply { IsSuccessfull = true });
             }
-            catch { return Task.FromResult(new GeneralReply { IsSuccessfull = false }); }
+            catch { return Task.FromResult(new GeneralReply { IsSuccessfull = false, Error = "User was not found in online users." }); }// if user wasn't in onlineuser dict returns a message
         }
     }
 }

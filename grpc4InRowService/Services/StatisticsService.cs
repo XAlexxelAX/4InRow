@@ -39,14 +39,14 @@ namespace grpc4InRowService.Services
                 foreach (var game in db.games)
                     using (var db2 = new UsersContext())
                     {
-                        string User1 = db2.users.Single(user => user.Id == game.Player1).Username;
-                        string User2 = db2.users.Single(user => user.Id == game.Player2).Username;
+                        string User1 = db2.users.Single(user => user.Id == game.Player1.Id).Username;
+                        string User2 = db2.users.Single(user => user.Id == game.Player2.Id).Username;
                         await responseStream.WriteAsync(new GameStats
                         {
-                            Id1 = game.Player1,
-                            Id2 = game.Player2,
-                            User1 = db2.users.Single(user => user.Id == game.Player1).Username,
-                            User2 = db2.users.Single(user => user.Id == game.Player2).Username,
+                            Id1 = game.Player1.Id,
+                            Id2 = game.Player2.Id,
+                            User1 = game.Player1.Username,//db2.users.Single(user => user.Id == game.Player1).Username,
+                            User2 = game.Player2.Username,//db2.users.Single(user => user.Id == game.Player2).Username,
                             Score1 = game.Player1Score,
                             Score2 = game.Player2Score,
                             Winner = game.WinnerId == 1 ? User1 : game.WinnerId == 2 ? User2 : "Tie",
@@ -57,49 +57,48 @@ namespace grpc4InRowService.Services
                                 Day = game.FinishTime.Day,
                                 Month = game.FinishTime.Month,
                                 Year = game.FinishTime.Year
-                            }
+                            },
+                            Moves = game.Moves
                         });
                     }
         }
 
         public override async Task getOngoingGames(StatsRequest request, IServerStreamWriter<GameStats> responseStream, ServerCallContext context)
         {
-                using (var db = new UsersContext())
-                    foreach (var game in Program.ongoingGames)
-                        await responseStream.WriteAsync(new GameStats
+            using (var db = new UsersContext())
+                foreach (var game in Program.ongoingGames)
+                    await responseStream.WriteAsync(new GameStats
+                    {
+                        Id1 = game.Key.Item1,
+                        Id2 = game.Key.Item2,
+                        User1 = db.users.Single(user => user.Id == game.Key.Item1).Username,
+                        User2 = db.users.Single(user => user.Id == game.Key.Item2).Username,
+                        Date = new Protos.DateTime
                         {
-                            Id1 = game.Key.Item1,
-                            Id2 = game.Key.Item2,
-                            User1 = db.users.Single(user => user.Id == game.Key.Item1).Username,
-                            User2 = db.users.Single(user => user.Id == game.Key.Item2).Username,
-                            Date = new Protos.DateTime
-                            {
-                                Hour = game.Value.Item1.Hour,
-                                Minute = game.Value.Item1.Minute,
-                                Day = game.Value.Item1.Day,
-                                Month = game.Value.Item1.Month,
-                                Year = game.Value.Item1.Year
-                            }
-                        });
+                            Hour = game.Value.Item1.Hour,
+                            Minute = game.Value.Item1.Minute,
+                            Day = game.Value.Item1.Day,
+                            Month = game.Value.Item1.Month,
+                            Year = game.Value.Item1.Year
+                        }
+                    });
         }
 
         public override async Task getUsersIntersection(StatsRequest request, IServerStreamWriter<GameStats> responseStream, ServerCallContext context)
         {
             using (var db = new UsersContext())
-                foreach (var game in db.games.Where(g => g.Player1 == request.Id1 && g.Player2 == request.Id2 || g.Player1 == request.Id2 && g.Player2 == request.Id1))
+                foreach (var game in db.games.Where(g => g.Player1.Id == request.Id1 && g.Player2.Id == request.Id2 || g.Player1.Id == request.Id2 && g.Player2.Id == request.Id1))
                     using (var db2 = new UsersContext())
                     {
-                        string User1 = db2.users.Single(user => user.Id == game.Player1).Username;
-                        string User2 = db2.users.Single(user => user.Id == game.Player2).Username;
                         await responseStream.WriteAsync(new GameStats
                         {
-                            Id1 = game.Player1,
-                            Id2 = game.Player2,
-                            User1 = User1,
-                            User2 = User2,
+                            Id1 = game.Player1.Id,
+                            Id2 = game.Player2.Id,
+                            User1 = game.Player1.Username,
+                            User2 = game.Player2.Username,
                             Score1 = game.Player1Score,
                             Score2 = game.Player2Score,
-                            Winner = game.WinnerId == 1 ? User1 : game.WinnerId == 2 ? User2 : "Tie",
+                            Winner = game.WinnerId == 1 ? game.Player1.Username : game.WinnerId == 2 ? game.Player2.Username : "Tie",
                             Date = new Protos.DateTime
                             {
                                 Hour = game.FinishTime.Hour,

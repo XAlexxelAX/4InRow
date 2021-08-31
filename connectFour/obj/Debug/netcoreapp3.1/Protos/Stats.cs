@@ -27,24 +27,25 @@ namespace grpc4InRowService.Protos {
             "ChJQcm90b3Mvc3RhdHMucHJvdG8iKAoMU3RhdHNSZXF1ZXN0EgsKA2lkMRgB",
             "IAEoBRILCgNpZDIYAiABKAUiVQoJVXNlclN0YXRzEgoKAmlkGAEgASgFEhAK",
             "CHVzZXJuYW1lGAIgASgJEg0KBWdhbWVzGAMgASgFEgwKBHdpbnMYBCABKAUS",
-            "DQoFc2NvcmUYBSABKAUijAEKCUdhbWVTdGF0cxILCgNpZDEYASABKAUSDQoF",
+            "DQoFc2NvcmUYBSABKAUimwEKCUdhbWVTdGF0cxILCgNpZDEYASABKAUSDQoF",
             "dXNlcjEYAiABKAkSDgoGc2NvcmUxGAMgASgFEgsKA2lkMhgEIAEoBRINCgV1",
             "c2VyMhgFIAEoCRIOCgZzY29yZTIYBiABKAUSDgoGd2lubmVyGAcgASgJEhcK",
-            "BGRhdGUYCCABKAsyCS5EYXRlVGltZSJSCghEYXRlVGltZRIMCgRob3VyGAEg",
-            "ASgFEg4KBm1pbnV0ZRgCIAEoBRILCgNkYXkYAyABKAUSDQoFbW9udGgYBCAB",
-            "KAUSDAoEeWVhchgFIAEoBTL9AQoKU3RhdGlzdGljcxIvChBnZXRBbGxVc2Vy",
-            "c1N0YXRzEg0uU3RhdHNSZXF1ZXN0GgouVXNlclN0YXRzMAESLgoPZ2V0Rmlu",
-            "aXNlZEdhbWVzEg0uU3RhdHNSZXF1ZXN0GgouR2FtZVN0YXRzMAESLgoPZ2V0",
-            "T25nb2luZ0dhbWVzEg0uU3RhdHNSZXF1ZXN0GgouR2FtZVN0YXRzMAESKQoM",
-            "Z2V0VXNlclN0YXRzEg0uU3RhdHNSZXF1ZXN0GgouVXNlclN0YXRzEjMKFGdl",
-            "dFVzZXJzSW50ZXJzZWN0aW9uEg0uU3RhdHNSZXF1ZXN0GgouR2FtZVN0YXRz",
-            "MAFCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
+            "BGRhdGUYCCABKAsyCS5EYXRlVGltZRINCgVtb3ZlcxgJIAEoBSJSCghEYXRl",
+            "VGltZRIMCgRob3VyGAEgASgFEg4KBm1pbnV0ZRgCIAEoBRILCgNkYXkYAyAB",
+            "KAUSDQoFbW9udGgYBCABKAUSDAoEeWVhchgFIAEoBTL9AQoKU3RhdGlzdGlj",
+            "cxIvChBnZXRBbGxVc2Vyc1N0YXRzEg0uU3RhdHNSZXF1ZXN0GgouVXNlclN0",
+            "YXRzMAESLgoPZ2V0RmluaXNlZEdhbWVzEg0uU3RhdHNSZXF1ZXN0GgouR2Ft",
+            "ZVN0YXRzMAESLgoPZ2V0T25nb2luZ0dhbWVzEg0uU3RhdHNSZXF1ZXN0Ggou",
+            "R2FtZVN0YXRzMAESKQoMZ2V0VXNlclN0YXRzEg0uU3RhdHNSZXF1ZXN0Ggou",
+            "VXNlclN0YXRzEjMKFGdldFVzZXJzSW50ZXJzZWN0aW9uEg0uU3RhdHNSZXF1",
+            "ZXN0GgouR2FtZVN0YXRzMAFCG6oCGGdycGM0SW5Sb3dTZXJ2aWNlLlByb3Rv",
+            "c2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.StatsRequest), global::grpc4InRowService.Protos.StatsRequest.Parser, new[]{ "Id1", "Id2" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserStats), global::grpc4InRowService.Protos.UserStats.Parser, new[]{ "Id", "Username", "Games", "Wins", "Score" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameStats), global::grpc4InRowService.Protos.GameStats.Parser, new[]{ "Id1", "User1", "Score1", "Id2", "User2", "Score2", "Winner", "Date" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GameStats), global::grpc4InRowService.Protos.GameStats.Parser, new[]{ "Id1", "User1", "Score1", "Id2", "User2", "Score2", "Winner", "Date", "Moves" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.DateTime), global::grpc4InRowService.Protos.DateTime.Parser, new[]{ "Hour", "Minute", "Day", "Month", "Year" }, null, null, null, null)
           }));
     }
@@ -613,6 +614,7 @@ namespace grpc4InRowService.Protos {
       score2_ = other.score2_;
       winner_ = other.winner_;
       date_ = other.date_ != null ? other.date_.Clone() : null;
+      moves_ = other.moves_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -709,6 +711,17 @@ namespace grpc4InRowService.Protos {
       }
     }
 
+    /// <summary>Field number for the "moves" field.</summary>
+    public const int MovesFieldNumber = 9;
+    private int moves_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Moves {
+      get { return moves_; }
+      set {
+        moves_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GameStats);
@@ -730,6 +743,7 @@ namespace grpc4InRowService.Protos {
       if (Score2 != other.Score2) return false;
       if (Winner != other.Winner) return false;
       if (!object.Equals(Date, other.Date)) return false;
+      if (Moves != other.Moves) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -744,6 +758,7 @@ namespace grpc4InRowService.Protos {
       if (Score2 != 0) hash ^= Score2.GetHashCode();
       if (Winner.Length != 0) hash ^= Winner.GetHashCode();
       if (date_ != null) hash ^= Date.GetHashCode();
+      if (Moves != 0) hash ^= Moves.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -792,6 +807,10 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(66);
         output.WriteMessage(Date);
       }
+      if (Moves != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Moves);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -833,6 +852,10 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(66);
         output.WriteMessage(Date);
       }
+      if (Moves != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Moves);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -865,6 +888,9 @@ namespace grpc4InRowService.Protos {
       }
       if (date_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Date);
+      }
+      if (Moves != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Moves);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -903,6 +929,9 @@ namespace grpc4InRowService.Protos {
           Date = new global::grpc4InRowService.Protos.DateTime();
         }
         Date.MergeFrom(other.Date);
+      }
+      if (other.Moves != 0) {
+        Moves = other.Moves;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -953,6 +982,10 @@ namespace grpc4InRowService.Protos {
             input.ReadMessage(Date);
             break;
           }
+          case 72: {
+            Moves = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -1000,6 +1033,10 @@ namespace grpc4InRowService.Protos {
               Date = new global::grpc4InRowService.Protos.DateTime();
             }
             input.ReadMessage(Date);
+            break;
+          }
+          case 72: {
+            Moves = input.ReadInt32();
             break;
           }
         }

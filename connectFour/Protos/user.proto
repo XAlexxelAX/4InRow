@@ -28,4 +28,5 @@ message UserRequest {
 message GeneralReply{
 	bool isSuccessfull = 1;
 	int32 id = 2;
+	string error = 3;
 }

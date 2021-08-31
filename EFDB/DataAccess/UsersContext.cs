@@ -8,7 +8,7 @@ namespace EFDB.DataAccess
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                @"Data Source=c:\fourinarow;Server=(localdb)\mssqllocaldb;Database=fourinarow;Trusted_Connection=True");//Data Source=c:\fourinrow;
+                @"AttachDbFilename=C:\fourinrow\fourinrow_avi_evyatar.mdf;Server=(localdb)\mssqllocaldb;Database=fourinarow;Trusted_Connection=True");//Data Source=c:\fourinrow;
         }
 
 

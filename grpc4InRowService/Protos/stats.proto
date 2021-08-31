@@ -32,6 +32,7 @@ message GameStats{
 	int32 score2 = 6;
 	string winner = 7;
 	DateTime date = 8;
+	int32 moves = 9;
 }
 
 message DateTime{

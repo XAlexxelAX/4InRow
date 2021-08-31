@@ -27,21 +27,21 @@ namespace grpc4InRowService.Protos {
             "ChFQcm90b3MvdXNlci5wcm90byIqCgpHZW5lcmFsUmVxEgoKAmlkGAEgASgF",
             "EhAKCHVzZXJuYW1lGAIgASgJIigKCFVzZXJEYXRhEgoKAmlkGAEgASgFEhAK",
             "CHVzZXJuYW1lGAIgASgJIisKC1VzZXJSZXF1ZXN0EhAKCHVzZXJuYW1lGAEg",
-            "ASgJEgoKAnB3GAIgASgJIjEKDEdlbmVyYWxSZXBseRIVCg1pc1N1Y2Nlc3Nm",
-            "dWxsGAEgASgIEgoKAmlkGAIgASgFMtwBCgRVc2VyEioKDmdldE9ubGluZVVz",
-            "ZXJzEgsuR2VuZXJhbFJlcRoJLlVzZXJEYXRhMAESJAoFTG9naW4SDC5Vc2Vy",
-            "UmVxdWVzdBoNLkdlbmVyYWxSZXBseRInCghSZWdpc3RlchIMLlVzZXJSZXF1",
-            "ZXN0Gg0uR2VuZXJhbFJlcGx5Ei4KEFJlbW92ZUZyb21PbmxpbmUSCy5HZW5l",
-            "cmFsUmVxGg0uR2VuZXJhbFJlcGx5EikKC0FkZFRvT25saW5lEgsuR2VuZXJh",
-            "bFJlcRoNLkdlbmVyYWxSZXBseUIbqgIYZ3JwYzRJblJvd1NlcnZpY2UuUHJv",
-            "dG9zYgZwcm90bzM="));
+            "ASgJEgoKAnB3GAIgASgJIkAKDEdlbmVyYWxSZXBseRIVCg1pc1N1Y2Nlc3Nm",
+            "dWxsGAEgASgIEgoKAmlkGAIgASgFEg0KBWVycm9yGAMgASgJMtwBCgRVc2Vy",
+            "EioKDmdldE9ubGluZVVzZXJzEgsuR2VuZXJhbFJlcRoJLlVzZXJEYXRhMAES",
+            "JAoFTG9naW4SDC5Vc2VyUmVxdWVzdBoNLkdlbmVyYWxSZXBseRInCghSZWdp",
+            "c3RlchIMLlVzZXJSZXF1ZXN0Gg0uR2VuZXJhbFJlcGx5Ei4KEFJlbW92ZUZy",
+            "b21PbmxpbmUSCy5HZW5lcmFsUmVxGg0uR2VuZXJhbFJlcGx5EikKC0FkZFRv",
+            "T25saW5lEgsuR2VuZXJhbFJlcRoNLkdlbmVyYWxSZXBseUIbqgIYZ3JwYzRJ",
+            "blJvd1NlcnZpY2UuUHJvdG9zYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GeneralReq), global::grpc4InRowService.Protos.GeneralReq.Parser, new[]{ "Id", "Username" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserData), global::grpc4InRowService.Protos.UserData.Parser, new[]{ "Id", "Username" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.UserRequest), global::grpc4InRowService.Protos.UserRequest.Parser, new[]{ "Username", "Pw" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GeneralReply), global::grpc4InRowService.Protos.GeneralReply.Parser, new[]{ "IsSuccessfull", "Id" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::grpc4InRowService.Protos.GeneralReply), global::grpc4InRowService.Protos.GeneralReply.Parser, new[]{ "IsSuccessfull", "Id", "Error" }, null, null, null, null)
           }));
     }
     #endregion
@@ -703,6 +703,7 @@ namespace grpc4InRowService.Protos {
     public GeneralReply(GeneralReply other) : this() {
       isSuccessfull_ = other.isSuccessfull_;
       id_ = other.id_;
+      error_ = other.error_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -733,6 +734,17 @@ namespace grpc4InRowService.Protos {
       }
     }
 
+    /// <summary>Field number for the "error" field.</summary>
+    public const int ErrorFieldNumber = 3;
+    private string error_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Error {
+      get { return error_; }
+      set {
+        error_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GeneralReply);
@@ -748,6 +760,7 @@ namespace grpc4InRowService.Protos {
       }
       if (IsSuccessfull != other.IsSuccessfull) return false;
       if (Id != other.Id) return false;
+      if (Error != other.Error) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -756,6 +769,7 @@ namespace grpc4InRowService.Protos {
       int hash = 1;
       if (IsSuccessfull != false) hash ^= IsSuccessfull.GetHashCode();
       if (Id != 0) hash ^= Id.GetHashCode();
+      if (Error.Length != 0) hash ^= Error.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -780,6 +794,10 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(16);
         output.WriteInt32(Id);
       }
+      if (Error.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Error);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -797,6 +815,10 @@ namespace grpc4InRowService.Protos {
         output.WriteRawTag(16);
         output.WriteInt32(Id);
       }
+      if (Error.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Error);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -811,6 +833,9 @@ namespace grpc4InRowService.Protos {
       }
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (Error.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Error);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -828,6 +853,9 @@ namespace grpc4InRowService.Protos {
       }
       if (other.Id != 0) {
         Id = other.Id;
+      }
+      if (other.Error.Length != 0) {
+        Error = other.Error;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -851,6 +879,10 @@ namespace grpc4InRowService.Protos {
             Id = input.ReadInt32();
             break;
           }
+          case 26: {
+            Error = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -871,6 +903,10 @@ namespace grpc4InRowService.Protos {
           }
           case 16: {
             Id = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            Error = input.ReadString();
             break;
           }
         }

@@ -3,20 +3,13 @@ using grpc4InRowService.Protos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace connectFour
 {
@@ -28,7 +21,7 @@ namespace connectFour
         private int[,] board;
         private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex, timeCounter;
         private List<Image> imgs;
-        private bool isMyTurn, hasAnimationFinished, amIfirst;
+        private bool isMyTurn, hasAnimationFinished, amIfirst, isGameOver;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
         private User.UserClient userClient;
@@ -62,6 +55,7 @@ namespace connectFour
             lastIndex = -1;
             hasAnimationFinished = true;
             amIfirst = isMyTurn;
+            isGameOver = false;
             timeCounter = 0;
 
             turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
@@ -140,8 +134,24 @@ namespace connectFour
                     break;
                 col++;
             }
-
-            Reply call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col, InitiatorID = id1, InitiatedID = id2 });
+            Reply call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
+            if (call.Move != null && call.Move.Move_ == -1)
+            {
+                isGameOver = true;
+                System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
+                await gameClient.UpdateScoreAsync(new Score
+                {
+                    Key1 = id1,
+                    Key2 = id2,
+                    Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                    Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                    Won = id1 == LoginPage.myID ? 1 : 2,
+                    Moves = p1_cellCount + p2_cellCount
+                });
+                this.Close();
+                return;
+            }
+            call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col, InitiatorID = id1, InitiatedID = id2 });
 
             int emptyCell_row = findEmptyRowCell(col - 2);
             if (emptyCell_row == -1)
@@ -150,7 +160,7 @@ namespace connectFour
                 return;
             }
             updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
-            //boardView.IsHitTestVisible = false;
+                                                 //boardView.IsHitTestVisible = false;
         }
 
         private void codeAfterAnimation()
@@ -251,10 +261,17 @@ namespace connectFour
 
         private int findEmptyRowCell(int j)
         {
-            for (int i = board.GetLength(0) - 1; i >= 0; i--) // find the position of the ball by the user col. input
-                if (board[i, j] == 0)
-                    return i;
-            return -1; // return -1 if all col is full
+            try
+            {
+                for (int i = board.GetLength(0) - 1; i >= 0; i--) // find the position of the ball by the user col. input
+                    if (board[i, j] == 0)
+                        return i;
+                return -1; // return -1 if all col is full
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                return -1;
+            }
         }
 
         private int checkForWinnerOrTie()
@@ -392,7 +409,7 @@ namespace connectFour
 
             Reply r;
             if (id1 == LoginPage.myID) // update score in server
-                r = await gameClient.UpdateScoreAsync(new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p });
+                r = await gameClient.UpdateScoreAsync(new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p, Moves = p1_cellCount + p2_cellCount });
 
             if (System.Windows.MessageBox.Show(msg, "Game Over", MessageBoxButton.OK) == MessageBoxResult.OK)
                 this.Close(); // close window when game finished
@@ -437,6 +454,22 @@ namespace connectFour
                 call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
                 if (call.Answer && call.Move.Id != LoginPage.myID && lastIndex != call.Move.Index)
                     break;
+                else if (call.Move != null && call.Move.Move_ == -1) // the opponent has been disconnected
+                {
+                    isGameOver = true;
+                    System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
+                    await gameClient.UpdateScoreAsync(new Score
+                    {
+                        Key1 = id1,
+                        Key2 = id2,
+                        Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                        Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                        Won = id1 == LoginPage.myID ? 1 : 2,
+                        Moves = p1_cellCount + p2_cellCount
+                    });
+                    this.Close();
+                    return;
+                }
                 //else Thread.Sleep(1000);
             }
             lastIndex = call.Move.Index;
@@ -449,7 +482,8 @@ namespace connectFour
         public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
             await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
-
+            if (checkForWinnerOrTie() == 0 && !isGameOver) // send a msg that this player disconnected from the game
+                await gameClient.MakeMoveAsync(new MoveRequest { Move = -1, InitiatorID = id1, InitiatedID = id2 });
             //TODO: send a msg to to the other opponent of it's disconnected and make oppnent win
             // if(checkForWinnerOrTie()==0) // if game unfinished but this player exited the game than a meessage should be sent to server
         }
