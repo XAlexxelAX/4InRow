@@ -245,6 +245,7 @@ namespace connectFour
 
         private List<(String, int)> getCheckedUsers()
         {
+            // initate or clear list
             if (pickedUsers == null)
                 pickedUsers = new List<(String, int)>();
             else
