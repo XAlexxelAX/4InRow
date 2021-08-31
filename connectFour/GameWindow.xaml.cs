@@ -481,14 +481,6 @@ namespace connectFour
 
             return answer == MessageBoxResult.Yes; // return true iff accepted another round, else return false
         }
-        private async void anotherRoundOpponentsAnswer()
-        {
-            //TODO: when game finished, a pop msg appears along with a question to both users about playing another round
-            //In this method we will wait for the answer of the opponent 
-            // if and only if both users accepted another round - another round will be initialized with server implemtations
-            var call = await gameClient.CheckForGameAsync(new Check { MyId = LoginPage.myID });
-            isNewRound = call.Answer;  // return true iff the opponenet accepted another round, else return false
-        }
 
         public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
