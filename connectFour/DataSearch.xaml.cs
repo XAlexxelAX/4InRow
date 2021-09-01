@@ -105,7 +105,7 @@ namespace connectFour
                         {
                             while (await call.ResponseStream.MoveNext())
                             {
-                                string Date = String.Format("{2}/{3}/{4}\n{0}:{1}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
+                                string Date =Convert.ToDateTime(call.ResponseStream.Current.Date).ToString("dd/MM/yyyy\nhh:mm::ss");
                                 rowsData.Add(new List<Object>{call.ResponseStream.Current.User1, call.ResponseStream.Current.User2, call.ResponseStream.Current.Winner,
                                 call.ResponseStream.Current.Score1,call.ResponseStream.Current.Score2,Date });
                             }
@@ -134,7 +134,7 @@ namespace connectFour
                         {
                             while (await call.ResponseStream.MoveNext())
                             {
-                                string Date = String.Format("{3}/{4}/{5}\n{0}:{1}:{2}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute,call.ResponseStream.Current.Date.Seconds, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
+                                string Date = Convert.ToDateTime(call.ResponseStream.Current.Date).ToString("dd/MM/yyyy\nhh:mm::ss");
                                 rowsData.Add(new List<Object> { Date, call.ResponseStream.Current.User1, call.ResponseStream.Current.User2 });
                             }
                         }
@@ -198,7 +198,7 @@ namespace connectFour
                     {
                         while (await call.ResponseStream.MoveNext())
                         {
-                            string Date = String.Format("{3}/{4}/{5}\n{0}:{1}:{2}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute, call.ResponseStream.Current.Date.Seconds, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
+                            string Date = Convert.ToDateTime(call.ResponseStream.Current.Date).ToString("dd/MM/yyyy\nhh:mm::ss");
                             rowsData.Add(new List<Object> { Date, call.ResponseStream.Current.Winner
                             ,call.ResponseStream.Current.Score1, call.ResponseStream.Current.Score2 });
                         }
