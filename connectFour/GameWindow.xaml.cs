@@ -19,13 +19,13 @@ namespace connectFour
     public partial class Game : Window
     {
         private int[,] board;
-        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex, timeCounter;
+        private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex;
         private List<Image> imgs;
         private bool isMyTurn, hasAnimationFinished, amIfirst, isGameOver;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
         private User.UserClient userClient;
-        private Timer timer, timer2;
+        private Timer timer;
 
         public Game(bool isMyTurn, int id1, int id2)
         {
@@ -56,50 +56,43 @@ namespace connectFour
             hasAnimationFinished = true;
             amIfirst = isMyTurn;
             isGameOver = false;
-            timeCounter = 0;
-
             turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
             turnTitle.Foreground = new SolidColorBrush(Colors.Red);
 
-            if (!isMyTurn)
-            { // check for oponent's first move iff your are the not the initator of the game (= it's not your turn at the start)
-                hasAnimationFinished = false;
-                timer = new Timer();
-                timer.Tick += new EventHandler(timer_Tick);
-                timer.Interval = 200; // listen and update after 1/5 of a second (for the consturtor to finished)
-                timer.Start();
-            }
+            timer = new Timer();
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Interval = 500; // listen and update after 1/2 of a second (for the consturtor to finished)
+            timer.Start();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private async void timer_Tick(object sender, EventArgs e)
         {
-            makeOpponentsMove();
-            timer.Stop();
-            timer.Dispose();
-            hasAnimationFinished = true;
-        }
-
-        private async void timer_Tick2(object sender, EventArgs e)
-        {
-            timeCounter++;
-            var call = await gameClient.CheckForGameAsync(new Check { MyId = id1 == LoginPage.myID ? id2 : id1 });
-            if (call.Status == AnswerCode.Accepted)
+            Reply call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
+            // check if opponent disconnected from the game
+            if (!isGameOver && call.Move != null && call.Move.Move_ == -1) // move = -1 <=> opponent disconnected
             {
-                await gameClient.CreateGameAsync(new MoveRequest { InitiatedID = id1 == LoginPage.myID ? id2 : id1, InitiatorID = LoginPage.myID });
-                id1 = id1 == LoginPage.myID ? id2 : id1;
-                id2 = LoginPage.myID;
-                this.Dispatcher.Invoke(() => // in order to change the UI with another thread
+                isGameOver = true;
+                System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
+                await gameClient.UpdateScoreAsync(new Score // update score
                 {
-                    resetBoard(); // reset board to start another round
-                });
+                    Key1 = id1,
+                    Key2 = id2,
+                    Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                    Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                    Won = id1 == LoginPage.myID ? 1 : 2,
+                    Moves = p1_cellCount + p2_cellCount
+                });                this.Close(); // close this window
+                
+                return;
             }
-
-            if (timeCounter == 10)
-            {
-                timer2.Stop();
-                timeCounter = 0;
-                await gameClient.RemoveRequestAsync(new GameRequest { OpponentID = id1 == LoginPage.myID ? id2 : id1 });
-                this.Close();
+          
+            if (!amIfirst)// if first turn is not my turn and it's the opponent's turn, so wait and listen for hes move
+            {            // check for oponent's first move iff your are the not the initator of the game (= it's not your turn at the start)
+                hasAnimationFinished = false;
+                makeOpponentsMove();
+                //timer.Stop();
+                //timer.Dispose();
+                hasAnimationFinished = true;
             }
         }
 
@@ -134,24 +127,8 @@ namespace connectFour
                     break;
                 col++;
             }
-            Reply call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
-            if (call.Move != null && call.Move.Move_ == -1)
-            {
-                isGameOver = true;
-                System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
-                await gameClient.UpdateScoreAsync(new Score
-                {
-                    Key1 = id1,
-                    Key2 = id2,
-                    Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
-                    Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
-                    Won = id1 == LoginPage.myID ? 1 : 2,
-                    Moves = p1_cellCount + p2_cellCount
-                });
-                this.Close();
-                return;
-            }
-            call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col, InitiatorID = id1, InitiatedID = id2 });
+
+            Reply call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col, InitiatorID = id1, InitiatedID = id2 });
 
             int emptyCell_row = findEmptyRowCell(col - 2);
             if (emptyCell_row == -1)
@@ -454,7 +431,7 @@ namespace connectFour
                 call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
                 if (call.Answer && call.Move.Id != LoginPage.myID && lastIndex != call.Move.Index)
                     break;
-                else if (call.Move != null && call.Move.Move_ == -1) // the opponent has been disconnected
+                else if (!isGameOver && call.Move != null && call.Move.Move_ == -1) // the opponent has been disconnected
                 {
                     isGameOver = true;
                     System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
@@ -467,6 +444,8 @@ namespace connectFour
                         Won = id1 == LoginPage.myID ? 1 : 2,
                         Moves = p1_cellCount + p2_cellCount
                     });
+                    timer.Stop();
+                    timer.Dispose();
                     this.Close();
                     return;
                 }
@@ -481,11 +460,12 @@ namespace connectFour
 
         public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
+            timer.Stop();
+            timer.Dispose();
             await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
             if (checkForWinnerOrTie() == 0 && !isGameOver) // send a msg that this player disconnected from the game
                 await gameClient.MakeMoveAsync(new MoveRequest { Move = -1, InitiatorID = id1, InitiatedID = id2 });
-            //TODO: send a msg to to the other opponent of it's disconnected and make oppnent win
-            // if(checkForWinnerOrTie()==0) // if game unfinished but this player exited the game than a meessage should be sent to server
+            isGameOver = true;           
         }
     }
 }

@@ -99,14 +99,21 @@ namespace connectFour
 
                     rowsData = new List<List<Object>>();
                     rowsData.Add(new List<Object> { "P1", "P2", "Winner", "P1 Points", "P2 Points", "Date" });
-                    using (var call = statsClient.getFinisedGames(new StatsRequest()))
+                    try
                     {
-                        while (await call.ResponseStream.MoveNext())
+                        using (var call = statsClient.getFinisedGames(new StatsRequest()))
                         {
-                            string Date = String.Format("{2}/{3}/{4}\n{0}:{1}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
-                            rowsData.Add(new List<Object>{call.ResponseStream.Current.User1, call.ResponseStream.Current.User2, call.ResponseStream.Current.Winner,
+                            while (await call.ResponseStream.MoveNext())
+                            {
+                                string Date = String.Format("{2}/{3}/{4}\n{0}:{1}", call.ResponseStream.Current.Date.Hour, call.ResponseStream.Current.Date.Minute, call.ResponseStream.Current.Date.Day, call.ResponseStream.Current.Date.Month, call.ResponseStream.Current.Date.Year);
+                                rowsData.Add(new List<Object>{call.ResponseStream.Current.User1, call.ResponseStream.Current.User2, call.ResponseStream.Current.Winner,
                                 call.ResponseStream.Current.Score1,call.ResponseStream.Current.Score2,Date });
+                            }
                         }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("An error occurred");
                     }
                     rows = rowsData.Count;
                     createRows(rows);

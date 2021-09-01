@@ -68,7 +68,7 @@ namespace connectFour
                 MyId = LoginPage.myID
             });
 
-            if (cr.Answer && cr.Status == AnswerCode.Unanswered) // if there exist a request for game
+            if (isFree && cr.Answer && cr.Status == AnswerCode.Unanswered) // if there exist a request for game
             {
                 isFree = false;
                 var result = AutoClosingMessageBox.Show(
@@ -87,9 +87,12 @@ namespace connectFour
                 {
                     gr.Answer = AnswerCode.Accepted;
                     await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
-                    game = new Game(false, LoginPage.myID, cr.Offeringid);
-                    game.Closed += (sender, args) => { game = null; isFree = true; };
-                    game.Show();
+                    if (game == null)
+                    {
+                        game = new Game(false, LoginPage.myID, cr.Offeringid);
+                        game.Closed += (sender, args) => { game = null; isFree = true; };
+                        game.Show();
+                    }
                 }
                 else
                 {
@@ -124,18 +127,23 @@ namespace connectFour
                 else if (cr.Status == AnswerCode.Accepted)
                 {
                     timerResponse.Stop();
-                    msgBoxWindow.Close();
+                    if (msgBoxWindow != null)
+                        msgBoxWindow.Close();
                     timerCount = 0;
                     await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
                     await gameClient.CreateGameAsync(new MoveRequest { InitiatedID = (int)lb_itemBtn.DataContext, InitiatorID = LoginPage.myID });
-                    game = new Game(true, (int)lb_itemBtn.DataContext, LoginPage.myID);
-                    game.Closed += (sender, args) => { game = null; isFree = true; };
-                    game.Show();
+                    if (game == null)
+                    {
+                        game = new Game(true, (int)lb_itemBtn.DataContext, LoginPage.myID);
+                        game.Closed += (sender, args) => { game = null; isFree = true; };
+                        game.Show();
+                    }
                 }
                 else
                 {
                     timerResponse.Stop();
-                    msgBoxWindow.Close();
+                    if (msgBoxWindow != null)
+                        msgBoxWindow.Close();
                     timerCount = 0;
                     await gameClient.RemoveRequestAsync(new GameRequest { OpponentID = (int)lb_itemBtn.DataContext });
                     System.Windows.MessageBox.Show("Your opponent denied the game request.");

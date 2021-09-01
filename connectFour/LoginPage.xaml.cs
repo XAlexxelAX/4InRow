@@ -33,18 +33,24 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-                GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
-                if (!gr.IsSuccessfull)
+                try
                 {
-                    MessageBox.Show(gr.Error);
-                    return;
+                    GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
+                    if (!gr.IsSuccessfull)
+                    {
+                        MessageBox.Show(gr.Error);
+                        return;
+                    }
+                    myID = gr.Id;
+                    myUsername = username.Text;
+                    new OnlineUsersList().Show(); // open the list of current active players
+
+                    this.Close();
                 }
-                myID = gr.Id;
-                myUsername = username.Text;
-                new OnlineUsersList().Show(); // open the list of current active players
-
-                this.Close();
-
+                catch (Exception)
+                {
+                    MessageBox.Show("An error occurred while trying to log in");
+                }
             }
         }
 
