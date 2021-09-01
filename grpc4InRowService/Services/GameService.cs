@@ -64,7 +64,7 @@ namespace grpc4InRowService.Services
         {
             try
             {
-                if (Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))
+                if (Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)) && Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Count() > 0)
                     return Task.FromResult(new Reply
                     {
                         Answer = true,
@@ -75,6 +75,8 @@ namespace grpc4InRowService.Services
                             Index = Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Count - 1
                         }
                     });
+                else
+                    return Task.FromResult(new Reply { Answer = false });
             }
             catch
             {

@@ -8,8 +8,10 @@ namespace EFDB.Models
     {
         
         public int Id { get; set; }
+        public string Player1Username { get; set; }
         public UserModel Player1 { get; set; }
         public int Player1Score { get; set; }
+        public string Player2Username { get; set; }
         public UserModel Player2 { get; set; }
         public int Player2Score { get; set; }
         public int WinnerId { get; set; }

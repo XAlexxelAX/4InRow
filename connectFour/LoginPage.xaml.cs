@@ -15,12 +15,14 @@ namespace connectFour
         private User.UserClient userClient;
         public static int myID;
         public static String myUsername;
+        private bool sentRequest;
         public LoginPage()
         {
             InitializeComponent();
 
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             userClient = new User.UserClient(channel);
+            sentRequest = false;
         }
 
         private async void login_Click(object sender, RoutedEventArgs e)
@@ -35,17 +37,22 @@ namespace connectFour
             {
                 try
                 {
-                    GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
-                    if (!gr.IsSuccessfull)
+                    if (!sentRequest)
                     {
-                        MessageBox.Show(gr.Error);
-                        return;
+                        sentRequest = true;
+                        GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
+                        if (!gr.IsSuccessfull)
+                        {
+                            sentRequest = false;
+                            MessageBox.Show(gr.Error);
+                            return;
+                        }
+                        myID = gr.Id;
+                        myUsername = username.Text;
+                        new OnlineUsersList().Show(); // open the list of current active players
+                        sentRequest = false;
+                        this.Close();
                     }
-                    myID = gr.Id;
-                    myUsername = username.Text;
-                    new OnlineUsersList().Show(); // open the list of current active players
-
-                    this.Close();
                 }
                 catch (Exception)
                 {

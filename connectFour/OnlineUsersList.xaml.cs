@@ -46,7 +46,7 @@ namespace connectFour
         { // timer invokes each second
             Timer timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
-            timer.Interval = 1000; // listen and update each second
+            timer.Interval = 3000; // listen and update each second
             timer.Start();
         }
         public void InitTimer2()

@@ -12,11 +12,13 @@ namespace connectFour
     {
         private GrpcChannel channel;
         private User.UserClient userClient;
+        private bool sentRequest;
         public Register()
         {
             InitializeComponent();
             channel = GrpcChannel.ForAddress("https://localhost:5001");
             userClient = new User.UserClient(channel);
+            sentRequest = false;
         }
 
         private async void register_Click(object sender, RoutedEventArgs e)
@@ -29,15 +31,21 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-                var response = await userClient.RegisterAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
-
-                if (!response.IsSuccessfull)
+                if (!sentRequest)
                 {
-                    MessageBox.Show(response.Error);
-                    return;
+                    sentRequest = true;
+                    var response = await userClient.RegisterAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
+
+                    if (!response.IsSuccessfull)
+                    {
+                        MessageBox.Show(response.Error);
+                        sentRequest = false;
+                        return;
+                    }
+                    sentRequest = false;
+                    this.Close();
                 }
-                
-                this.Close();
+                sentRequest = true;
             }
         }
 

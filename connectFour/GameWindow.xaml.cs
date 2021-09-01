@@ -3,6 +3,7 @@ using grpc4InRowService.Protos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -21,11 +22,11 @@ namespace connectFour
         private int[,] board;
         private int turn, p1_cellCount, p2_cellCount, p1_score, p2_score, id1, id2, lastIndex;
         private List<Image> imgs;
-        private bool isMyTurn, hasAnimationFinished, amIfirst, isGameOver;
+        private bool isMyTurn, hasAnimationFinished, amIfirst, isGameOver, ScoreUpdated;
         private GrpcChannel channel;
         private Games.GamesClient gameClient;
         private User.UserClient userClient;
-        private Timer timer;
+        private System.Windows.Forms.Timer timer;
 
         public Game(bool isMyTurn, int id1, int id2)
         {
@@ -56,10 +57,11 @@ namespace connectFour
             hasAnimationFinished = true;
             amIfirst = isMyTurn;
             isGameOver = false;
+            ScoreUpdated = false;
             turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
             turnTitle.Foreground = new SolidColorBrush(Colors.Red);
 
-            timer = new Timer();
+            timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = 500; // listen and update after 1/2 of a second (for the consturtor to finished)
             timer.Start();
@@ -75,15 +77,20 @@ namespace connectFour
             {
                 isGameOver = true;
                 System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
-                await gameClient.UpdateScoreAsync(new Score // update score
+                if (!ScoreUpdated)
                 {
-                    Key1 = id1,
-                    Key2 = id2,
-                    Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
-                    Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
-                    Won = id1 == LoginPage.myID ? 1 : 2,
-                    Moves = p1_cellCount + p2_cellCount
-                }); this.Close(); // close this window
+                    ScoreUpdated = true;
+                    await gameClient.UpdateScoreAsync(new Score // update score
+                    {
+                        Key1 = id1,
+                        Key2 = id2,
+                        Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                        Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                        Won = id1 == LoginPage.myID ? 1 : 2,
+                        Moves = p1_cellCount + p2_cellCount
+                    });
+                }
+                this.Close(); // close this window
 
                 return;
             }
@@ -102,11 +109,10 @@ namespace connectFour
         {
             if (!hasAnimationFinished || timer == null || isGameOver)
                 return;
-
+            hasAnimationFinished = false;
             if (!isMyTurn || checkForWinnerOrTie() != 0) // if game over or it's not my turn than ignore the click
                 return;
             //boardView.IsHitTestVisible = false;
-            hasAnimationFinished = false;
             var point = Mouse.GetPosition(boardView); // mouse ptr cordiante at click event time
 
             int row = 0, col = 0;
@@ -129,7 +135,33 @@ namespace connectFour
                     break;
                 col++;
             }
-
+            var check = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
+            if (check.Answer == true && check.Move.Move_ == -1)
+            {
+                isGameOver = true;
+                System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
+                if (!ScoreUpdated)
+                {
+                    ScoreUpdated = true;
+                    await gameClient.UpdateScoreAsync(new Score
+                    {
+                        Key1 = id1,
+                        Key2 = id2,
+                        Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                        Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                        Won = id1 == LoginPage.myID ? 1 : 2,
+                        Moves = p1_cellCount + p2_cellCount
+                    });
+                }
+                if (timer != null)
+                {
+                    timer.Stop();
+                    timer.Dispose();
+                    timer = null;
+                }
+                this.Close();
+                return;
+            }
             Reply call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col, InitiatorID = id1, InitiatedID = id2 });
 
             int emptyCell_row = findEmptyRowCell(col - 2);
@@ -387,10 +419,12 @@ namespace connectFour
             else msg = "It's a Tie! ☻";
 
             Reply r;
-            if (id1 == LoginPage.myID) // update score in server
+            if (id1 == LoginPage.myID && !ScoreUpdated)
+            { // update score in serve
+                ScoreUpdated = true;
                 r = await gameClient.UpdateScoreAsync(
                     new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p, Moves = p1_cellCount + p2_cellCount });
-
+            }
             if (checkForWinnerOrTie() != 0 && System.Windows.MessageBox.Show(msg, "Game Over", MessageBoxButton.OK) == MessageBoxResult.OK)
                 // only show this msg box once, when game is over
                 this.Close(); // close window when game finished
@@ -433,21 +467,24 @@ namespace connectFour
             while (true)
             {
                 call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
-                if (call.Answer && call.Move.Id != LoginPage.myID && lastIndex != call.Move.Index || timer == null)
+                if (call.Answer && call.Move.Id != LoginPage.myID && lastIndex != call.Move.Index && call.Move.Move_ != -1 || timer == null)
                     break;
                 else if (!isGameOver && call.Move != null && call.Move.Move_ == -1) // the opponent has been disconnected
                 {
                     isGameOver = true;
                     System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
-                    await gameClient.UpdateScoreAsync(new Score
-                    {
-                        Key1 = id1,
-                        Key2 = id2,
-                        Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
-                        Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
-                        Won = id1 == LoginPage.myID ? 1 : 2,
-                        Moves = p1_cellCount + p2_cellCount
-                    });
+                    if (!ScoreUpdated) {
+                        ScoreUpdated = true;
+                        await gameClient.UpdateScoreAsync(new Score
+                        {
+                            Key1 = id1,
+                            Key2 = id2,
+                            Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                            Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                            Won = id1 == LoginPage.myID ? 1 : 2,
+                            Moves = p1_cellCount + p2_cellCount
+                        });
+                    }
                     if (timer != null)
                     {
                         timer.Stop();
@@ -457,17 +494,23 @@ namespace connectFour
                     this.Close();
                     return;
                 }
+                Thread.Sleep(200);
             }
             try
             {
-                lastIndex = call.Move.Index;
+                if (call.Move != null)
+                    lastIndex = call.Move.Index;
             }
             catch (NullReferenceException)
             {
                 return;
             }
-
-            int emptyCell_row = findEmptyRowCell(call.Move.Move_ - 2);
+            int emptyCell_row;
+            try
+            {
+                emptyCell_row = findEmptyRowCell(call.Move.Move_ - 2);
+            }
+            catch { emptyCell_row = -1; }
             if (emptyCell_row == -1)
                 return;
             updateBoard(emptyCell_row, call.Move.Move_ - 2); // update 2D board + make animation of sliding ball

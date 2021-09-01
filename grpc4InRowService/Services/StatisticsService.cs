@@ -1,4 +1,5 @@
 ﻿using EFDB.DataAccess;
+using EFDB.Models;
 using Grpc.Core;
 using grpc4InRowService.Protos;
 using Microsoft.Extensions.Logging;
@@ -37,17 +38,17 @@ namespace grpc4InRowService.Services
                 foreach (var game in db.games)
                     using (var db2 = new UsersContext())
                     {
-                        string User1 = db2.users.Single(user => user.Id == game.Player1.Id).Username;
-                        string User2 = db2.users.Single(user => user.Id == game.Player2.Id).Username;
+                        UserModel User1 = db2.users.Single(user => user.Username == game.Player1Username);
+                        UserModel User2 = db2.users.Single(user => user.Username == game.Player2Username);
                         await responseStream.WriteAsync(new GameStats
                         {
-                            Id1 = game.Player1.Id,
-                            Id2 = game.Player2.Id,
-                            User1 = game.Player1.Username,//db2.users.Single(user => user.Id == game.Player1).Username,
-                            User2 = game.Player2.Username,//db2.users.Single(user => user.Id == game.Player2).Username,
+                            Id1 = User1.Id,
+                            Id2 = User2.Id,
+                            User1 = User1.Username,//db2.users.Single(user => user.Id == game.Player1).Username,
+                            User2 = User2.Username,//db2.users.Single(user => user.Id == game.Player2).Username,
                             Score1 = game.Player1Score,
                             Score2 = game.Player2Score,
-                            Winner = game.WinnerId == 1 ? User1 : game.WinnerId == 2 ? User2 : "Tie",
+                            Winner = game.WinnerId == 1 ? User1.Username : game.WinnerId == 2 ? User2.Username : "Tie",
                             Date = new Protos.DateTime
                             {
                                 Hour = game.FinishTime.Hour,
@@ -72,7 +73,7 @@ namespace grpc4InRowService.Services
                         Id2 = game.Key.Item2,
                         User1 = db.users.Single(user => user.Id == game.Key.Item1).Username,
                         User2 = db.users.Single(user => user.Id == game.Key.Item2).Username,
-                        Date = new Protos.DateTime
+                        Date = new DateTime
                         {
                             Hour = game.Value.Item1.Hour,
                             Minute = game.Value.Item1.Minute,
@@ -86,19 +87,20 @@ namespace grpc4InRowService.Services
 
         public override async Task getUsersIntersection(StatsRequest request, IServerStreamWriter<GameStats> responseStream, ServerCallContext context)
         {
-            using (var db = new UsersContext())
-                foreach (var game in db.games.Where(g => g.Player1.Id == request.Id1 && g.Player2.Id == request.Id2 || g.Player1.Id == request.Id2 && g.Player2.Id == request.Id1))
-                    using (var db2 = new UsersContext())
-                    {
-                        await responseStream.WriteAsync(new GameStats
+            using (var db2 = new UsersContext()) {
+                UserModel User1 = db2.users.Single(user => user.Id == request.Id1);
+                UserModel User2 = db2.users.Single(user => user.Id == request.Id2);
+                foreach (var game in db2.games.Where(g => g.Player1Username == User1.Username && g.Player2Username == User2.Username 
+                                                        || g.Player2Username == User1.Username && g.Player1Username == User2.Username))
+                    await responseStream.WriteAsync(new GameStats
                         {
-                            Id1 = game.Player1.Id,
-                            Id2 = game.Player2.Id,
-                            User1 = game.Player1.Username,
-                            User2 = game.Player2.Username,
+                            Id1 = User1.Id,
+                            Id2 = User2.Id,
+                            User1 = User1.Username,
+                            User2 = User2.Username,
                             Score1 = game.Player1Score,
                             Score2 = game.Player2Score,
-                            Winner = game.WinnerId == 1 ? game.Player1.Username : game.WinnerId == 2 ? game.Player2.Username : "Tie",
+                            Winner = game.WinnerId == 1 ? User1.Username : game.WinnerId == 2 ? User2.Username : "Tie",
                             Date = new Protos.DateTime
                             {
                                 Hour = game.FinishTime.Hour,
@@ -109,7 +111,7 @@ namespace grpc4InRowService.Services
                                 Seconds = game.FinishTime.Second
                             }
                         });
-                    }
+            }
         }
         public override Task<UserStats> getUserStats(StatsRequest request, ServerCallContext context)
         {
