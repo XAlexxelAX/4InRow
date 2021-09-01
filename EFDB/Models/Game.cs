@@ -8,9 +8,9 @@ namespace EFDB.Models
     {
         
         public int Id { get; set; }
-        public UserModel Player1 { get; set; }
+        public virtual UserModel Player1 { get; set; }
         public int Player1Score { get; set; }
-        public UserModel Player2 { get; set; }
+        public virtual UserModel Player2 { get; set; }
         public int Player2Score { get; set; }
         public int WinnerId { get; set; }
         public DateTime FinishTime { get; set; }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDB.Migrations
 {
     [DbContext(typeof(UsersContext))]
-    [Migration("20210831200109_Create")]
+    [Migration("20210901102031_Create")]
     partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
