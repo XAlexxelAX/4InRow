@@ -55,7 +55,7 @@ namespace grpc4InRowService.Services
                                 Day = game.FinishTime.Day,
                                 Month = game.FinishTime.Month,
                                 Year = game.FinishTime.Year,
-                                Seconds=game.FinishTime.Second
+                                Seconds = game.FinishTime.Second
                             },
                             Moves = game.Moves
                         });
@@ -79,7 +79,7 @@ namespace grpc4InRowService.Services
                             Day = game.Value.Item1.Day,
                             Month = game.Value.Item1.Month,
                             Year = game.Value.Item1.Year,
-                            Seconds=game.Value.Item1.Second
+                            Seconds = game.Value.Item1.Second
                         }
                     });
         }
@@ -106,7 +106,7 @@ namespace grpc4InRowService.Services
                                 Day = game.FinishTime.Day,
                                 Month = game.FinishTime.Month,
                                 Year = game.FinishTime.Year,
-                                Seconds= game.FinishTime.Second
+                                Seconds = game.FinishTime.Second
                             }
                         });
                     }
