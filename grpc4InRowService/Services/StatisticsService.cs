@@ -103,7 +103,8 @@ namespace grpc4InRowService.Services
                                 Minute = game.FinishTime.Minute,
                                 Day = game.FinishTime.Day,
                                 Month = game.FinishTime.Month,
-                                Year = game.FinishTime.Year
+                                Year = game.FinishTime.Year,
+                                Seconds= game.FinishTime.Second
                             }
                         });
                     }

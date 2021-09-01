@@ -41,4 +41,5 @@ message DateTime{
 	int32 day = 3;
 	int32 month = 4;
 	int32 year = 5;
+	int32 seconds=6;
 }
