@@ -108,7 +108,6 @@ namespace grpc4InRowService.Services
                         });
                     }
         }
-
         public override Task<UserStats> getUserStats(StatsRequest request, ServerCallContext context)
         {
             using (var db = new UsersContext())

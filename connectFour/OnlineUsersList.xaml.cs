@@ -112,7 +112,8 @@ namespace connectFour
             if (timerCount == 10)
             {
                 timerResponse.Stop();
-                msgBoxWindow.Close();
+                if (msgBoxWindow != null)
+                    msgBoxWindow.Close();
                 timerCount = 0;
                 await gameClient.RemoveRequestAsync(new GameRequest { OpponentID = (int)lb_itemBtn.DataContext });
                 System.Windows.MessageBox.Show("Your opponent didn't responed to your game request.");
