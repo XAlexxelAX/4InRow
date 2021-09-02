@@ -117,7 +117,7 @@ namespace grpc4InRowService.Services
 
         public override Task<Reply> MakeMove(MoveRequest request, ServerCallContext context)
         {
-            if (!Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))
+            if (!Program.ongoingGames.ContainsKey((request.InitiatedID, request.InitiatorID)))
                 CreateGame(request, context);
             try
             {
