@@ -217,3 +217,4 @@ C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InR
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.dll
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.pdb
 C:\Users\shaha\Desktop\4inRow\grpc4InRowService\obj\Debug\netcoreapp3.1\grpc4InRowService.genruntimeconfig.cache
+C:\Users\USER\Desktop\4InRow\grpc4InRowService\bin\Debug\netcoreapp3.1\AutoClosingMessageBox.dll

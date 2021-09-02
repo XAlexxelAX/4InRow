@@ -6,12 +6,10 @@ C:\Users\USER\Desktop\4InRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Net.Client
 C:\Users\USER\Desktop\4InRow\connectFour\bin\Debug\netcoreapp3.1\Grpc.Net.Common.dll
 C:\Users\USER\Desktop\4InRow\connectFour\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\LoginPage.g.cs
-C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour_MarkupCompile.cache
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour_MarkupCompile.lref
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\LoginPage.baml
-C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\MainWindow.baml
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.g.resources
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.AssemblyInfoInputs.cache
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.AssemblyInfo.cs
@@ -255,3 +253,10 @@ C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.dll
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.pdb
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.genruntimeconfig.cache
+C:\Users\USER\Desktop\4InRow\connectFour\bin\Debug\netcoreapp3.1\AutoClosingMessageBox.dll
+C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\GameWindow.g.cs
+C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.g.cs
+C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.g.cs
+C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\GameWindow.baml
+C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.baml
+C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.baml

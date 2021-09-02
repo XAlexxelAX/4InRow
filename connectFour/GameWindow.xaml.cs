@@ -107,12 +107,11 @@ namespace connectFour
 
         private async void OnPreviewMouseLeftButtonDownAsync(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (!hasAnimationFinished || timer == null || isGameOver)
+            if (!hasAnimationFinished || timer == null || isGameOver || !isMyTurn || checkForWinnerOrTie() != 0)// if game over or it's not my turn than ignore the click
                 return;
             hasAnimationFinished = false;
-            if (!isMyTurn || checkForWinnerOrTie() != 0) // if game over or it's not my turn than ignore the click
-                return;
-            //boardView.IsHitTestVisible = false;
+
+            boardView.IsHitTestVisible = false;
             var point = Mouse.GetPosition(boardView); // mouse ptr cordiante at click event time
 
             int row = 0, col = 0;
@@ -171,7 +170,6 @@ namespace connectFour
                 return;
             }
             updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
-                                                 //boardView.IsHitTestVisible = false;
         }
 
         private void codeAfterAnimation()
@@ -252,11 +250,12 @@ namespace connectFour
             EventHandler onComplete = (s, e) =>
             {
                 codeAfterAnimation(); // check for winner + update score etc
-                                      //boardView.IsHitTestVisible = true; // enable mouse clicks again for next move
                 hasAnimationFinished = true;
+
                 turnTitle.Text = isMyTurn ? "Your Turn" : "Opponent's Turn";  // update turn title view
                 turnTitle.Foreground = isMyTurn && amIfirst || !isMyTurn && !amIfirst ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Yellow);
                 makeOpponentsMove();
+                boardView.IsHitTestVisible = true; // enable mouse clicks again for next move
             };
             animY.Completed += onComplete;
             trans.BeginAnimation(TranslateTransform.YProperty, animY);
@@ -450,17 +449,6 @@ namespace connectFour
                     return true;
             return false;
         }
-
-        private void resetBoard()
-        { // reset board view to default/empty/start
-            for (int i = 0; i < board.GetLength(0); i++)
-                for (int j = 0; j < board.GetLength(1); board[i, j++] = 0) ;
-
-            foreach (Image img in imgs)
-                boardView.Children.Remove(img);
-            imgs.Clear();
-        }
-
         private async void makeOpponentsMove()
         {
             Reply call;
@@ -473,7 +461,8 @@ namespace connectFour
                 {
                     isGameOver = true;
                     System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
-                    if (!ScoreUpdated) {
+                    if (!ScoreUpdated)
+                    {
                         ScoreUpdated = true;
                         await gameClient.UpdateScoreAsync(new Score
                         {
@@ -494,7 +483,7 @@ namespace connectFour
                     this.Close();
                     return;
                 }
-                Thread.Sleep(200);
+                // Thread.Sleep(200);
             }
             try
             {
