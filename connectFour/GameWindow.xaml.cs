@@ -48,9 +48,18 @@ namespace connectFour
             turn = 0;
             imgs = new List<Image>();
             this.isMyTurn = isMyTurn;
-            channel = GrpcChannel.ForAddress("https://localhost:5001");
-            gameClient = new Games.GamesClient(channel);
-            userClient = new User.UserClient(channel);
+
+            try
+            {
+                channel = GrpcChannel.ForAddress("https://localhost:5001");
+                gameClient = new Games.GamesClient(channel);
+                userClient = new User.UserClient(channel);
+            }
+            catch (Grpc.Core.RpcException)
+            {
+                System.Windows.MessageBox.Show("An error from server has occurred", "Error");
+                return;
+            }
             this.id1 = id1;
             this.id2 = id2;
             lastIndex = -1;
@@ -71,37 +80,44 @@ namespace connectFour
         {
             if (isGameOver || timer == null)
                 return;
-            Reply call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
-            // check if opponent disconnected from the game
-            if (!isGameOver && call.Move != null && call.Move.Move_ == -1) // move = -1 <=> opponent disconnected
+            try
             {
-                isGameOver = true;
-                System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
-                if (!ScoreUpdated)
+                Reply call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
+                // check if opponent disconnected from the game
+                if (!isGameOver && call.Move != null && call.Move.Move_ == -1) // move = -1 <=> opponent disconnected
                 {
-                    ScoreUpdated = true;
-                    await gameClient.UpdateScoreAsync(new Score // update score
+                    isGameOver = true;
+                    System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
+                    if (!ScoreUpdated)
                     {
-                        Key1 = id1,
-                        Key2 = id2,
-                        Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
-                        Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
-                        Won = id1 == LoginPage.myID ? 1 : 2,
-                        Moves = p1_cellCount + p2_cellCount
-                    });
+                        ScoreUpdated = true;
+                        await gameClient.UpdateScoreAsync(new Score // update score
+                        {
+                            Key1 = id1,
+                            Key2 = id2,
+                            Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                            Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                            Won = id1 == LoginPage.myID ? 1 : 2,
+                            Moves = p1_cellCount + p2_cellCount
+                        });
+                    }
+                    this.Close(); // close this window
+
+                    return;
                 }
-                this.Close(); // close this window
 
-                return;
+                if (!amIfirst)// if first turn is not my turn and it's the opponent's turn, so wait and listen for hes move
+                {            // check for oponent's first move iff your are the not the initator of the game (= it's not your turn at the start)
+                    hasAnimationFinished = false;
+                    makeOpponentsMove();
+                    //timer.Stop();
+                    //timer.Dispose();
+                    hasAnimationFinished = true;
+                }
             }
-
-            if (!amIfirst)// if first turn is not my turn and it's the opponent's turn, so wait and listen for hes move
-            {            // check for oponent's first move iff your are the not the initator of the game (= it's not your turn at the start)
-                hasAnimationFinished = false;
-                makeOpponentsMove();
-                //timer.Stop();
-                //timer.Dispose();
-                hasAnimationFinished = true;
+            catch (Grpc.Core.RpcException)
+            {
+                System.Windows.MessageBox.Show("An error from server has occurred", "Error");
             }
         }
 

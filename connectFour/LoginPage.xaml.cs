@@ -19,10 +19,16 @@ namespace connectFour
         public LoginPage()
         {
             InitializeComponent();
-
-            channel = GrpcChannel.ForAddress("https://localhost:5001");
-            userClient = new User.UserClient(channel);
-            sentRequest = false;
+            try
+            {
+                channel = GrpcChannel.ForAddress("https://localhost:5001");
+                userClient = new User.UserClient(channel);
+                sentRequest = false;
+            }
+            catch (Grpc.Core.RpcException)
+            {
+                System.Windows.MessageBox.Show("An error from server has occurred", "Error");
+            }
         }
 
         private async void login_Click(object sender, RoutedEventArgs e)

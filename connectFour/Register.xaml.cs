@@ -17,9 +17,17 @@ namespace connectFour
         public Register()
         {
             InitializeComponent();
-            channel = GrpcChannel.ForAddress("https://localhost:5001");
-            userClient = new User.UserClient(channel);
+            try
+            {
+                channel = GrpcChannel.ForAddress("https://localhost:5001");
+                userClient = new User.UserClient(channel);
+            }
+            catch (Grpc.Core.RpcException)
+            {
+                System.Windows.MessageBox.Show("An error from server has occurred", "Error");
+            }
             sentRequest = false;
+
         }
 
         private async void register_Click(object sender, RoutedEventArgs e)
