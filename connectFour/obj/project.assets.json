@@ -6172,23 +6172,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Alex\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\shaha\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Alex\\source\\repos\\4InRow\\connectFour\\connectFour.csproj",
+      "projectUniqueName": "C:\\Users\\shaha\\Desktop\\4inRow\\connectFour\\connectFour.csproj",
       "projectName": "connectFour",
-      "projectPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\connectFour\\connectFour.csproj",
-      "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\connectFour\\obj\\",
+      "projectPath": "C:\\Users\\shaha\\Desktop\\4inRow\\connectFour\\connectFour.csproj",
+      "packagesPath": "C:\\Users\\shaha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\shaha\\Desktop\\4inRow\\connectFour\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\shaha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6202,8 +6203,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Alex\\source\\repos\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj": {
-              "projectPath": "C:\\Users\\Alex\\source\\repos\\4InRow\\grpc4InRowService\\grpc4InRowService.csproj"
+            "C:\\Users\\shaha\\Desktop\\4inRow\\grpc4InRowService\\grpc4InRowService.csproj": {
+              "projectPath": "C:\\Users\\shaha\\Desktop\\4inRow\\grpc4InRowService\\grpc4InRowService.csproj"
             }
           }
         }
@@ -6255,7 +6256,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   },

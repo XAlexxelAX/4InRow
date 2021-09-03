@@ -26,7 +26,7 @@ namespace grpc4InRowService.Services
                 using (var db = new UsersContext())
                 {
                     UserModel userEntity = db.users.Single(user => user.Username == request.Username);//gets user reference from db by username(the primary key)
-                    if (userEntity != null)//if found user in db
+                    if (userEntity != null) {//if found user in db
                         if (Program.onlineUsers.ContainsKey(userEntity.Id))// if user already logged in
                             throw new Exception("User already logged in");
                         else if (userEntity.PW == request.Pw)//else checks if password matches the db
@@ -34,6 +34,8 @@ namespace grpc4InRowService.Services
                             AddToOnline(new GeneralReq { Id = userEntity.Id, Username = userEntity.Username }, context);
                             return Task.FromResult(new GeneralReply { IsSuccessfull = true, Id = userEntity.Id });
                         }
+                        else throw new Exception("Wrong password");
+                    }
                     return Task.FromResult(new GeneralReply { IsSuccessfull = false });
                 }
             }

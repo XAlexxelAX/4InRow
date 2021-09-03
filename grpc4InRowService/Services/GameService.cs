@@ -117,13 +117,13 @@ namespace grpc4InRowService.Services
 
         public override Task<Reply> MakeMove(MoveRequest request, ServerCallContext context)
         {
-            if (!Program.ongoingGames.ContainsKey((request.InitiatedID, request.InitiatorID)))
+            if (!Program.ongoingGames.ContainsKey((request.InitiatorID, request.InitiatedID)))//checks if game exists in ongoing game dict, creates if not
                 CreateGame(request, context);
             try
             {
-                if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Count == 0)
+                if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Count == 0)// if a move hasn't been done yet
                     Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Add((request.InitiatedID, request.Move));
-                else if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Last().Item1 == request.InitiatedID)
+                else if (Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Last().Item1 == request.InitiatedID)// else if and else does moves alternetavly
                     Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Add((request.InitiatorID, request.Move));
                 else
                     Program.ongoingGames[(request.InitiatorID, request.InitiatedID)].Item2.Add((request.InitiatedID, request.Move));
@@ -139,7 +139,7 @@ namespace grpc4InRowService.Services
         {
             using (var db = new UsersContext())
             {
-                UserModel userEntity = db.users.Single(user => user.Id == request.Key1);
+                UserModel userEntity = db.users.Single(user => user.Id == request.Key1);//finds 1st user in db and updates values
                 if (userEntity != null)
                 {
                     userEntity.Score += request.Score1;
@@ -147,7 +147,7 @@ namespace grpc4InRowService.Services
                     if (request.Won == 1)
                         userEntity.GamesWon++;
                 }
-                userEntity = db.users.Single(user => user.Id == request.Key2);
+                userEntity = db.users.Single(user => user.Id == request.Key2);//finds 2nd user in db and updates values
                 if (userEntity != null)
                 {
                     userEntity.Score += request.Score2;
@@ -155,7 +155,7 @@ namespace grpc4InRowService.Services
                     if (request.Won == 2)
                         userEntity.GamesWon++;
                 }
-                if (Program.ongoingGames.ContainsKey((request.Key1, request.Key2)))
+                if (Program.ongoingGames.ContainsKey((request.Key1, request.Key2)))//checks and removes game from ongoing games and adds to db to table games
                 {
                     db.games.Add(new Game
                     {

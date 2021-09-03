@@ -132,7 +132,7 @@ namespace connectFour
                         msgBoxWindow.Close();
                     timerCount = 0;
                     await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
-                    await gameClient.CreateGameAsync(new MoveRequest { InitiatedID = (int)lb_itemBtn.DataContext, InitiatorID = LoginPage.myID });
+                    await gameClient.CreateGameAsync(new MoveRequest { InitiatorID = (int)lb_itemBtn.DataContext, InitiatedID = LoginPage.myID });
                     if (game == null)
                     {
                         game = new Game(true, (int)lb_itemBtn.DataContext, LoginPage.myID);
@@ -225,8 +225,7 @@ namespace connectFour
         public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
             await userClient.RemoveFromOnlineAsync(new GeneralReq { Id = LoginPage.myID });
-            //TODO: sign out of the current user and update online users list in the server
-            //send a msg to to the other opponent of the game has been disconnected
+            //sign out of the current user and update online users list in the server           
         }
     }
 }
