@@ -467,6 +467,7 @@ namespace connectFour
         private async void makeOpponentsMove()
         {
             Reply call;
+
             while (true)
             {
                 try
@@ -501,32 +502,31 @@ namespace connectFour
                         return;
                     }
                     // Thread.Sleep(200);
-
-                    try
-                    {
-                        if (call.Move != null)
-                            lastIndex = call.Move.Index;
-                    }
-                    catch (NullReferenceException)
-                    {
-                        return;
-                    }
-                    int emptyCell_row;
-                    try
-                    {
-                        emptyCell_row = findEmptyRowCell(call.Move.Move_ - 2);
-                    }
-                    catch { emptyCell_row = -1; }
-                    if (emptyCell_row == -1)
-                        return;
-                    updateBoard(emptyCell_row, call.Move.Move_ - 2); // update 2D board + make animation of sliding ball
                 }
                 catch (Grpc.Core.RpcException)
                 {
                     System.Windows.MessageBox.Show("An error from server has occurred", "Error");
-                    return;
                 }
             }
+            try
+            {
+                if (call.Move != null)
+                    lastIndex = call.Move.Index;
+            }
+            catch (NullReferenceException)
+            {
+                return;
+            }
+            int emptyCell_row;
+            try
+            {
+                emptyCell_row = findEmptyRowCell(call.Move.Move_ - 2);
+            }
+            catch { emptyCell_row = -1; }
+            if (emptyCell_row == -1)
+                return;
+            updateBoard(emptyCell_row, call.Move.Move_ - 2); // update 2D board + make animation of sliding ball
+
         }
 
         public async void OnWindowClosing(object sender, CancelEventArgs e)
