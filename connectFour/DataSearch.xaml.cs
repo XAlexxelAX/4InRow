@@ -23,9 +23,15 @@ namespace connectFour
         public DataSearch()
         {
             InitializeComponent();
-            channel = GrpcChannel.ForAddress("https://localhost:5001");
-            statsClient = new Statistics.StatisticsClient(channel);
-
+            try
+            {
+                channel = GrpcChannel.ForAddress("https://localhost:5001");
+                statsClient = new Statistics.StatisticsClient(channel);
+            }
+            catch (Grpc.Core.RpcException)
+            {
+                MessageBox.Show("An error from server has occurred", "Error");
+            }
             usersList = new List<(string, int, int, int, int, float, int)>();
             DynamicGrid = new Grid();
 
@@ -48,15 +54,22 @@ namespace connectFour
 
             int rows, cols;
 
-            using (var call = statsClient.getAllUsersStats(new StatsRequest()))
+            try
             {
-                while (await call.ResponseStream.MoveNext())
+                using (var call = statsClient.getAllUsersStats(new StatsRequest()))
                 {
-                    // (Username,Games,Wins,Loses,Score,Ratio,id)
-                    usersList.Add((call.ResponseStream.Current.Username, call.ResponseStream.Current.Games, call.ResponseStream.Current.Wins,
-                        call.ResponseStream.Current.Games - call.ResponseStream.Current.Wins, call.ResponseStream.Current.Score
-                        , (float)call.ResponseStream.Current.Wins / call.ResponseStream.Current.Games * 100, call.ResponseStream.Current.Id));
+                    while (await call.ResponseStream.MoveNext())
+                    {
+                        // (Username,Games,Wins,Loses,Score,Ratio,id)
+                        usersList.Add((call.ResponseStream.Current.Username, call.ResponseStream.Current.Games, call.ResponseStream.Current.Wins,
+                            call.ResponseStream.Current.Games - call.ResponseStream.Current.Wins, call.ResponseStream.Current.Score
+                            , (float)call.ResponseStream.Current.Wins / call.ResponseStream.Current.Games * 100, call.ResponseStream.Current.Id));
+                    }
                 }
+            }
+            catch (Grpc.Core.RpcException)
+            {
+                MessageBox.Show("An error from server has occurred", "Error");
             }
 
             switch (searchOption.SelectedItem.ToString().Substring(38))
@@ -188,9 +201,15 @@ namespace connectFour
                 rowsData = new List<List<Object>>();
                 rowsData.Add(new List<Object> { "Games", "Wins", "Wins Ratio", "Points" });
 
-                var call = statsClient.getUserStats(new StatsRequest { Id1 = getCheckedUsers()[0].Item2 });
-
-                rowsData.Add(new List<Object> { call.Games, call.Wins, "" + (float)call.Wins / call.Games * 100 + "%", call.Score });
+                try
+                {
+                    var call = statsClient.getUserStats(new StatsRequest { Id1 = getCheckedUsers()[0].Item2 });
+                    rowsData.Add(new List<Object> { call.Games, call.Wins, "" + (float)call.Wins / call.Games * 100 + "%", call.Score });
+                }
+                catch (Grpc.Core.RpcException)
+                {
+                    MessageBox.Show("An error from server has occurred", "Error");
+                }
 
                 new PlayersData().Show();
             }
@@ -215,8 +234,7 @@ namespace connectFour
                 }
                 catch(Exception)
                 {
-                    MessageBox.Show("An unexpected error occurred");
-                    return;
+                    MessageBox.Show("An unexpected error occurred","Error");
                 }
                 new PlayersData().Show();
             }

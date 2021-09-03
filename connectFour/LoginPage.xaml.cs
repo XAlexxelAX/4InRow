@@ -40,9 +40,9 @@ namespace connectFour
                     if (!sentRequest)
                     {
                         sentRequest = true;
-                        GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
+                        GeneralReply gr = await userClient.LoginAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) }); // login query
                         if (!gr.IsSuccessfull)
-                        {
+                        {// if query failed
                             sentRequest = false;
                             MessageBox.Show(gr.Error);
                             return;
@@ -55,7 +55,8 @@ namespace connectFour
                     }
                 }
                 catch (Exception)
-                {
+                {// if server is down
+                    sentRequest = false;
                     MessageBox.Show("An error occurred while trying to log in");
                 }
             }

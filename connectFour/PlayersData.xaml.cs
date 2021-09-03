@@ -16,7 +16,14 @@ namespace connectFour
         public PlayersData()
         {
             InitializeComponent();
-            showData();
+            try
+            {
+                showData();
+            }
+            catch(Grpc.Core.RpcException)
+            {
+                MessageBox.Show("An error from server has occurred", "Error");
+            }
         }
 
         private void showData()

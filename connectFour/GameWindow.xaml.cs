@@ -134,42 +134,50 @@ namespace connectFour
                     break;
                 col++;
             }
-            var check = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
-            if (check.Answer == true && check.Move.Move_ == -1)
+            try
             {
-                isGameOver = true;
-                System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
-                if (!ScoreUpdated)
-                {
-                    ScoreUpdated = true;
-                    await gameClient.UpdateScoreAsync(new Score
-                    {
-                        Key1 = id1,
-                        Key2 = id2,
-                        Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
-                        Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
-                        Won = id1 == LoginPage.myID ? 1 : 2,
-                        Moves = p1_cellCount + p2_cellCount
-                    });
-                }
-                if (timer != null)
-                {
-                    timer.Stop();
-                    timer.Dispose();
-                    timer = null;
-                }
-                this.Close();
-                return;
-            }
-            Reply call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col, InitiatorID = id1, InitiatedID = id2 });
+                var check = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
 
-            int emptyCell_row = findEmptyRowCell(col - 2);
-            if (emptyCell_row == -1)
-            {
-                boardView.IsHitTestVisible = false;
-                return;
+                if (check.Answer == true && check.Move.Move_ == -1)
+                {
+                    isGameOver = true;
+                    System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
+                    if (!ScoreUpdated)
+                    {
+                        ScoreUpdated = true;
+                        await gameClient.UpdateScoreAsync(new Score
+                        {
+                            Key1 = id1,
+                            Key2 = id2,
+                            Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                            Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                            Won = id1 == LoginPage.myID ? 1 : 2,
+                            Moves = p1_cellCount + p2_cellCount
+                        });
+                    }
+                    if (timer != null)
+                    {
+                        timer.Stop();
+                        timer.Dispose();
+                        timer = null;
+                    }
+                    this.Close();
+                    return;
+                }
+                Reply call = await gameClient.MakeMoveAsync(new MoveRequest { Move = col, InitiatorID = id1, InitiatedID = id2 });
+
+                int emptyCell_row = findEmptyRowCell(col - 2);
+                if (emptyCell_row == -1)
+                {
+                    boardView.IsHitTestVisible = false;
+                    return;
+                }
+                updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
             }
-            updateBoard(emptyCell_row, col - 2); // update 2D board + make animation of sliding ball
+            catch (Grpc.Core.RpcException)
+            {
+                System.Windows.MessageBox.Show("An error from server has occurred", "Error");
+            }
         }
 
         private void codeAfterAnimation()
@@ -421,8 +429,15 @@ namespace connectFour
             if (id1 == LoginPage.myID && !ScoreUpdated)
             { // update score in serve
                 ScoreUpdated = true;
-                r = await gameClient.UpdateScoreAsync(
-                    new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p, Moves = p1_cellCount + p2_cellCount });
+                try
+                {
+                    r = await gameClient.UpdateScoreAsync(
+                        new Score { Key1 = id1, Key2 = id2, Score1 = p1_score, Score2 = p2_score, Won = p, Moves = p1_cellCount + p2_cellCount });
+                }
+                catch (Grpc.Core.RpcException)
+                {
+                    System.Windows.MessageBox.Show("An error from server has occurred", "Error");
+                }
             }
             if (checkForWinnerOrTie() != 0 && System.Windows.MessageBox.Show(msg, "Game Over", MessageBoxButton.OK) == MessageBoxResult.OK)
                 // only show this msg box once, when game is over
@@ -454,69 +469,86 @@ namespace connectFour
             Reply call;
             while (true)
             {
-                call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
-                if (call.Answer && call.Move.Id != LoginPage.myID && lastIndex != call.Move.Index && call.Move.Move_ != -1 || timer == null)
-                    break;
-                else if (!isGameOver && call.Move != null && call.Move.Move_ == -1) // the opponent has been disconnected
+                try
                 {
-                    isGameOver = true;
-                    System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
-                    if (!ScoreUpdated)
+                    call = await gameClient.CheckMoveAsync(new MoveCheck { InitiatorID = id1, InitiatedID = id2 });
+                    if (call.Answer && call.Move.Id != LoginPage.myID && lastIndex != call.Move.Index && call.Move.Move_ != -1 || timer == null)
+                        break;
+                    else if (!isGameOver && call.Move != null && call.Move.Move_ == -1) // the opponent has been disconnected
                     {
-                        ScoreUpdated = true;
-                        await gameClient.UpdateScoreAsync(new Score
+                        isGameOver = true;
+                        System.Windows.MessageBox.Show("Your opponent has been disconnected", "You Won ☺", MessageBoxButton.OK);
+                        if (!ScoreUpdated)
                         {
-                            Key1 = id1,
-                            Key2 = id2,
-                            Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
-                            Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
-                            Won = id1 == LoginPage.myID ? 1 : 2,
-                            Moves = p1_cellCount + p2_cellCount
-                        });
+                            ScoreUpdated = true;
+                            await gameClient.UpdateScoreAsync(new Score
+                            {
+                                Key1 = id1,
+                                Key2 = id2,
+                                Score1 = id1 == LoginPage.myID ? 1000 : p1_cellCount * 10,
+                                Score2 = id2 == LoginPage.myID ? 1000 : p2_cellCount * 10,
+                                Won = id1 == LoginPage.myID ? 1 : 2,
+                                Moves = p1_cellCount + p2_cellCount
+                            });
+                        }
+                        if (timer != null)
+                        {
+                            timer.Stop();
+                            timer.Dispose();
+                            timer = null;
+                        }
+                        this.Close();
+                        return;
                     }
-                    if (timer != null)
+                    // Thread.Sleep(200);
+
+                    try
                     {
-                        timer.Stop();
-                        timer.Dispose();
-                        timer = null;
+                        if (call.Move != null)
+                            lastIndex = call.Move.Index;
                     }
-                    this.Close();
+                    catch (NullReferenceException)
+                    {
+                        return;
+                    }
+                    int emptyCell_row;
+                    try
+                    {
+                        emptyCell_row = findEmptyRowCell(call.Move.Move_ - 2);
+                    }
+                    catch { emptyCell_row = -1; }
+                    if (emptyCell_row == -1)
+                        return;
+                    updateBoard(emptyCell_row, call.Move.Move_ - 2); // update 2D board + make animation of sliding ball
+                }
+                catch (Grpc.Core.RpcException)
+                {
+                    System.Windows.MessageBox.Show("An error from server has occurred", "Error");
                     return;
                 }
-                // Thread.Sleep(200);
             }
-            try
-            {
-                if (call.Move != null)
-                    lastIndex = call.Move.Index;
-            }
-            catch (NullReferenceException)
-            {
-                return;
-            }
-            int emptyCell_row;
-            try
-            {
-                emptyCell_row = findEmptyRowCell(call.Move.Move_ - 2);
-            }
-            catch { emptyCell_row = -1; }
-            if (emptyCell_row == -1)
-                return;
-            updateBoard(emptyCell_row, call.Move.Move_ - 2); // update 2D board + make animation of sliding ball
         }
 
         public async void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (checkForWinnerOrTie() == 0 && !isGameOver) // send a msg that this player disconnected from the game
-                await gameClient.MakeMoveAsync(new MoveRequest { Move = -1, InitiatorID = id1, InitiatedID = id2 });
-            isGameOver = true;
-            if (timer != null)
+            try
             {
-                timer.Stop();
-                timer.Dispose();
-                timer = null;
+                if (checkForWinnerOrTie() == 0 && !isGameOver) // send a msg that this player disconnected from the game
+                    await gameClient.MakeMoveAsync(new MoveRequest { Move = -1, InitiatorID = id1, InitiatedID = id2 });
+                isGameOver = true;
+                if (timer != null)
+                {
+                    timer.Stop();
+                    timer.Dispose();
+                    timer = null;
+                }
+                await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
             }
-            await userClient.AddToOnlineAsync(new GeneralReq { Id = LoginPage.myID, Username = LoginPage.myUsername });
+            catch (Grpc.Core.RpcException)
+            {
+                System.Windows.MessageBox.Show("An error from server has occurred", "Error");
+                return;
+            }
         }
     }
 }

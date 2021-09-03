@@ -1,5 +1,6 @@
 ﻿using Grpc.Net.Client;
 using grpc4InRowService.Protos;
+using System;
 using System.Text;
 using System.Windows;
 
@@ -31,21 +32,29 @@ namespace connectFour
                                     MessageBoxButton.OK, MessageBoxImage.Question, MessageBoxResult.OK);
             else
             {
-                if (!sentRequest)
+                try
                 {
-                    sentRequest = true;
-                    var response = await userClient.RegisterAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) });
-
-                    if (!response.IsSuccessfull)
+                    if (!sentRequest)
                     {
-                        MessageBox.Show(response.Error);
+                        sentRequest = true;
+                        var response = await userClient.RegisterAsync(new UserRequest { Username = username.Text, Pw = CreateMD5(password.Password) }); // register query
+
+                        if (!response.IsSuccessfull) 
+                        { // if query failed
+                            MessageBox.Show(response.Error);
+                            sentRequest = false;
+                            return;
+                        }
                         sentRequest = false;
-                        return;
+                        this.Close();
                     }
-                    sentRequest = false;
-                    this.Close();
+                    sentRequest = true;
                 }
-                sentRequest = true;
+                catch (Exception)
+                { // if server is down
+                    sentRequest = false;
+                    MessageBox.Show("An error occurred while trying to log in");
+                }
             }
         }
 

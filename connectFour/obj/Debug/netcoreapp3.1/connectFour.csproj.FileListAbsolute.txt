@@ -165,7 +165,6 @@ C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\GameWindow
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.g.cs
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\GameWindow.baml
 C:\Users\Alex\source\repos\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.baml
-C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csproj.AssemblyReference.cache
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\DataSearch.g.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\GameWindow.g.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\LoginPage.g.cs
@@ -245,7 +244,6 @@ C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\OnlineUsersLis
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.baml
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\Register.baml
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.g.resources
-C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.AssemblyInfoInputs.cache
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.AssemblyInfo.cs
 C:\Users\shaha\Desktop\4inRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csproj.CoreCompileInputs.cache
@@ -260,3 +258,4 @@ C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.g.c
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\GameWindow.baml
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\MyMsgBox.baml
 C:\Users\USER\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\PlayersData.baml
+C:\Users\shaha\Desktop\4InRow\connectFour\obj\Debug\netcoreapp3.1\connectFour.csprojAssemblyReference.cache
